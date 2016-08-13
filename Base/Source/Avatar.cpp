@@ -1,7 +1,7 @@
 #include "avatar.h"
 
-Avatar::Avatar(int x, int y, string meshName, string meshTexture)
-	: GameObject(x,y,meshName,meshTexture)
+Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
+	: GameObject(x, y, meshName, typeOfTile)
 	, inMidAir_Down(false)
 	, inMidAir_Up(false)
 	, jumpSpeed(0)
@@ -22,44 +22,6 @@ Avatar::~Avatar()
 	delete inventory;
 }
 
-//////////////////FUNCTIONS///////////////////
-
-bool Avatar::CheckCollision(GameObject* other,TileMap* tilemap)
-{
-	return (GetPosition() - other->GetPosition()).LengthSquare() < 1.5f*tilemap->GetTileSize()*tilemap->GetTileSize();
-}
-
-void Avatar::CollisionResponse(GameObject* other, TileMap* tilemap)
-{
-	if (other->meshName == "GEO_TILEGROUND")//|| whatever other object you want that have collision)
-	{
-		if (GetPosition().x < other->GetPosition().x && other->GetPosition().x - GetPosition().x <  tilemap->GetTileSize())
-		{
-			if (GetPosition().y >= other->GetPosition().y  && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
-				other->GetPosition().y >= GetPosition().y  && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
-				moveRight = false;
-		}
-		else if (other->GetPosition().x < GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize())
-		{
-			if (GetPosition().y >= other->GetPosition().y  && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
-				other->GetPosition().y >= GetPosition().y  && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
-				moveLeft = false;
-		}
-		if (GetPosition().y < other->GetPosition().y && other->GetPosition().y - GetPosition().y <= tilemap->GetTileSize())
-		{
-			if (GetPosition().x >= other->GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize() * 0.75f ||
-				other->GetPosition().x >= GetPosition().x && other->GetPosition().x - GetPosition().x < tilemap->GetTileSize() * 0.75f)
-				moveUp = false;
-		}
-		else if (other->GetPosition().y < GetPosition().y && GetPosition().y - other->GetPosition().y <= tilemap->GetTileSize())
-		{
-			if (GetPosition().x >= other->GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize()* 0.75f ||
-				other->GetPosition().x >= GetPosition().x && other->GetPosition().x - GetPosition().x < tilemap->GetTileSize()* 0.75f)
-				moveDown = false;
-		}
-	}
-}
-
 //////////////////SETTERS////////////////////
 
 //Animation
@@ -77,6 +39,7 @@ void Avatar::SetAnimationInvert(bool AnimationInvert)
 {
 	this->AnimationInvert = AnimationInvert;
 }
+
 
 // Jump
 // Set the player's status to free fall mode

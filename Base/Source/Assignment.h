@@ -12,7 +12,7 @@
 #include "Hero.h"
 #include "Enemy.h"
 #include "Tile.h"
-
+#include "GeometryType.h"
 class Assignment : public Scene
 {
 	enum UNIFORM_TYPE
@@ -53,23 +53,6 @@ class Assignment : public Scene
 		U_TEXT_ENABLED,
 		U_TEXT_COLOR,
 		U_TOTAL,
-	};
-	enum GEOMETRY_TYPE
-	{
-		GEO_AXES,
-		GEO_CROSSHAIR,
-		GEO_LIGHTBALL,
-		GEO_SPHERE,
-		GEO_QUAD,
-		GEO_CUBE,
-		GEO_RING,
-		GEO_CONE,
-		GEO_BACKGROUND,
-		GEO_OBJECT,
-		GEO_TEXT,
-		GEO_MARIO,
-		GEO_COIN,
-		NUM_GEOMETRY,
 	};
 
 public:
@@ -118,6 +101,9 @@ private:
 	
 	void Restart();
 
+	//collision
+	bool CheckCollision(Avatar* Hero, GameObject*Other);
+	void CollisionResponse(Avatar* Hero, GameObject*other);
 	//check wif enemy
 	void CheckStrategy(Avatar* hero,Avatar* enemy );
 

@@ -1,16 +1,16 @@
 #include "Hero.h"
 
-
-Hero::Hero(int x, int y, string meshName, string meshTexture[])
+//'x' and 'y' is position , meshName = name of the mesh , typeoftile = geometry type , numberoftextures = amount of textures for 'typeOfTile' 1 texture = 1
+Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberOfTextures)
 	: moveX(0)
 	, moveY(0)
 	, initX(x)
 	, initY(y)
-	, Avatar(x, y, meshName, meshTexture[0])
+	, Avatar(x, y, meshName, typeOfTile[0])
 {
-	for (int i = 0; i < NUM_GEOMETRY; ++i)
+	for (int i = 0; i < numberOfTextures; ++i)
 	{
-		this->texture[i] = meshTexture[i];
+		this->texture[i] = typeOfTile[i];
 	}
 }
 
@@ -182,7 +182,6 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		AnimationCounterLR--;
 		if (AnimationCounterLR < 0)
 			AnimationCounterLR = 3;
-		
 	}
 	else
 	{
@@ -195,7 +194,6 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		AnimationCounterLR++;
 		if (AnimationCounterLR > 3)
 			AnimationCounterLR = 0;
-		
 	}
 
 	SetTexture(texture[AnimationCounterLR]);
@@ -206,14 +204,12 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 	if (mode)
 	{
 		if (moveUp)
-		{
 			Position.y += (int)(8.0f * timeDiff);
-		}
+
 		AnimationInvert = true;
 		AnimationCounterUD--;
 		if (AnimationCounterUD < 0)
 			AnimationCounterUD = 3;
-		
 	}
 	else
 	{
@@ -225,7 +221,6 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 		AnimationCounterUD++;
 		if (AnimationCounterUD > 3)
 			AnimationCounterUD = 0;
-		
 	}
 
 	SetTexture(texture[AnimationCounterLR]);

@@ -1,7 +1,7 @@
 #include "Tile.h"
 
-Tile::Tile(int x,int y , string meshName, string meshTexture)
-	: GameObject(x,y,meshName,meshTexture)
+Tile::Tile(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
+	: GameObject(x, y, meshName, typeOfTile)
 	, type(NORMAL)
 {
 

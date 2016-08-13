@@ -129,8 +129,8 @@ void Assignment::Init()
 	camera.Init(Vector3(0, 0, 10), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
 	// Initialise the hero's position
-	string heroTexture[] = { "Image//tile2_hero_frame_0.tga", "Image//tile2_hero_frame_1.tga", "Image//tile2_hero_frame_2.tga", "Image//tile2_hero_frame_3.tga" };
-	currHero = new Hero(32, 160, "HERO", heroTexture);
+	GEOMETRY_TYPE heroTexture[] = { GEO_TILEHERO_FRAME0, GEO_TILEHERO_FRAME1, GEO_TILEHERO_FRAME2, GEO_TILEHERO_FRAME3 };
+	currHero = new Hero(32, 160, "HERO", heroTexture , 4);
 	currHero->health = 3;
 	m_avatarList.push_back(currHero);
 
@@ -163,6 +163,27 @@ void Assignment::Init()
 
 	meshList[GEO_COIN] = MeshBuilder::Generate2DMesh("coin", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
 	meshList[GEO_COIN]->textureID = LoadTGA("Image//coin.tga");
+
+	meshList[GEO_TILEGROUND] = MeshBuilder::Generate2DMesh("coin", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
+	meshList[GEO_TILEGROUND]->textureID = LoadTGA("Image//mariotile.tga");
+
+	meshList[GEO_TILETREE] = MeshBuilder::Generate2DMesh("GEO_TILETREE", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
+	meshList[GEO_TILETREE]->textureID = LoadTGA("Image//tree.tga");
+
+	meshList[GEO_TILESTRUCTURE] = MeshBuilder::Generate2DMesh("GEO_TILESTRUCTURE", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
+	meshList[GEO_TILESTRUCTURE]->textureID = LoadTGA("Image//step4b.tga");
+
+	meshList[GEO_TILEHERO_FRAME0] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME0", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
+	meshList[GEO_TILEHERO_FRAME0]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga");
+
+	meshList[GEO_TILEHERO_FRAME1] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME1", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
+	meshList[GEO_TILEHERO_FRAME1]->textureID = LoadTGA("Image//tile2_hero_frame_1.tga");
+
+	meshList[GEO_TILEHERO_FRAME2] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME2", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
+	meshList[GEO_TILEHERO_FRAME2]->textureID = LoadTGA("Image//tile2_hero_frame_2.tga");
+
+	meshList[GEO_TILEHERO_FRAME3] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME3", Color(1, 1, 1), 0.0f, 0.0f, 32, 32);
+	meshList[GEO_TILEHERO_FRAME3]->textureID = LoadTGA("Image//tile2_hero_frame_3.tga");
 
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
@@ -200,10 +221,10 @@ void Assignment::ReadLevel()
 			{
 			case 1:
 			{
-				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", "Image//mariotile.tga");
+				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				m_goList.push_back(newTile);
+				break;
 			}
-			break;
 			}
 		}
 	}
@@ -217,17 +238,16 @@ void Assignment::ReadLevel()
 			{
 			case 2:
 			{
-				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILETREE", "Image//tree.tga");
+				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILETREE", GEO_TILETREE);
 				m_rearList.push_back(newTile);
+				break;
 			}
-			break;
-
 			case 3:
 			{
-				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILESTRUCTURE", "Image//step4b.tga");
+				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILESTRUCTURE", GEO_TILESTRUCTURE);
 				m_rearList.push_back(newTile);
+				break;
 			}
-			break;
 			}
 		}
 	}
@@ -333,9 +353,9 @@ void Assignment::Update(double dt)
 			GameObject *other = (GameObject *)*iter2;
 			if (!other->active)
 				continue;
-			if (go->CheckCollision(other,&tilemap))
+			if (CheckCollision(go,other))
 			{
-				go->CollisionResponse(other, &tilemap);
+				CollisionResponse(go, other);
 			}
 		}
 
@@ -344,16 +364,11 @@ void Assignment::Update(double dt)
 			Avatar *other = (Avatar *)*iter3;
 			if (!other->active)
 				continue;
-			//if is hero, check enemy against hero to see if need to change strategy
 			if (go->meshName == "HERO")
+				CheckStrategy(go,other);
+			if (CheckCollision(go, other))
 			{
-				Enemy*enemy = (Enemy*)other;
-				enemy->CheckStrategy(go);
-			}
-
-			if (go->CheckCollision(other, &tilemap))
-			{
-				go->CollisionResponse(other, &tilemap);
+				CollisionResponse(go, other);
 			}
 		}
 	}
@@ -376,6 +391,51 @@ void Assignment::Update(double dt)
 
 
 	fps = (float)(1.f / dt);
+}
+
+//Check and Change StrateGy of Enemy here
+void Assignment::CheckStrategy(Avatar* hero, Avatar* enemy)
+{
+
+}
+//check collision of Avatar with all other objects
+bool Assignment::CheckCollision(Avatar *hero, GameObject*Other)
+{
+	if ((hero->GetPosition() - Other->GetPosition()).LengthSquare() < 1.5f*tilemap.GetTileSize()*tilemap.GetTileSize())
+		return true;
+	else
+		return false;
+}
+static int counter = 0;
+void Assignment::CollisionResponse(Avatar *hero, GameObject*Other)
+{
+	if (Other->meshName == "GEO_TILEGROUND")//|| whatever Other object you want that have collision)
+	{
+		if (hero->GetPosition().x < Other->GetPosition().x && Other->GetPosition().x - hero->GetPosition().x <  tilemap.GetTileSize())
+		{
+			if (hero->GetPosition().y >= Other->GetPosition().y  && hero->GetPosition().y - Other->GetPosition().y < tilemap.GetTileSize()||
+				Other->GetPosition().y >= hero->GetPosition().y  && Other->GetPosition().y - hero->GetPosition().y < tilemap.GetTileSize())
+			hero->moveRight = false;
+		}
+		else if (Other->GetPosition().x < hero->GetPosition().x && hero->GetPosition().x - Other->GetPosition().x < tilemap.GetTileSize())
+		{
+			if (hero->GetPosition().y >= Other->GetPosition().y  && hero->GetPosition().y - Other->GetPosition().y < tilemap.GetTileSize() ||
+				Other->GetPosition().y >= hero->GetPosition().y  && Other->GetPosition().y - hero->GetPosition().y < tilemap.GetTileSize())
+			hero->moveLeft = false;
+		}
+		if (hero->GetPosition().y < Other->GetPosition().y && Other->GetPosition().y - hero->GetPosition().y <= tilemap.GetTileSize())
+		{
+			if (hero->GetPosition().x >= Other->GetPosition().x && hero->GetPosition().x - Other->GetPosition().x < tilemap.GetTileSize() * 0.75f ||
+				Other->GetPosition().x >= hero->GetPosition().x && Other->GetPosition().x - hero->GetPosition().x < tilemap.GetTileSize() * 0.75f)
+				hero->moveUp = false;
+		}
+		else if (Other->GetPosition().y < hero->GetPosition().y && hero->GetPosition().y - Other->GetPosition().y <= tilemap.GetTileSize())
+		{
+			if (hero->GetPosition().x >= Other->GetPosition().x && hero->GetPosition().x - Other->GetPosition().x < tilemap.GetTileSize()* 0.75f ||
+				Other->GetPosition().x >= hero->GetPosition().x && Other->GetPosition().x - hero->GetPosition().x < tilemap.GetTileSize()* 0.75f)
+				hero->moveDown = false;
+		}
+	}
 }
 
 void Assignment::RenderText(Mesh* mesh, std::string text, Color color)
@@ -653,7 +713,7 @@ void Assignment::LoadLevel()
 		GameObject *go = (GameObject *)*iter;
 		if (!go->active)
 			continue;
-		Render2DMesh(go->mesh, false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x*0.25f, go->GetPosition().y - tilemap.offSet_y*0.25f);
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x*0.25f, go->GetPosition().y - tilemap.offSet_y*0.25f);
 	}
 
 	//load actual
@@ -662,7 +722,7 @@ void Assignment::LoadLevel()
 		GameObject *go = (GameObject *)*iter;
 		if (!go->active)
 			continue;
-		Render2DMesh(go->mesh, false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
 
 	//render avatars
@@ -672,7 +732,7 @@ void Assignment::LoadLevel()
 		if (!go->active)
 			continue;
 
-		Render2DMesh(go->mesh, false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, false, currHero->GetAnimationInvert());
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, false, currHero->GetAnimationInvert());
 	}
 }
 

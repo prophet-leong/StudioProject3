@@ -3,18 +3,19 @@
 #include "Vector2.h"
 #include "Mesh.h"
 #include <string>
+#include "GeometryType.h"
 using std::string;
 
 class GameObject
 {
 public:
 
-	GameObject(int x, int y, string meshName, string meshTexture);
+	GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	~GameObject();
 
 	void SetPos(int x,int y);
 	void SetPos(Vector2 newPos);
-	void SetTexture(string newTexture);
+	void SetTexture(GEOMETRY_TYPE newTexture);
 
 	Vector2 GetPosition();
 
@@ -23,10 +24,10 @@ public:
 	bool active;
 	Vector2 scale;
 
-	Mesh* mesh;
+	//Mesh* mesh;
 	string meshName;
 	string meshTexture;
-
+	GEOMETRY_TYPE type;
 protected:
 
 	Vector2 Position;

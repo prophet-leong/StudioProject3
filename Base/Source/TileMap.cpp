@@ -39,12 +39,12 @@ bool TileMap::LoadFile(const string& mapName, const int screenWidth, const int s
 	numColumns = 0;
 
 	string currentLine = "";
-	while (getline(file, currentLine))
+	while(getline(file, currentLine)) 
 	{
 		// If this line is a comment line, or an empty line, then ignore it.
 		++numRows;
-
-		if (currentLine == "")
+		
+		if (currentLine == "") 
 			continue;
 
 
@@ -95,7 +95,8 @@ bool TileMap::LoadFile(const string& mapName, const int screenWidth, const int s
 
 bool TileMap::LoadMap(const string& mapName, const int screenWidth, const int screenHeight) {
 
-	if (LoadFile(mapName, screenWidth, screenHeight) == true) {
+	if (LoadFile(mapName, screenWidth, screenHeight) == true)
+	{
 		printf("Map (%s) has been successfully loaded!\n", mapName.c_str());
 		return true;
 	}
@@ -116,13 +117,13 @@ void TileMap::Update()
 
 }
 
-int TileMap::GetNumRows() const {
-
+int TileMap::GetNumRows() const
+{
 	return this->numRows;
 }
 
-int TileMap::GetNumColumns() const {
-
+int TileMap::GetNumColumns() const
+{
 	return this->numColumns;
 }
 

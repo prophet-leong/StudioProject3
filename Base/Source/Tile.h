@@ -5,7 +5,7 @@
 class Tile : public GameObject
 {
 public:
-	Tile(int x, int y, string meshName, string meshTexture);
+	Tile(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	~Tile();
 
 	enum TILE_TYPE

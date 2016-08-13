@@ -1,7 +1,7 @@
 #include "PowerUp.h"
 
-PowerUp::PowerUp(int x, int y, string meshName, string meshTexture, string PowerUp, float Duration)
-	:GameObject(x,y,meshName,meshTexture)
+PowerUp::PowerUp(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, string PowerUp, float Duration)
+:GameObject(x, y, meshName, typeOfTile)
 	, powerup(PowerUp)
 	, powerUpDuration(Duration)
 {

@@ -1,23 +1,16 @@
 #ifndef ENEMY_H 
 #define ENEMY_H
 #include "avatar.h"
+#include "TileMap.h"
 #include "Strategy.h"
 
 class Enemy : public Avatar
 {
 public:
-	Enemy(int x, int y, string meshName, string meshTexture[]);
+	Enemy(int x, int y, string meshName, GEOMETRY_TYPE tileOfTile[], int numberOfTextures);
 	~Enemy();
 
-	enum GEOMETRY_TYPE
-	{
-		GEO_TILEENEMY_FRAME0,
-		GEO_TILEENEMY_FRAME1,
-		GEO_TILEENEMY_FRAME2,
-		GEO_TILEENEMY_FRAME3,
-		NUM_GEOMETRY,
-	};
-	string texture[NUM_GEOMETRY];
+	GEOMETRY_TYPE texture[NUM_GEOMETRY];
 
 	// Set the destination of this enemy 
 	void SetDestination(const int pos_x,const int pos_y);
@@ -26,8 +19,6 @@ public:
 	// Set the destination of this enemy 
 	int GetDestination_y();
 
-	//Functions
-	void CheckStrategy(Avatar* other);
 	// ENEMY Update 
 	void Update();
 	// Strategy

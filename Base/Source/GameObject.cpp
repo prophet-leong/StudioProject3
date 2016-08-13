@@ -4,16 +4,16 @@
 #include "MeshBuilder.h"
 #include "LoadTGA.h"
 
-GameObject::GameObject(int x , int y, string meshName, string meshTexture)
+GameObject::GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	: Position(x,y)
 	, active(true)
 	, health(0)
 	, scale(1.f,1.f)
 	, meshName(meshName)
-	, meshTexture(meshTexture)
 {
-	mesh = MeshBuilder::Generate2DMesh(meshName, Color(1, 1, 1), 0.0f, 0.0f, size * scale.x, size * scale.y);
-	mesh->textureID = LoadTGA(meshTexture.c_str());
+	//mesh = MeshBuilder::Generate2DMesh(meshName, Color(1, 1, 1), 0.0f, 0.0f, size * scale.x, size * scale.y);
+	//mesh->textureID = LoadTGA(meshTexture.c_str());
+	type = typeOfTile;
 }
 
 GameObject::~GameObject()
@@ -33,10 +33,10 @@ void GameObject::SetPos(Vector2 newPos)
 	Position.y = newPos.y;
 }
 
-void GameObject::SetTexture(string newTexture)
+void GameObject::SetTexture(GEOMETRY_TYPE newTexture)
 {
-	meshTexture = newTexture;
-	mesh->textureID = LoadTGA(meshTexture.c_str());
+	type = newTexture;
+	//mesh->textureID = LoadTGA(meshTexture.c_str());
 }
 
 Vector2 GameObject::GetPosition()

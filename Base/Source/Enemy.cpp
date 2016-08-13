@@ -1,11 +1,12 @@
 #include "Enemy.h"
-Enemy::Enemy(int x ,int y,string meshName,string meshTexture[])
+
+Enemy::Enemy(int x ,int y,string meshName,GEOMETRY_TYPE typeOfTile[],int numberOfTextures)
 	: theStrategy(NULL)
-	, Avatar(x,y,meshName,meshTexture[0])
+	, Avatar(x, y, meshName, typeOfTile[0])
 {
-	for (int i = 0; i < NUM_GEOMETRY; ++i)
+	for (int i = 0; i < numberOfTextures; ++i)
 	{
-		this->texture[i] = meshTexture[i];
+		this->texture[i] = typeOfTile[i];
 	}
 }
 
@@ -37,11 +38,6 @@ int Enemy::GetDestination_x()
 int Enemy::GetDestination_y()
 {
 	return theDestination.y;
-}
-
-void Enemy::CheckStrategy(Avatar* other)
-{
-
 }
 /********************************************************************************
 Hero Update

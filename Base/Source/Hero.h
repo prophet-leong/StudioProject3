@@ -2,23 +2,15 @@
 #define HERO_H
 
 #include "avatar.h"
+#include "TileMap.h"
 
 class Hero : public Avatar
 {
 public:
-	Hero(int x,int y,string meshName,string meshTexture[]);
+	Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[], int numberOfTextures);
 	~Hero();
 
-	enum GEOMETRY_TYPE
-	{
-		GEO_TILEHERO_FRAME0,
-		GEO_TILEHERO_FRAME1,
-		GEO_TILEHERO_FRAME2,
-		GEO_TILEHERO_FRAME3,
-		NUM_GEOMETRY,
-	};
-
-	string texture[NUM_GEOMETRY];
+	GEOMETRY_TYPE texture[4];
 
 	//update
 	void Update(TileMap* tilemap,double dt);

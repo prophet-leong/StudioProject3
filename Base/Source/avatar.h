@@ -2,17 +2,15 @@
 #define AVATAR_H
 #include "GameObject.h"
 #include "Bag.h"
-#include "TileMap.h"
 
 class Avatar :public GameObject
 {
 public:
-	Avatar(int x, int y, string meshName, string meshTexture);
+	Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	~Avatar();
 
 	//functions
-	virtual bool CheckCollision(GameObject* other, TileMap* tilemap);
-	virtual void CollisionResponse(GameObject* other, TileMap* tilemap);
+	//virtual void update(double dt) = 0;
 
 	//setters
 	void SetAnimationCounterLR(int AnimationCounterLR);
