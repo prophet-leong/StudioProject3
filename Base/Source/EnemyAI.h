@@ -61,7 +61,7 @@ public:
 
 
 
-	void init();
+	//virtual void init();
 	void Update();
 	
 private:

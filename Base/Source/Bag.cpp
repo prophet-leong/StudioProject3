@@ -1,8 +1,6 @@
 #include "Bag.h"
 
 Bag::Bag()
-	: score(0)
-	, coins(0)
 {
 }
 
@@ -20,4 +18,6 @@ void Bag::Update(double dt)
 			continue;
 		go->Update(dt);
 	}
+
+
 }

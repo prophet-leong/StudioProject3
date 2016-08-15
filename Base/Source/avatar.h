@@ -7,8 +7,9 @@
 class Avatar :public GameObject
 {
 public:
+	Avatar();
 	Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
-	~Avatar();
+	virtual ~Avatar();
 
 	//functions
 	//virtual void update(double dt) = 0;
@@ -43,6 +44,7 @@ public:
 	//for different powerups
 	Bag* inventory;
 
+	int health;
 
 protected:
 	//for Animation

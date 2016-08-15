@@ -17,79 +17,13 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 Hero::~Hero()
 {
 }
-
-// Update Jump Upwards
-void Hero::UpdateJumpUpwards(double dt)
-{
-	if (moveUp)
-	{
-		Position.y += (int)(8.0f /** dt * 60.f*/);
-		UpwardsFrame -= 1;
-
-	}
-	if (!moveUp || UpwardsFrame <= 0)
-	{
-		inMidAir_Up = false;
-		inMidAir_Down = true;
-	}
-}
-
-// Update FreeFall
-void Hero::UpdateFreeFall(double dt)
-{
-	Position.y += (int)(8.0f/* * dt * 60.f*/);
-}
-
-//status::done
-void Hero::UpdateJump(double dt)
-{
-	//check for falling
-	if (isOnGround())
-	{
-		SetOnFreeFall(moveDown);
-	}
-	// update jumping upwards
-	else if (isJumpUpwards())
-	{
-		UpdateJumpUpwards(dt);
-	}
-	// update falling
-	else if (isFreeFall())
-	{
-		//Check if the hero is still in mid air...
-		if (moveDown)
-		{
-			Position.y -= (int)(8.0f /** dt * 60.f*/);
-		}
-		else
-		{
-			inMidAir_Down = false;
-		}
-	}
-}
-
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)
 {
-	if (inventory->coins >= 100)
-	{
-		inventory->coins -= 100;
-		health += 1;
-	}
-
 	for (vector<PowerUp*>::iterator iter = inventory->powerUpList.begin(); iter != inventory->powerUpList.end(); iter++)
 	{
 		PowerUp *go = (PowerUp *)*iter;
-
-		if (go->powerUpDuration > 0)
-		{
-			if (go->powerup == "Scale")
-				scale.y = 2.f;
-		}
-		else
-		{
-			scale.y = 1.f;
-		}
+		go->Update(dt);
 	}
 
 	moveLeft = moveRight = moveUp = moveDown = true;
@@ -125,7 +59,6 @@ void Hero::Reset(TileMap* tilemap)
 	SetAnimationInvert(false);
 	SetToStop();
 	inventory->powerUpList.clear();
-	inventory->coins = 0;
 	scale.y = 1.f;
 	tilemap->offSet_x = 0;
 	tilemap->fineOffSet_y = 0;
@@ -135,7 +68,6 @@ void Hero::Reset(TileMap* tilemap)
 void Hero::Restart(TileMap* tilemap)
 {
 	health = 3;
-	inventory->score = 0;
 }
 
 // status:done

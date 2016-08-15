@@ -8,15 +8,12 @@ class Hero : public Avatar
 {
 public:
 	Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[], int numberOfTextures);
-	~Hero();
+	virtual ~Hero();
 
 	GEOMETRY_TYPE texture[4];
 
 	//update
 	void Update(TileMap* tilemap,double dt);
-	void UpdateJump(double dt);
-	void UpdateJumpUpwards(double dt);
-	void UpdateFreeFall(double dt);
 
 	//functions
 	void Scrolling(TileMap* tilemap,const int leftBorder, const int rightBorder,

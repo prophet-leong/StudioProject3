@@ -1,17 +1,33 @@
 #ifndef POWER_UP
 #define POWER_UP
-#include "GameObject.h"
+#include "GeometryType.h"
 
-class PowerUp : public GameObject
+//#include "Hero.h"
+#include <string>
+using std::string;
+
+// power up needs to be able to be rendered on screen after the death of a boss monster
+// but also need to be able to be kept in bag
+class PowerUp
 {
 public:
-	PowerUp(int x, int y, string meshName,GEOMETRY_TYPE typeOfTile, string PowerUp, float Duration);
-	~PowerUp();
+	PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUp);
+	virtual ~PowerUp();
 
-	void Update(double dt);
+	virtual void Update(/*Hero& hero ,*/ double dt) = 0;
+	virtual void activate() =0;
+	bool GetInBag();
+	void SetInBag(bool isInBag);
+	string GetPowerUpName();
+	void SetPowerUpName(string newName);
+	bool active;
+private:
 
-	string powerup;
-	float powerUpDuration;
+	GEOMETRY_TYPE type;
+	bool inBag;
+	int x;
+	int y;
+	string PowerUpName;
 
 };
 #endif

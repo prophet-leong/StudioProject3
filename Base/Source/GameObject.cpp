@@ -6,7 +6,6 @@
 GameObject::GameObject()
 	:Position(0, 0)
 	, active(true)
-	, health(0)
 	, scale(1.f, 1.f)
 	, meshName(meshName)
 {
@@ -16,7 +15,6 @@ GameObject::GameObject()
 GameObject::GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	: Position(x,y)
 	, active(true)
-	, health(0)
 	, scale(1.f,1.f)
 	, meshName(meshName)
 {
@@ -34,7 +32,6 @@ void GameObject::Init(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 {
 	SetPos(x, y);
 	this->active = true;
-	this->health = 0;
 	this->scale.Set(1.f, 1.f);
 	this->meshName = meshName;
 	type = typeOfTile;

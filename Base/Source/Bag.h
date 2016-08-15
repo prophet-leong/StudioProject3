@@ -11,8 +11,6 @@ struct Bag
 
 	void Update(double dt);
 
-	int score;
-	short coins;
-	vector<PowerUp *> powerUpList;
+	vector<PowerUp*>powerUpList;
 };
 #endif
