@@ -44,6 +44,7 @@
     <ClInclude Include="Source\Camera3.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\GeometryType.h" />
     <ClInclude Include="Source\Hero.h" />
     <ClInclude Include="Source\Light.h" />
     <ClInclude Include="Source\LoadOBJ.h" />

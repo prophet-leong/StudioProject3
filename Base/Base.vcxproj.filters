@@ -176,5 +176,8 @@
     <ClInclude Include="Source\Vertex.h">
       <Filter>Header Files\Essentials</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GeometryType.h">
+      <Filter>Header Files\Assignment</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

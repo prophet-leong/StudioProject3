@@ -3,6 +3,15 @@
 
 #include "MeshBuilder.h"
 #include "LoadTGA.h"
+GameObject::GameObject()
+	:Position(0, 0)
+	, active(true)
+	, health(0)
+	, scale(1.f, 1.f)
+	, meshName(meshName)
+{
+
+}
 
 GameObject::GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	: Position(x,y)
@@ -19,6 +28,16 @@ GameObject::GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 GameObject::~GameObject()
 {
 
+}
+
+void GameObject::Init(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
+{
+	SetPos(x, y);
+	this->active = true;
+	this->health = 0;
+	this->scale.Set(1.f, 1.f);
+	this->meshName = meshName;
+	type = typeOfTile;
 }
 
 void GameObject::SetPos(int x, int y)

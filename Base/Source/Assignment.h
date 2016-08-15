@@ -13,6 +13,7 @@
 #include "Enemy.h"
 #include "Tile.h"
 #include "GeometryType.h"
+
 class Assignment : public Scene
 {
 	enum UNIFORM_TYPE
@@ -101,11 +102,7 @@ private:
 	
 	void Restart();
 
-	//collision
-	bool CheckCollision(Avatar* Hero, GameObject*Other);
-	void CollisionResponse(Avatar* Hero, GameObject*other);
-	//check wif enemy
-	void CheckStrategy(Avatar* hero,Avatar* enemy );
+	GameObject* FetchGO(vector<GameObject*>&list);
 
 	//private variabless
 	unsigned m_vertexArrayID;
