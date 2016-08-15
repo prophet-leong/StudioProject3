@@ -71,12 +71,6 @@ void Hero::UpdateJump(double dt)
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)
 {
-	if (inventory->coins >= 100)
-	{
-		inventory->coins -= 100;
-		health += 1;
-	}
-
 	for (vector<PowerUp*>::iterator iter = inventory->powerUpList.begin(); iter != inventory->powerUpList.end(); iter++)
 	{
 		PowerUp *go = (PowerUp *)*iter;
@@ -125,7 +119,6 @@ void Hero::Reset(TileMap* tilemap)
 	SetAnimationInvert(false);
 	SetToStop();
 	inventory->powerUpList.clear();
-	inventory->coins = 0;
 	scale.y = 1.f;
 	tilemap->offSet_x = 0;
 	tilemap->fineOffSet_y = 0;
@@ -135,7 +128,6 @@ void Hero::Reset(TileMap* tilemap)
 void Hero::Restart(TileMap* tilemap)
 {
 	health = 3;
-	inventory->score = 0;
 }
 
 // status:done

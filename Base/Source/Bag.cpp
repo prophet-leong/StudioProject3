@@ -1,8 +1,6 @@
 #include "Bag.h"
 
 Bag::Bag()
-	: score(0)
-	, coins(0)
 {
 }
 

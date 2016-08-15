@@ -653,14 +653,6 @@ void Assignment::Render()
 	sss.precision(5);
 
 	sss.str("");
-	sss << "score: " << currHero->inventory->score;
-	RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0.845, 0.2465, 0.1235), 30, 400,  0);
-
-	Render2DMesh(meshList[GEO_COIN], false, 1, 1, 100, 0);
-	sss.str("");
-	sss << " X" << currHero->inventory->coins;
-	RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(1, 1, 0), 30, 80, 0);
-
 	Render2DMesh(meshList[GEO_MARIO], false);
 	sss.str("");
 	sss << " X" << currHero->health;
