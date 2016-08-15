@@ -32,18 +32,20 @@ void Avatar::CollisionResponse(GameObject* other, TileMap* tilemap)
 {
 	if (other->meshName == "GEO_TILEGROUND")//|| whatever other object you want that have collision)
 	{
-		if (other->GetPosition().x < other->GetPosition().x && other->GetPosition().x - GetPosition().x <  tilemap->GetTileSize())
+
+		if (GetPosition().x < other->GetPosition().x && other->GetPosition().x - GetPosition().x <= tilemap->GetTileSize())
 		{
-			if (GetPosition().y >= other->GetPosition().y  && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
-				other->GetPosition().y >= GetPosition().y  && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
+			if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
+				other->GetPosition().y >= GetPosition().y && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
 				moveRight = false;
 		}
-		else if (other->GetPosition().x < GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize())
+		else if (other->GetPosition().x < GetPosition().x && GetPosition().x - other->GetPosition().x <= tilemap->GetTileSize())
 		{
-			if (GetPosition().y >= other->GetPosition().y  && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
-				other->GetPosition().y >= GetPosition().y  && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
+			if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
+				other->GetPosition().y >= GetPosition().y && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
 				moveLeft = false;
 		}
+
 		if (GetPosition().y < other->GetPosition().y && other->GetPosition().y - GetPosition().y <= tilemap->GetTileSize())
 		{
 			if (GetPosition().x >= other->GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize() * 0.75f ||
