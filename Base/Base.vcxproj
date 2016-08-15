@@ -55,6 +55,7 @@
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Assignment.h" />
     <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\SharedData.h" />
     <ClInclude Include="Source\Strategy.h" />
     <ClInclude Include="Source\Strategy_Escape.h" />
     <ClInclude Include="Source\Strategy_Kill.h" />

@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Essentials">
       <UniqueIdentifier>{cf9792c9-2a4a-4eed-8190-e281b9261a4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shuyu">
+      <UniqueIdentifier>{8a9ad58c-94a1-441f-b50f-c217a27d0e9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shuyu">
+      <UniqueIdentifier>{2090096c-ebb4-40b8-9725-da61ffc2109b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameObject.cpp">
@@ -175,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="Source\Vertex.h">
       <Filter>Header Files\Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SharedData.h">
+      <Filter>Header Files\Shuyu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
