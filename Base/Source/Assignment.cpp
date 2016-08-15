@@ -11,9 +11,7 @@
 #include "Strategy_Escape.h"
 
 Assignment::Assignment()
-	: currState(STATE_TYPE)
-	, currpauseMenuState(PAUSEMENU_START)
-	, currLevel(LEVEL1)
+	:currLevel(LEVEL1)
 	, goToNextLevel(false)
 {
 
@@ -195,6 +193,7 @@ void Assignment::Init()
 
 	bLightEnabled = true;
 
+
 }
 
 GameObject* Assignment::FetchGO(vector<GameObject*>&list)
@@ -338,79 +337,78 @@ void Assignment::Update(double dt)
 	//if(Application::IsKeyPressed('P'))
 	//	lights[0].position.y += (float)(10.f * dt);
 	//camera.Update(dt);
-
-	// Update the hero
-	if (dt > 1.0 / 30.0)
-		return;
-
-	//status:done
-	if (Application::IsKeyPressed('W'))
-		currHero->MoveUpDown(true, 1.0f, &tilemap);
-	if (Application::IsKeyPressed('S'))
-		currHero->MoveUpDown(false, 1.0f, &tilemap);
-	if (Application::IsKeyPressed('A'))
-		currHero->MoveLeftRight(true, 1.0f, &tilemap);
-	if (Application::IsKeyPressed('D'))
-		currHero->MoveLeftRight(false, 1.0f, &tilemap);
-	if (Application::IsKeyPressed(' '))
-		currHero->SetToJumpUpwards(true);
-
-	currHero->Update(&tilemap, dt);
 	
-	if (currHero->GetPosition().y <= 20)
-	{
-		Restart();
-	}
+		// Update the hero
+		if (dt > 1.0 / 30.0)
+			return;
 
-	tilemap.Update();
-	// avatar check with all other objects
-	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
-	{
-		Avatar *go = (Avatar *)*iter;
-		if (!go->active)
-			continue;
+		//status:done
+		if (Application::IsKeyPressed('W'))
+			currHero->MoveUpDown(true, 1.0f, &tilemap);
+		if (Application::IsKeyPressed('S'))
+			currHero->MoveUpDown(false, 1.0f, &tilemap);
+		if (Application::IsKeyPressed('A'))
+			currHero->MoveLeftRight(true, 1.0f, &tilemap);
+		if (Application::IsKeyPressed('D'))
+			currHero->MoveLeftRight(false, 1.0f, &tilemap);
+		if (Application::IsKeyPressed(' '))
+			currHero->SetToJumpUpwards(true);
 
-		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
+		currHero->Update(&tilemap, dt);
+
+		if (currHero->GetPosition().y <= 20)
 		{
-			GameObject *other = (GameObject *)*iter2;
-			if (!other->active)
+			Restart();
+		}
+
+		tilemap.Update();
+		// avatar check with all other objects
+		for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
+		{
+			Avatar *go = (Avatar *)*iter;
+			if (!go->active)
 				continue;
-			if (go->CheckCollision(other,&tilemap))
+
+			for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
 			{
-				go->CollisionResponse(other, &tilemap);
+				GameObject *other = (GameObject *)*iter2;
+				if (!other->active)
+					continue;
+				if (go->CheckCollision(other, &tilemap))
+				{
+					go->CollisionResponse(other, &tilemap);
+				}
+			}
+
+			for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
+			{
+				Avatar *other = (Avatar *)*iter3;
+				if (!other->active)
+					continue;
+				if (go->meshName == "HERO")
+					other->CheckStrategy(go, &tilemap);
+				if (go->CheckCollision(other, &tilemap))
+				{
+					go->CollisionResponse(other, &tilemap);
+				}
 			}
 		}
 
-		for (vector<Avatar*>::iterator iter3 = iter+1; iter3 != m_avatarList.end(); iter3++)
+		currHero->UpdateJump(dt);
+
+		if (goToRestart)
 		{
-			Avatar *other = (Avatar *)*iter3;
-			if (!other->active)
-				continue;
-			if (go->meshName == "HERO")
-				other->CheckStrategy(go,&tilemap);
-			if (go->CheckCollision(other,&tilemap))
-			{
-				go->CollisionResponse(other,&tilemap);
-			}
+			Restart();
+			goToRestart = false;
 		}
-	}
-
-	currHero->UpdateJump(dt);
-
-	if (goToRestart)
-	{
-		Restart();
-		goToRestart = false;
-	}
-	if (goToNextLevel)
-	{
-		currLevel = (LEVEL)(currLevel + 1);
-		ClearLevel();
-		ReadLevel();
-		currHero->Reset(&tilemap);
-		goToNextLevel = false;
-	}
-
+		if (goToNextLevel)
+		{
+			currLevel = (LEVEL)(currLevel + 1);
+			ClearLevel();
+			ReadLevel();
+			currHero->Reset(&tilemap);
+			goToNextLevel = false;
+		}
 
 	fps = (float)(1.f / dt);
 }
@@ -645,18 +643,38 @@ void Assignment::Render()
 	// Render the background image
 	RenderBackground();
 
-	//loading/rendering of level
-	LoadLevel();
-
 	//On screen text UI
 	std::ostringstream sss;
 	sss.precision(5);
 
-	sss.str("");
-	Render2DMesh(meshList[GEO_MARIO], false);
-	sss.str("");
-	sss << " X" << currHero->health;
-	RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
+	if (currState == STATE_PLAY)
+	{
+		Render2DMesh(meshList[GEO_MARIO], false);
+		sss.str("");
+		sss << " X" << currHero->health;
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
+		//loading/rendering of level
+		LoadLevel();
+	}
+
+		sss.str("");
+		sss << "This is Main Menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 200);
+		modelStack.PushMatrix();
+		Render2DMesh(meshList[GEO_QUAD], false);
+		modelStack.PopMatrix();
+	
+		sss.str("");
+		sss << "This is Main Menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 100, 200);
+
+		sss.str("");
+		sss << "This is Main Menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 100, 180);
+
+		sss.str("");
+		sss << "This is Main Menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 100, 200);
 }
 
 void Assignment::Exit()
@@ -738,21 +756,3 @@ void Assignment::ClearLevel()
 }
 
 
-//Setting Gamestates, Returning gamestates
-void Assignment::SetCurrentState(STATE state)
-{
-	this->currState = state;
-}
-void Assignment::SetCurrentPauseMenuState(PAUSEMENU pausemenu)
-{
-	this->currpauseMenuState = pausemenu;
-}
-
-STATE Assignment::GetCurrentState()
-{
-	return currState;
-}
-PAUSEMENU Assignment::GetCurrentPauseMenuState()
-{
-	return currpauseMenuState;
-}
