@@ -70,6 +70,7 @@
     <ClCompile Include="Source\Utility.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PowerUp_Shield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Vertex.h">
@@ -156,6 +157,7 @@
     <ClInclude Include="Source\shader.hpp">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PowerUp_Shield.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">

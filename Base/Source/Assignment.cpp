@@ -340,8 +340,6 @@ void Assignment::Update(double dt)
 		currHero->MoveLeftRight(true, 1.0f, &tilemap);
 	if (Application::IsKeyPressed('D'))
 		currHero->MoveLeftRight(false, 1.0f, &tilemap);
-	if (Application::IsKeyPressed(' '))
-		currHero->SetToJumpUpwards(true);
 
 	currHero->Update(&tilemap, dt);
 	
@@ -381,7 +379,7 @@ void Assignment::Update(double dt)
 			}
 		}
 	}
-	currHero->UpdateJump(dt);
+
 
 	if (goToRestart)
 	{

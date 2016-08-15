@@ -27,6 +27,7 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Assignment.cpp" />
     <ClCompile Include="Source\PowerUp.cpp" />
+    <ClCompile Include="Source\PowerUp_Shield.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Strategy.cpp" />
     <ClCompile Include="Source\Strategy_Escape.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\PowerUp.h" />
+    <ClInclude Include="Source\PowerUp_Shield.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Assignment.h" />
     <ClInclude Include="Source\shader.hpp" />
