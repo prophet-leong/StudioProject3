@@ -247,7 +247,6 @@ void Assignment::ReadLevel()
 				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				break;
 			}
-			}
 		}
 	}
 

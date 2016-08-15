@@ -70,6 +70,9 @@
     <ClCompile Include="Source\Utility.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnmyAI.cpp">
+      <Filter>Source\Shuyu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Vertex.h">
@@ -91,9 +94,6 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\Strategy_Escape.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SharedData.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene.h">
@@ -156,6 +156,12 @@
     <ClInclude Include="Source\shader.hpp">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Source\SharedData.h">
+      <Filter>Header\Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAI.h">
+      <Filter>Header\Shuyu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -163,6 +169,12 @@
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{38a77ed1-05f1-4fac-8738-0f255a3b125c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Shuyu">
+      <UniqueIdentifier>{af20ebbe-1450-41a6-96a6-1a09ea297c6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Shuyu">
+      <UniqueIdentifier>{d73dc9bf-d722-41d1-bf48-7a5caed3a6ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
