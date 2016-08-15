@@ -18,6 +18,4 @@ void Bag::Update(double dt)
 			continue;
 		go->Update(dt);
 	}
-
-
 }
