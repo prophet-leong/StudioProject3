@@ -6,9 +6,9 @@ class PowerUp : public GameObject
 {
 public:
 	PowerUp(int x, int y, string meshName,GEOMETRY_TYPE typeOfTile, string PowerUp, float Duration);
-	~PowerUp();
+	virtual ~PowerUp();
 
-	void Update(double dt);
+	virtual void Update(double dt);
 
 	string powerup;
 	float powerUpDuration;

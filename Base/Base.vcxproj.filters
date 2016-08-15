@@ -164,5 +164,11 @@
     <Filter Include="Header">
       <UniqueIdentifier>{38a77ed1-05f1-4fac-8738-0f255a3b125c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header\TeckLee">
+      <UniqueIdentifier>{b927cefd-46c4-43a0-a081-af24f64dad32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TeckLee">
+      <UniqueIdentifier>{a5812ab1-f8cb-4d7c-a0c1-ef1247b525d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -197,27 +197,6 @@ void Assignment::Init()
 
 }
 
-GameObject* Assignment::FetchGO(vector<GameObject*>&list)
-{
-	//Exercise 2a: implement FetchGO()
-	for (std::vector<GameObject*>::iterator iter = list.begin(); iter != list.end(); ++iter)
-	{
-		GameObject *go = *iter;
-		if (!go->active )
-		{
-			go->active = true;
-			return go;
-		}
-	}
-	//Exercise 2b: increase object count every time an object is set to active
-
-	list.push_back(new GameObject());
-	
-	GameObject *go = *(list.end() - 1);
-	go->active = true;
-	return go;
-}
-
 void Assignment::ReadLevel()
 {
 	switch (currLevel)
@@ -241,12 +220,21 @@ void Assignment::ReadLevel()
 		{
 			switch (tilemap.map[i][k])
 			{
+			
 			case 1:
 			{
 				Tile *newTile = (Tile*)FetchGO(m_goList);
 				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				break;
 			}
+			
+			case 2:
+			{
+				Enemy* enemy = (Enemy*)FetchGO(m_avatarList);
+				enemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
+				break;
+			}
+
 			}
 		}
 	}
@@ -369,7 +357,6 @@ void Assignment::Update(double dt)
 		Avatar *go = (Avatar *)*iter;
 		if (!go->active)
 			continue;
-
 		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
 		{
 			GameObject *other = (GameObject *)*iter2;
@@ -394,7 +381,6 @@ void Assignment::Update(double dt)
 			}
 		}
 	}
-
 	currHero->UpdateJump(dt);
 
 	if (goToRestart)

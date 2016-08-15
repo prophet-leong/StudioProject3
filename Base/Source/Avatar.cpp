@@ -1,5 +1,11 @@
 #include "avatar.h"
 
+Avatar::Avatar()
+	:GameObject()
+{
+
+}
+
 Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	: GameObject(x, y, meshName, typeOfTile)
 	, inMidAir_Down(false)
@@ -30,9 +36,8 @@ bool Avatar::CheckCollision(GameObject* other,TileMap* tilemap)
 
 void Avatar::CollisionResponse(GameObject* other, TileMap* tilemap)
 {
-	if (other->meshName == "GEO_TILEGROUND")//|| whatever other object you want that have collision)
+	if (other->type == GEO_TILEGROUND)//|| whatever other object you want that have collision)
 	{
-
 		if (GetPosition().x < other->GetPosition().x && other->GetPosition().x - GetPosition().x <= tilemap->GetTileSize())
 		{
 			if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||

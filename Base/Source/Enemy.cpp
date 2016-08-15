@@ -3,6 +3,7 @@
 Enemy::Enemy(int x ,int y,string meshName,GEOMETRY_TYPE typeOfTile[],int numberOfTextures)
 	: theStrategy(NULL)
 	, Avatar(x, y, meshName, typeOfTile[0])
+	, enemyname(basic)
 {
 	for (int i = 0; i < numberOfTextures; ++i)
 	{

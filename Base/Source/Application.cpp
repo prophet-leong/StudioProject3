@@ -79,7 +79,6 @@ bool Application::GetMouseUpdate()
     return false;
 }
 
-
 Application::Application()
 	: scene(NULL)
 {

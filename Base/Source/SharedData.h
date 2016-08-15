@@ -13,6 +13,7 @@ using std::vector;
 
 
 enum scene{
+
 	NUM_SCENE
 };
 
@@ -42,8 +43,6 @@ public:
 	bool SD_QuitGame;
 
 	unsigned SD_health;
-
-
 
 };
 

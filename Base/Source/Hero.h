@@ -8,7 +8,7 @@ class Hero : public Avatar
 {
 public:
 	Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[], int numberOfTextures);
-	~Hero();
+	virtual ~Hero();
 
 	GEOMETRY_TYPE texture[4];
 
