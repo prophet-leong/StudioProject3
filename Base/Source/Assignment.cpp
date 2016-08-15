@@ -11,7 +11,8 @@
 #include "Strategy_Escape.h"
 
 Assignment::Assignment()
-	: currState(MENU)
+	: currState(STATE_TYPE)
+	, currpauseMenuState(PAUSEMENU_START)
 	, currLevel(LEVEL1)
 	, goToNextLevel(false)
 {
@@ -761,4 +762,24 @@ void Assignment::ClearLevel()
 		Avatar *go = (Avatar *)*iter;
 	}
 
+}
+
+
+//Setting Gamestates, Returning gamestates
+void Assignment::SetCurrentState(STATE state)
+{
+	this->currState = state;
+}
+void Assignment::SetCurrentPauseMenuState(PAUSEMENU pausemenu)
+{
+	this->currpauseMenuState = pausemenu;
+}
+
+STATE Assignment::GetCurrentState()
+{
+	return currState;
+}
+PAUSEMENU Assignment::GetCurrentPauseMenuState()
+{
+	return currpauseMenuState;
 }
