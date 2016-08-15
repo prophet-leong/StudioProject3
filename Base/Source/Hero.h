@@ -14,9 +14,6 @@ public:
 
 	//update
 	void Update(TileMap* tilemap,double dt);
-	void UpdateJump(double dt);
-	void UpdateJumpUpwards(double dt);
-	void UpdateFreeFall(double dt);
 
 	//functions
 	void Scrolling(TileMap* tilemap,const int leftBorder, const int rightBorder,

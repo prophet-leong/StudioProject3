@@ -11,7 +11,7 @@ class GameObject
 public:
 	GameObject();
 	GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
-	~GameObject();
+	virtual ~GameObject();
 
 	void Init(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	void SetPos(int x,int y);
