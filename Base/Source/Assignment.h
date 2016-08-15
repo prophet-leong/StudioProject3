@@ -96,8 +96,37 @@ private:
 	
 	void Restart();
 
+<<<<<<< HEAD
 	GameObject* FetchGO(vector<GameObject*>&list);
 	
+=======
+	template<class Type>
+	Type* FetchGO(vector<Type*>&list)
+	{
+		for (std::vector<Type*>::iterator iter = list.begin(); iter != list.end(); ++iter)
+		{
+			Type *go = *iter;
+			if (!go->active)
+			{
+				go->active = true;
+				return go;
+			}
+		}
+		//Exercise 2b: increase object count every time an object is set to active
+
+		list.push_back(new Type());
+
+		Type *go = *(list.end() - 1);
+		go->active = true;
+		return go;
+	};
+
+	void SetCurrentState(STATE gamestate);
+	void SetCurrentPauseMenuState(PAUSEMENU pausemenu);
+
+	PAUSEMENU GetCurrentPauseMenuState();
+	STATE GetCurrentState();
+>>>>>>> c8ed8b200a998f2267550d3b071ec37f880b30dd
 
 	//collision
 	bool CheckCollision(Avatar* Hero, GameObject*Other);

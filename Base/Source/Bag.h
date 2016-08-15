@@ -11,6 +11,6 @@ struct Bag
 
 	void Update(double dt);
 
-	vector<PowerUp *> powerUpList;
+	vector<PowerUp*>powerUpList;
 };
 #endif

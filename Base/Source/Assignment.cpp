@@ -196,27 +196,6 @@ void Assignment::Init()
 
 }
 
-GameObject* Assignment::FetchGO(vector<GameObject*>&list)
-{
-	//Exercise 2a: implement FetchGO()
-	for (std::vector<GameObject*>::iterator iter = list.begin(); iter != list.end(); ++iter)
-	{
-		GameObject *go = *iter;
-		if (!go->active )
-		{
-			go->active = true;
-			return go;
-		}
-	}
-	//Exercise 2b: increase object count every time an object is set to active
-
-	list.push_back(new GameObject());
-	
-	GameObject *go = *(list.end() - 1);
-	go->active = true;
-	return go;
-}
-
 void Assignment::ReadLevel()
 {
 	switch (currLevel)
@@ -240,12 +219,20 @@ void Assignment::ReadLevel()
 		{
 			switch (tilemap.map[i][k])
 			{
+			
 			case 1:
-			{
+			{						
 				Tile *newTile = (Tile*)FetchGO(m_goList);
 				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				break;
 			}
+			case 2:
+			{
+				Enemy* enemy = (Enemy*)FetchGO(m_avatarList);
+				enemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
+				break;
+			}
+
 			}
 		}
 	}
@@ -337,6 +324,7 @@ void Assignment::Update(double dt)
 	//if(Application::IsKeyPressed('P'))
 	//	lights[0].position.y += (float)(10.f * dt);
 	//camera.Update(dt);
+<<<<<<< HEAD
 	
 		// Update the hero
 		if (dt > 1.0 / 30.0)
@@ -364,6 +352,38 @@ void Assignment::Update(double dt)
 		tilemap.Update();
 		// avatar check with all other objects
 		for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
+=======
+
+	// Update the hero
+	if (dt > 1.0 / 30.0)
+		return;
+
+	//status:done
+	if (Application::IsKeyPressed('W'))
+		currHero->MoveUpDown(true, 1.0f, &tilemap);
+	if (Application::IsKeyPressed('S'))
+		currHero->MoveUpDown(false, 1.0f, &tilemap);
+	if (Application::IsKeyPressed('A'))
+		currHero->MoveLeftRight(true, 1.0f, &tilemap);
+	if (Application::IsKeyPressed('D'))
+		currHero->MoveLeftRight(false, 1.0f, &tilemap);
+
+	currHero->Update(&tilemap, dt);
+	
+	if (currHero->GetPosition().y <= 20)
+	{
+		Restart();
+	}
+
+	tilemap.Update();
+	// avatar check with all other objects
+	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
+	{
+		Avatar *go = (Avatar *)*iter;
+		if (!go->active)
+			continue;
+		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
+>>>>>>> c8ed8b200a998f2267550d3b071ec37f880b30dd
 		{
 			Avatar *go = (Avatar *)*iter;
 			if (!go->active)
@@ -394,7 +414,24 @@ void Assignment::Update(double dt)
 			}
 		}
 
+<<<<<<< HEAD
 		currHero->UpdateJump(dt);
+=======
+
+	if (goToRestart)
+	{
+		Restart();
+		goToRestart = false;
+	}
+	if (goToNextLevel)
+	{
+		currLevel = (LEVEL)(currLevel + 1);
+		ClearLevel();
+		ReadLevel();
+		currHero->Reset(&tilemap);
+		goToNextLevel = false;
+	}
+>>>>>>> c8ed8b200a998f2267550d3b071ec37f880b30dd
 
 		if (goToRestart)
 		{
@@ -729,7 +766,6 @@ void Assignment::ClearLevel()
 	{
 		GameObject *go = (GameObject *)*iter;
 		go->active = false;
-		go->health = 0;
 		go->meshName = "";
 		go->meshTexture = "";
 	}
@@ -738,7 +774,6 @@ void Assignment::ClearLevel()
 	{
 		GameObject *go = (GameObject *)*iter;
 		go->active = false;
-		go->health = 0;
 		go->meshName = "";
 		go->meshTexture = "";
 	}

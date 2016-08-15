@@ -1,4 +1,4 @@
-﻿Build started 15/8/2016 1:18:02 PM.
+﻿Build started 15/8/2016 6:02:34 PM.
      1>Project "D:\School stuff\2016S1\DM2294 Game Prototype Project\Real Solution\Common\Common.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          E:\Programs\Visual Studio 2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\MathUtility.cpp Source\MatrixStack.cpp Source\Mtx44.cpp Source\timer.cpp Source\Vector2.cpp Source\Vector3.cpp
@@ -21,4 +21,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.36
+Time Elapsed 00:00:02.25

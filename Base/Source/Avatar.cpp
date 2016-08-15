@@ -1,5 +1,12 @@
 #include "avatar.h"
 
+Avatar::Avatar()
+	:GameObject()
+	, health(0)
+{
+
+}
+
 Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	: GameObject(x, y, meshName, typeOfTile)
 	, inMidAir_Down(false)
@@ -13,6 +20,7 @@ Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	, moveDown(true)
 	, moveLeft(true)
 	, moveRight(true)
+	, health(0)
 {
 	inventory = new Bag();
 }
@@ -25,14 +33,13 @@ Avatar::~Avatar()
 
 bool Avatar::CheckCollision(GameObject* other,TileMap* tilemap)
 {
-	return ( (GetPosition() - other->GetPosition()).LengthSquare() < 1.5f*tilemap->GetTileSize()*tilemap->GetTileSize() );
+	return ( (GetPosition() - other->GetPosition()).LengthSquare() < 1.5f * tilemap->GetTileSize() *tilemap->GetTileSize() );
 }
 
 void Avatar::CollisionResponse(GameObject* other, TileMap* tilemap)
 {
-	if (other->meshName == "GEO_TILEGROUND")//|| whatever other object you want that have collision)
+	if (other->type == GEO_TILEGROUND)//|| whatever other object you want that have collision)
 	{
-
 		if (GetPosition().x < other->GetPosition().x && other->GetPosition().x - GetPosition().x <= tilemap->GetTileSize())
 		{
 			if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
@@ -63,6 +70,7 @@ void Avatar::CollisionResponse(GameObject* other, TileMap* tilemap)
 
 void Avatar::CheckStrategy(GameObject* other, TileMap* tilemap)
 {
+	
 
 }
 

@@ -70,8 +70,18 @@
     <ClCompile Include="Source\Utility.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\FiniteStateManager.cpp">
       <Filter>Source</Filter>
+=======
+<<<<<<< HEAD
+    <ClCompile Include="Source\EnmyAI.cpp">
+      <Filter>Source\Shuyu</Filter>
+=======
+    <ClCompile Include="Source\PowerUp_Shield.cpp">
+      <Filter>Source</Filter>
+>>>>>>> e6f843a83c3c28002f31244450b2d77c8825a0cf
+>>>>>>> c8ed8b200a998f2267550d3b071ec37f880b30dd
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +104,6 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\Strategy_Escape.h">
-      <Filter>Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SharedData.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene.h">
@@ -153,14 +160,27 @@
     <ClInclude Include="Source\GeometryType.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\shader.hpp">
       <Filter>Source</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Source\FiniteStateManager.h">
       <Filter>Header</Filter>
+=======
+<<<<<<< HEAD
+    <ClInclude Include="Source\SharedData.h">
+      <Filter>Header\Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAI.h">
+      <Filter>Header\Shuyu</Filter>
+=======
+    <ClInclude Include="Source\PowerUp_Shield.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>Header</Filter>
+>>>>>>> e6f843a83c3c28002f31244450b2d77c8825a0cf
+>>>>>>> c8ed8b200a998f2267550d3b071ec37f880b30dd
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +189,20 @@
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{38a77ed1-05f1-4fac-8738-0f255a3b125c}</UniqueIdentifier>
+    </Filter>
+<<<<<<< HEAD
+    <Filter Include="Header\Shuyu">
+      <UniqueIdentifier>{af20ebbe-1450-41a6-96a6-1a09ea297c6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Shuyu">
+      <UniqueIdentifier>{d73dc9bf-d722-41d1-bf48-7a5caed3a6ca}</UniqueIdentifier>
+=======
+    <Filter Include="Header\TeckLee">
+      <UniqueIdentifier>{b927cefd-46c4-43a0-a081-af24f64dad32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TeckLee">
+      <UniqueIdentifier>{a5812ab1-f8cb-4d7c-a0c1-ef1247b525d8}</UniqueIdentifier>
+>>>>>>> e6f843a83c3c28002f31244450b2d77c8825a0cf
     </Filter>
   </ItemGroup>
 </Project>

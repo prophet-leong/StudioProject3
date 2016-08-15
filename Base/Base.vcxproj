@@ -18,7 +18,11 @@
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Source\FiniteStateManager.cpp" />
+=======
+    <ClCompile Include="Source\EnmyAI.cpp" />
+>>>>>>> c8ed8b200a998f2267550d3b071ec37f880b30dd
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\Hero.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
@@ -28,6 +32,7 @@
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Assignment.cpp" />
     <ClCompile Include="Source\PowerUp.cpp" />
+    <ClCompile Include="Source\PowerUp_Shield.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Strategy.cpp" />
     <ClCompile Include="Source\Strategy_Escape.cpp" />
@@ -44,7 +49,11 @@
     <ClInclude Include="Source\Camera2.h" />
     <ClInclude Include="Source\Camera3.h" />
     <ClInclude Include="Source\Enemy.h" />
+<<<<<<< HEAD
     <ClInclude Include="Source\FiniteStateManager.h" />
+=======
+    <ClInclude Include="Source\EnemyAI.h" />
+>>>>>>> c8ed8b200a998f2267550d3b071ec37f880b30dd
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GeometryType.h" />
     <ClInclude Include="Source\Hero.h" />
@@ -55,6 +64,7 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\PowerUp.h" />
+    <ClInclude Include="Source\PowerUp_Shield.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Assignment.h" />
     <ClInclude Include="Source\shader.hpp" />
