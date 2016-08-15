@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Debug/
 Release/
 *.opensdf
@@ -32,3 +33,16 @@ ipch/
 *.out
 *.app
 MyGraphics/Source/Quest.h.orig
+=======
+*.obj
+*.log
+*.lastbuildstate
+*.tlog
+*.idb
+*.pdb
+*.sdf
+*.suo
+*.exe
+*.lib
+*.dll
+>>>>>>> 739cce34e41c577284e87e923b43f52d63ce387d
