@@ -13,6 +13,28 @@
 #include "Enemy.h"
 #include "Tile.h"
 #include "GeometryType.h"
+
+enum STATE
+{
+	STATE_TYPE = 0,
+	STATE_MAIN_MENU,
+	STATE_PLAY,
+	STATE_CONTINUE,
+	STATE_OPTIONS,
+	STATE_PAUSE,
+	STATE_GAME_OVER,
+	STATE_END,
+};
+
+enum PAUSEMENU
+{
+	PAUSEMENU_START = 0,
+	RESUME,
+	PAUSE_MENU_OPTIONS,
+	BACK_TO_MAIN_MENU,
+	PAUSEMENU_END,
+};
+
 class Assignment : public Scene
 {
 	enum UNIFORM_TYPE
@@ -73,14 +95,7 @@ public:
 	void Render2DMesh(Mesh *mesh, const bool enableLight, const float sizeX = 1.0f, const float sizeY = 1.0f, const float x = 0.0f, const float y = 0.0f, const bool rotate = false, bool invert = false);
 
 private:
-	enum STATE
-	{
-		MENU,
-		PLAY,
-		GAME_OVER,
-		STATE_END,
-	};
-
+	
 	enum LEVEL
 	{
 		LEVEL1,
@@ -89,6 +104,7 @@ private:
 	};
 
 	STATE currState;
+	PAUSEMENU currpauseMenuState;
 	LEVEL currLevel;
 
 	bool goToNextLevel = false;
@@ -100,6 +116,13 @@ private:
 	void ClearLevel();
 	
 	void Restart();
+
+	GameObject* FetchGO(vector<GameObject*>&list);
+	void SetCurrentState(STATE gamestate);
+	void SetCurrentPauseMenuState(PAUSEMENU pausemenu);
+
+	PAUSEMENU GetCurrentPauseMenuState();
+	STATE GetCurrentState();
 
 	//collision
 	bool CheckCollision(Avatar* Hero, GameObject*Other);

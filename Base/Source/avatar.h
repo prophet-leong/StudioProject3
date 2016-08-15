@@ -2,6 +2,7 @@
 #define AVATAR_H
 #include "GameObject.h"
 #include "Bag.h"
+#include "TileMap.h"
 
 class Avatar :public GameObject
 {
@@ -11,6 +12,9 @@ public:
 
 	//functions
 	//virtual void update(double dt) = 0;
+	virtual bool CheckCollision(GameObject* other, TileMap* tilemap);
+	virtual void CollisionResponse(GameObject* other, TileMap* tilemap);
+	virtual void CheckStrategy(GameObject* other, TileMap* tilemap);
 
 	//setters
 	void SetAnimationCounterLR(int AnimationCounterLR);

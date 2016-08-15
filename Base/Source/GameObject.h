@@ -9,10 +9,11 @@ using std::string;
 class GameObject
 {
 public:
-
+	GameObject();
 	GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	~GameObject();
 
+	void Init(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	void SetPos(int x,int y);
 	void SetPos(Vector2 newPos);
 	void SetTexture(GEOMETRY_TYPE newTexture);
