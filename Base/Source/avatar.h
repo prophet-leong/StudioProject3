@@ -44,6 +44,7 @@ public:
 	//for different powerups
 	Bag* inventory;
 
+	int health;
 
 protected:
 	//for Animation

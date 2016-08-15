@@ -70,7 +70,9 @@
     <ClCompile Include="Source\Utility.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PowerUp_Shield.cpp" />
+    <ClCompile Include="Source\PowerUp_Shield.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Vertex.h">
@@ -151,13 +153,15 @@
     <ClInclude Include="Source\GeometryType.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObject.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Source\shader.hpp">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\PowerUp_Shield.h" />
+    <ClInclude Include="Source\PowerUp_Shield.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
