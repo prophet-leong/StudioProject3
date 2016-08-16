@@ -58,6 +58,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 	
 	Constrain(tilemap);
 }
+
 void Hero::AttackCooldown(double dt)
 {
 	if (allowAttack == false)
@@ -67,6 +68,7 @@ void Hero::AttackCooldown(double dt)
 			allowAttack = true;
 	}
 }
+
 void Hero::NormalAttack()
 {
 	if (allowAttack == true)
@@ -76,6 +78,7 @@ void Hero::NormalAttack()
 		Projectile.push_back(Bullet(Position, direction, heroDamage));
 	}
 }
+
 void Hero::SkillAttack()
 {
 	if (allowAttack == true && !inventory->powerUpList.empty() && inventory->powerUpList[currentPowerUp]->GetIncrementStat() == ATTACK)
@@ -86,6 +89,7 @@ void Hero::SkillAttack()
 		Projectile.push_back(Bullet(Position , direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE));
 	}
 }
+
 void Hero::BulletUpdate(double dt)
 {
 	for (int i = 0; i < Projectile.size(); ++i)
@@ -93,6 +97,7 @@ void Hero::BulletUpdate(double dt)
 		Projectile[i].Update(dt);
 	}
 }
+
 //status::done
 void Hero::Constrain(TileMap* tilemap)
 {

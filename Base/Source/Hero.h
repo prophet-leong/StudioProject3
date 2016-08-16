@@ -4,6 +4,7 @@
 #include "avatar.h"
 #include "TileMap.h"
 #include "Bullet.h"
+
 class Hero : public Avatar
 {
 public:
@@ -49,21 +50,6 @@ private:
 	int initX, initY;
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif

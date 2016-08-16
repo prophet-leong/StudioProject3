@@ -223,12 +223,12 @@ void Assignment::ReadLevel()
 				break;
 			}
 			
-			case 2:
+			/*case 2:
 			{
 				Enemy* enemy = (Enemy*)FetchGO(m_avatarList);
 				enemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				break;
-			}
+			}*/
 
 			}
 		}
@@ -801,7 +801,6 @@ void Assignment::ClearLevel()
 	{
 		GameObject *go = (GameObject *)*iter;
 		go->active = false;
-		go->health = 0;
 		go->meshName = "";
 		go->meshTexture = "";
 	}
@@ -810,7 +809,6 @@ void Assignment::ClearLevel()
 	{
 		GameObject *go = (GameObject *)*iter;
 		go->active = false;
-		go->health = 0;
 		go->meshName = "";
 		go->meshTexture = "";
 	}

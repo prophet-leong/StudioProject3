@@ -1,28 +1,3 @@
-c:\users\jun xiang\desktop\studioproject3\base\debug\vc120.pdb
-c:\users\jun xiang\desktop\studioproject3\base\debug\vc120.idb
-c:\users\jun xiang\desktop\studioproject3\base\debug\camera.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\camera2.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\camera3.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\enemy.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\gameobject.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\hero.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\loadobj.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\loadtga.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\main.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\mesh.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\meshbuilder.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\assignment.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\powerup.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\shader.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\strategy.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\strategy_escape.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\strategy_kill.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\tile.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\tilemap.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\utility.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\application.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\avatar.obj
-c:\users\jun xiang\desktop\studioproject3\base\debug\bag.obj
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\vc120.pdb
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\vc120.idb
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\enemy.obj
@@ -48,15 +23,19 @@ c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\application.obj
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\avatar.obj
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\bag.obj
+c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\bullet.obj
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\camera.obj
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\camera2.obj
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\camera3.obj
-c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\bullet.obj
-c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\debug\base.exe
+c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\finitestatemachine.obj
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\debug\base.pdb
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\cl.command.1.tlog
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\cl.read.1.tlog
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\cl.write.1.tlog
+c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\link-cvtres.read.1.tlog
+c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\link-cvtres.write.1.tlog
+c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\link-rc.read.1.tlog
+c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\link-rc.write.1.tlog
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\link.command.1.tlog
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\link.read.1.tlog
 c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\debug\base.tlog\link.write.1.tlog

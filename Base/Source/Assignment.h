@@ -109,13 +109,6 @@ private:
 		return go;
 	};
 
-	
-	//collision
-	bool CheckCollision(Avatar* Hero, GameObject*Other);
-	void CollisionResponse(Avatar* Hero, GameObject*other);
-	//check wif enemy
-	void CheckStrategy(Avatar* hero,Avatar* enemy );
-
 	//private variabless
 	unsigned m_vertexArrayID;
 	Mesh* meshList[NUM_GEOMETRY];
@@ -147,6 +140,7 @@ private:
 
 	//Map RNG
 	Generator* MapRandomizer;
+
 	//the state machine
 	the_state_machine statemachine;
 	

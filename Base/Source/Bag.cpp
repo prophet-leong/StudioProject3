@@ -1,5 +1,6 @@
 #include "Bag.h"
 #include "PowerUp_Attack.h"
+
 Bag::Bag()
 {
 	PowerUp_Attack *a = new PowerUp_Attack(0, 0, GEO_COIN, "FIRE", 5, 20, true);
