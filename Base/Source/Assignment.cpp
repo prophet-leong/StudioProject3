@@ -373,65 +373,42 @@ void Assignment::Update(double dt)
 			currHero->NormalAttack();
 		if (Application::IsKeyPressed('F'))
 			currHero->SkillAttack();
-
 		currHero->Update(&tilemap, dt);
 
 		if (currHero->GetPosition().y <= 20)
 		{
-			statemachine.nextstate(2);
+			Restart();
 		}
-		if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
+
+		tilemap.Update();
+		// avatar check with all other objects
+		for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
 		{
-			// Update the hero
-			if (dt > 1.0 / 30.0)
-				return;
-
-			//status:done
-			if (Application::IsKeyPressed('W'))
-				currHero->MoveUpDown(true, 1.0f, &tilemap);
-			if (Application::IsKeyPressed('S'))
-				currHero->MoveUpDown(false, 1.0f, &tilemap);
-			if (Application::IsKeyPressed('A'))
-				currHero->MoveLeftRight(true, 1.0f, &tilemap);
-			if (Application::IsKeyPressed('D'))
-				currHero->MoveLeftRight(false, 1.0f, &tilemap);
-
-			currHero->Update(&tilemap, dt);
-
-			if (currHero->GetPosition().y <= 20)
+			Avatar *go = (Avatar *)*iter;
+			if (!go->active)
+				continue;
+			for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
 			{
-				Restart();
+				GameObject *other = (GameObject *)*iter2;
+				if (!other->active)
+					continue;
+				if (go->CheckCollision(other, &tilemap))
+				{
+					go->CollisionResponse(other, &tilemap);
+				}
 			}
 
-			tilemap.Update();
-			// avatar check with all other objects
-			for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
+			for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
 			{
-				Avatar *go = (Avatar *)*iter;
-				if (!go->active)
+				Avatar *other = (Avatar *)*iter3;
+				if (!other->active)
 					continue;
-				for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
+				if (go->meshName == "HERO")
+					other->CheckStrategy(go, &tilemap);
+				if (go->CheckCollision(other, &tilemap))
 				{
-					GameObject *other = (GameObject *)*iter2;
-					if (!other->active)
-						continue;
-					if (go->CheckCollision(other, &tilemap))
-					{
-						go->CollisionResponse(other, &tilemap);
-					}
-				}
 
-				for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
-				{
-					Avatar *other = (Avatar *)*iter3;
-					if (!other->active)
-						continue;
-					if (go->meshName == "HERO")
-						other->CheckStrategy(go, &tilemap);
-					if (go->CheckCollision(other, &tilemap))
-					{
-						go->CollisionResponse(other, &tilemap);
-					}
+					go->CollisionResponse(other, &tilemap);
 				}
 			}
 		}
@@ -689,7 +666,6 @@ void Assignment::Render()
 
 	for (int i = 0; i < currHero->Projectile.size(); ++i)
 	{
-		cout << currHero->Projectile[i].GetPosition().y << endl;
 		Render2DMesh(meshList[currHero->Projectile[i].type], false, 1, 1,
 			currHero->Projectile[i].GetPosition().x - tilemap.offSet_x, 
 			currHero->Projectile[i].GetPosition().y - tilemap.offSet_y);

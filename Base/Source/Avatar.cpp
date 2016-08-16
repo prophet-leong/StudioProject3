@@ -33,7 +33,6 @@ bool Avatar::CheckCollision(GameObject* other,TileMap* tilemap)
 {
 	return ( (GetPosition() - other->GetPosition()).LengthSquare() < 1.5f*tilemap->GetTileSize()*tilemap->GetTileSize() );
 }
-
 void Avatar::CollisionResponse(GameObject* other, TileMap* tilemap)
 {
 	if (other->type == GEO_TILEGROUND)//|| whatever other object you want that have collision)
