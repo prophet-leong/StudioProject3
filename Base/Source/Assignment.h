@@ -13,27 +13,7 @@
 #include "Enemy.h"
 #include "Tile.h"
 #include "GeometryType.h"
-
-enum STATE
-{
-	STATE_TYPE = 0,
-	STATE_MAIN_MENU,
-	STATE_PLAY,
-	STATE_CONTINUE,
-	STATE_OPTIONS,
-	STATE_PAUSE,
-	STATE_GAME_OVER,
-	STATE_END,
-};
-
-enum PAUSEMENU
-{
-	PAUSEMENU_START = 0,
-	RESUME,
-	PAUSE_MENU_OPTIONS,
-	BACK_TO_MAIN_MENU,
-	PAUSEMENU_END,
-};
+#include "FiniteStatemachine.h"
 
 class Assignment : public Scene
 {
@@ -103,8 +83,6 @@ private:
 		END,
 	};
 
-	STATE currState;
-	PAUSEMENU currpauseMenuState;
 	LEVEL currLevel;
 
 	bool goToNextLevel = false;
@@ -138,12 +116,7 @@ private:
 		return go;
 	};
 
-	void SetCurrentState(STATE gamestate);
-	void SetCurrentPauseMenuState(PAUSEMENU pausemenu);
-
-	PAUSEMENU GetCurrentPauseMenuState();
-	STATE GetCurrentState();
-
+	
 	//collision
 	bool CheckCollision(Avatar* Hero, GameObject*Other);
 	void CollisionResponse(Avatar* Hero, GameObject*other);
@@ -178,6 +151,9 @@ private:
 	vector<Avatar*> m_avatarList;
 	vector<GameObject*> m_goList;
 	vector<GameObject*> m_rearList;
+
+	//the state machine
+	the_state_machine statemachine;
 	
 };
 

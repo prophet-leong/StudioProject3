@@ -9,11 +9,15 @@ using std::endl;
 class state
 {
 private:
-	int currentstate;
+	int current_state;
 public:
 	state();
 	state(int newstate);
 	~state(){};
+	int getcurrent_state()
+	{
+		return current_state;
+	}
 	virtual state * change_state(int choice) = 0;
 };
 
@@ -94,11 +98,32 @@ public:
 class the_state_machine
 {
 private:
-	state *thecurrentstate;
 public:
+	state *thecurrentstate;
 	the_state_machine();
 	~the_state_machine(){};
 	void nextstate(int choice);
 };
+
+//enum STATE
+//{
+//	STATE_TYPE = 0,
+//	STATE_MAIN_MENU,
+//	STATE_PLAY,
+//	STATE_CONTINUE,
+//	STATE_OPTIONS,
+//	STATE_PAUSE,
+//	STATE_GAME_OVER,
+//	STATE_END,
+//};
+//
+//enum PAUSEMENU
+//{
+//	PAUSEMENU_START = 0,
+//	RESUME,
+//	PAUSE_MENU_OPTIONS,
+//	BACK_TO_MAIN_MENU,
+//	PAUSEMENU_END,
+//};
 
 #endif

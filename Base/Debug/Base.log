@@ -1,19 +1,14 @@
-﻿Build started 8/16/2016 12:51:09 PM.
-     1>Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 8/16/2016 4:18:48 PM.
+     1>Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\508\Desktop\Sp3 Solution folder\/Common/Source" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glew/include" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\Avatar.cpp Source\Bag.cpp Source\Bullet.cpp Source\Camera.cpp Source\Camera2.cpp Source\Camera3.cpp Source\Enemy.cpp source\FiniteStateMachine.cpp Source\GameObject.cpp Source\Hero.cpp Source\LoadOBJ.cpp Source\LoadTGA.cpp Source\main.cpp Source\Mesh.cpp Source\MeshBuilder.cpp Source\Assignment.cpp Source\PowerUp.cpp Source\PowerUp_Shield.cpp Source\shader.cpp Source\Strategy.cpp Source\Strategy_Escape.cpp Source\Strategy_Kill.cpp Source\Tile.cpp Source\TileMap.cpp Source\Utility.cpp
-         Utility.cpp
-         TileMap.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\tilemap.cpp(66): warning C4018: '>' : signed/unsigned mismatch
-         Tile.cpp
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\508\Desktop\Sp3 Solution folder\/Common/Source" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glew/include" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\Assignment.cpp Source\Camera.cpp Source\Camera2.cpp Source\Camera3.cpp Source\Strategy_Kill.cpp Source\main.cpp source\FiniteStateMachine.cpp
+         FiniteStateMachine.cpp
+         main.cpp
          Strategy_Kill.cpp
-         Strategy_Escape.cpp
-         Strategy.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\strategy.cpp(24): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-         shader.cpp
-         PowerUp_Shield.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\powerup_shield.cpp(20): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-         PowerUp.cpp
+         Camera3.cpp
+     1>c:\users\508\desktop\sp3 solution folder\base\source\camera3.cpp(386): warning C4244: '+=' : conversion from 'const double' to 'float', possible loss of data
+         Camera2.cpp
+         Camera.cpp
          Assignment.cpp
      1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(159): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(162): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
@@ -25,43 +20,6 @@
      1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(180): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(183): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
      1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(186): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         MeshBuilder.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\meshbuilder.cpp(705): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\meshbuilder.cpp(711): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\meshbuilder.cpp(717): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         Mesh.cpp
-         main.cpp
-         LoadTGA.cpp
-         LoadOBJ.cpp
-         Hero.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(61): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(62): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(64): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(75): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(79): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(108): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(114): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(120): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\hero.cpp(126): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-         GameObject.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\gameobject.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\gameobject.cpp(45): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\gameobject.cpp(46): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-         FiniteStateMachine.cpp
-         Enemy.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\enemy.cpp(26): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\enemy.cpp(27): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\enemy.cpp(36): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\enemy.cpp(41): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-         Camera3.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\camera3.cpp(386): warning C4244: '+=' : conversion from 'const double' to 'float', possible loss of data
-         Generating Code...
-         Compiling...
-         Camera2.cpp
-         Camera.cpp
-         Bullet.cpp
-         Bag.cpp
-         Avatar.cpp
          Application.cpp
          Generating Code...
        Link:
@@ -94,8 +52,8 @@
      1>Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
      1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
          Base.vcxproj -> C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.exe
-     1>Done Building Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:11.13
+Time Elapsed 00:00:05.34

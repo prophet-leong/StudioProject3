@@ -1,11 +1,11 @@
 #include "FiniteStatemachine.h"
 
 //constructors
-state::state() : currentstate(0)
+state::state() : current_state(0)
 {
 
 }
-state::state(int newstate)
+state::state(int newstate) : current_state(newstate)
 {
 
 }
@@ -61,23 +61,23 @@ state_exit::state_exit() : state(9)
 state * state_main_menu::change_state(int choice)
 {
 	cout << "Main menu state" << endl;
-	if (choice == 1) // to play
+	if (choice == 2) // to play
 	{
 		reinterpret_cast<state_play *>(this)->state_play::state_play();
 	}
-	else if (choice == 2) // to continue a saved game
+	else if (choice == 3) // to continue a saved game
 	{
 		reinterpret_cast<state_continue *>(this)->state_continue::state_continue();
 	}
-	else if (choice == 3) //to go to the achievements screen
+	else if (choice == 4) //to go to the achievements screen
 	{
 		reinterpret_cast<state_Achievements *>(this)->state_Achievements::state_Achievements();
 	}
-	else if (choice == 4) // to change options
+	else if (choice == 5) // to change options
 	{
 		reinterpret_cast<state_Options *>(this)->state_Options::state_Options();
 	}
-	else if (choice == 5) // to exit game
+	else if (choice == 9) // to exit game
 	{
 		reinterpret_cast<state_exit *>(this)->state_exit::state_exit();
 	}
@@ -86,11 +86,11 @@ state * state_main_menu::change_state(int choice)
 state * state_play::change_state(int choice)
 {
 	cout << "Play State" << endl;
-	if (choice == 1) //to pause game within game
+	if (choice == 6) //to pause game within game
 	{
 		reinterpret_cast<state_pause_menu *>(this)->state_pause_menu::state_pause_menu();
 	}
-	if (choice == 2) //If you die, go back to main menu, does not save game since you died
+	if (choice == 1) //If you die, go back to main menu, does not save game since you died
 	{
 		reinterpret_cast<state_main_menu *>(this)->state_main_menu::state_main_menu();
 	}
@@ -100,7 +100,7 @@ state * state_play::change_state(int choice)
 state * state_continue::change_state(int choice)
 {
 	cout << "continue state" << endl;
-	if (choice == 1)
+	if (choice == 2)
 	{
 		reinterpret_cast<state_play *>(this)->state_play::state_play();
 	}
@@ -130,15 +130,15 @@ state * state_Options::change_state(int choice)
 state * state_pause_menu::change_state(int choice)
 {
 	cout << "Pause menu state state" << endl;
-	if (choice == 1)
+	if (choice == 7)
 	{
 		reinterpret_cast<state_in_game_options *>(this)->state_in_game_options::state_in_game_options();
 	}
-	if (choice == 2)
+	if (choice == 8)
 	{
 		reinterpret_cast<state_back_to_main_menu *>(this)->state_back_to_main_menu::state_back_to_main_menu();
 	}
-	if (choice == 3)
+	if (choice == 2)
 	{
 		reinterpret_cast<state_play *>(this)->state_play::state_play();
 	}
@@ -148,7 +148,7 @@ state * state_pause_menu::change_state(int choice)
 state * state_in_game_options::change_state(int choice)
 {
 	cout << "in-game Options state" << endl;
-	if (choice == 1)
+	if (choice == 6)
 	{
 		reinterpret_cast<state_pause_menu *>(this)->state_pause_menu::state_pause_menu();
 	}
