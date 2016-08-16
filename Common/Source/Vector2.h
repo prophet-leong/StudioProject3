@@ -15,5 +15,7 @@ struct Vector2
 	float LengthSquare(void)const;
 	float Dot( const Vector2& rhs ) const; //Dot product
 	Vector2 Normalized( void ); //Return a copy of this vector, normalized
+
+	bool operator==(const Vector2&rhs) const;
 };
 #endif

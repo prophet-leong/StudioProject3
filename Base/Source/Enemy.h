@@ -12,6 +12,7 @@ public:
 
 	GEOMETRY_TYPE texture[NUM_GEOMETRY];
 	
+	
 	enum name
 	{
 		basic,

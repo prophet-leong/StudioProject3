@@ -1,71 +1,15 @@
-﻿Build started 8/16/2016 11:23:04 PM.
-     1>Project "C:\Users\jun xiang\Desktop\StudioProject3\Base\Base.vcxproj" on node 2 (Build target(s)).
+﻿Build started 16/8/2016 6:03:10 PM.
+     1>Project "C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Base\Base.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\jun xiang\Desktop\StudioProject3\/Common/Source" /I"C:\Users\jun xiang\Desktop\StudioProject3\/glew/include" /I"C:\Users\jun xiang\Desktop\StudioProject3\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\Avatar.cpp Source\Bag.cpp Source\Camera.cpp Source\Camera2.cpp Source\Camera3.cpp Source\Enemy.cpp Source\GameObject.cpp Source\Hero.cpp Source\LoadOBJ.cpp Source\LoadTGA.cpp Source\main.cpp Source\Mesh.cpp Source\MeshBuilder.cpp Source\Assignment.cpp Source\PowerUp.cpp Source\PowerUp_Shield.cpp Source\shader.cpp Source\Strategy.cpp Source\Strategy_Escape.cpp Source\Strategy_Kill.cpp Source\Tile.cpp Source\TileMap.cpp Source\Utility.cpp
-         Utility.cpp
-         TileMap.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\tilemap.cpp(66): warning C4018: '>' : signed/unsigned mismatch
-         Tile.cpp
-         Strategy_Kill.cpp
-         Strategy_Escape.cpp
-         Strategy.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\strategy.cpp(24): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-         shader.cpp
-         PowerUp_Shield.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\powerup_shield.cpp(20): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-         PowerUp.cpp
-         Assignment.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(159): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(162): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(165): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(168): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(171): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(174): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(177): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(180): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(183): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\assignment.cpp(186): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-         MeshBuilder.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\meshbuilder.cpp(705): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\meshbuilder.cpp(711): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\meshbuilder.cpp(717): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-         Mesh.cpp
-         main.cpp
-         LoadTGA.cpp
-         LoadOBJ.cpp
-         Hero.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(59): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(60): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(62): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(73): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(77): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(106): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(112): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(118): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\hero.cpp(124): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-         GameObject.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\gameobject.cpp(22): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\gameobject.cpp(45): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\gameobject.cpp(46): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-         Enemy.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\enemy.cpp(26): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\enemy.cpp(27): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\enemy.cpp(36): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\enemy.cpp(41): warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
-         Camera3.cpp
-     1>c:\users\jun xiang\desktop\studioproject3\base\source\camera3.cpp(386): warning C4244: '+=' : conversion from 'const double' to 'float', possible loss of data
-         Camera2.cpp
-         Generating Code...
-         Compiling...
-         Camera.cpp
-         Bag.cpp
-         Avatar.cpp
-         Application.cpp
-         Generating Code...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/Common/Source" /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glew/include" /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\MapGenerator.cpp
+         MapGenerator.cpp
+     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\mapgenerator.cpp(17): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\mapgenerator.cpp(51): warning C4715: 'Generator::RandomDirection' : not all control paths return a value
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\jun xiang\Desktop\StudioProject3\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\jun xiang\Desktop\StudioProject3\Debug" /LIBPATH:"C:\Users\jun xiang\Desktop\StudioProject3\/glfw/lib-msvc100" /LIBPATH:"C:\Users\jun xiang\Desktop\StudioProject3\/glew/lib" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\jun xiang\Desktop\StudioProject3\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\jun xiang\Desktop\StudioProject3\Debug\Base.lib" /MACHINE:X86 Debug\Application.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug" /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glfw/lib-msvc100" /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glew/lib" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.lib" /MACHINE:X86 Debug\Application.obj
          Debug\Avatar.obj
          Debug\Bag.obj
+         Debug\Bullet.obj
          Debug\Camera.obj
          Debug\Camera2.obj
          Debug\Camera3.obj
@@ -75,6 +19,8 @@
          Debug\LoadOBJ.obj
          Debug\LoadTGA.obj
          Debug\main.obj
+         Debug\MapGenerator.obj
+         Debug\MapNode.obj
          Debug\Mesh.obj
          Debug\MeshBuilder.obj
          Debug\Assignment.obj
@@ -89,9 +35,9 @@
          Debug\Utility.obj
      1>Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
      1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-         Base.vcxproj -> C:\Users\jun xiang\Desktop\StudioProject3\Debug\Base.exe
-     1>Done Building Project "C:\Users\jun xiang\Desktop\StudioProject3\Base\Base.vcxproj" (Build target(s)).
+         Base.vcxproj -> C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.exe
+     1>Done Building Project "C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Base\Base.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:10.03
+Time Elapsed 00:00:00.91

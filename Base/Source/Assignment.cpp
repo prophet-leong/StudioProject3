@@ -13,7 +13,6 @@
 Assignment::Assignment()
 	: currState(STATE_TYPE)
 	, currpauseMenuState(PAUSEMENU_START)
-	, currLevel(LEVEL1)
 	, goToNextLevel(false)
 {
 
@@ -135,6 +134,9 @@ void Assignment::Init()
 	currHero->health = 3;
 	m_avatarList.push_back(currHero);
 
+	MapRandomizer = new Generator();
+	MapRandomizer->GenerateStructure();
+
 	ReadLevel();
 
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
@@ -199,19 +201,7 @@ void Assignment::Init()
 
 void Assignment::ReadLevel()
 {
-	switch (currLevel)
-	{
-	case LEVEL1:
-		tilemap.LoadMap("Image//MapDesign_1.csv", 1024, 800);
-		rearmap.LoadMap("Image//MapDesign_Rear_1.csv", 1024, 800);
-		break;
-
-	case LEVEL2:
-		tilemap.LoadMap("Image//MapDesign_2.csv", 1024, 800);
-		rearmap.LoadMap("Image//MapDesign_Rear_2.csv", 1024, 800);
-		break;
-	}
-
+	MapRandomizer->Read(&tilemap);
 
 	// Actual Map
 	for (int i = 0; i < tilemap.GetNumRows(); i++)
@@ -268,9 +258,9 @@ void Assignment::Restart()
 	currHero->health -= 1;
 	if (currHero->health <= 0)
 	{
-		if (currLevel != LEVEL1)
+		//if (currLevel != LEVEL1)
 		{
-			currLevel = (LEVEL)(currLevel - 1);
+			//currLevel = (LEVEL)(currLevel - 1);
 			ClearLevel();
 			ReadLevel();
 		}
@@ -372,14 +362,15 @@ void Assignment::Update(double dt)
 			if (!other->active)
 				continue;
 			if (go->meshName == "HERO")
-				other->CheckStrategy(go,&tilemap);
+			{
+				other->CheckStrategy(go, &tilemap);
+			}
 			if (go->CheckCollision(other,&tilemap))
 			{
 				go->CollisionResponse(other,&tilemap);
 			}
 		}
 	}
-
 
 	if (goToRestart)
 	{
@@ -388,7 +379,7 @@ void Assignment::Update(double dt)
 	}
 	if (goToNextLevel)
 	{
-		currLevel = (LEVEL)(currLevel + 1);
+		//currLevel = (LEVEL)(currLevel + 1);
 		ClearLevel();
 		ReadLevel();
 		currHero->Reset(&tilemap);
@@ -721,12 +712,12 @@ void Assignment::ClearLevel()
 
 }
 
-
 //Setting Gamestates, Returning gamestates
 void Assignment::SetCurrentState(STATE state)
 {
 	this->currState = state;
 }
+
 void Assignment::SetCurrentPauseMenuState(PAUSEMENU pausemenu)
 {
 	this->currpauseMenuState = pausemenu;
@@ -736,6 +727,7 @@ STATE Assignment::GetCurrentState()
 {
 	return currState;
 }
+
 PAUSEMENU Assignment::GetCurrentPauseMenuState()
 {
 	return currpauseMenuState;

@@ -63,3 +63,8 @@ Vector2 Vector2::Normalized(void)
 	y = y / d;
 	return *this;
 }
+
+bool Vector2::operator==(const Vector2&rhs) const
+{
+	return(x == rhs.x && y == rhs.y);
+}

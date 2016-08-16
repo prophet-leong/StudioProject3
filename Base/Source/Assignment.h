@@ -13,6 +13,7 @@
 #include "Enemy.h"
 #include "Tile.h"
 #include "GeometryType.h"
+#include "MapGenerator.h"
 
 enum STATE
 {
@@ -96,16 +97,9 @@ public:
 
 private:
 	
-	enum LEVEL
-	{
-		LEVEL1,
-		LEVEL2,
-		END,
-	};
 
 	STATE currState;
 	PAUSEMENU currpauseMenuState;
-	LEVEL currLevel;
 
 	bool goToNextLevel = false;
 	bool goToRestart = false;
@@ -178,6 +172,9 @@ private:
 	vector<Avatar*> m_avatarList;
 	vector<GameObject*> m_goList;
 	vector<GameObject*> m_rearList;
+
+	//Map RNG
+	Generator* MapRandomizer;
 	
 };
 
