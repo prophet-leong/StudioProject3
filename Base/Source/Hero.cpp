@@ -191,6 +191,7 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 
 	SetTexture(texture[AnimationCounterLR]);
 }
+
 void Hero::HeroTakeDamage(int damage)
 {
 	if (heroShield <= 0)

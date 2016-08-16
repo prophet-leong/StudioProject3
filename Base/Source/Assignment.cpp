@@ -11,9 +11,7 @@
 #include "Strategy_Escape.h"
 
 Assignment::Assignment()
-	: currState(STATE_TYPE)
-	, currpauseMenuState(PAUSEMENU_START)
-	, goToNextLevel(false)
+	: goToNextLevel(false)
 {
 
 }
@@ -188,6 +186,8 @@ void Assignment::Init()
 	meshList[GEO_TILEHERO_FRAME3] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME3", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME3]->textureID = LoadTGA("Image//tile2_hero_frame_3.tga");
 
+	meshList[GEO_PLACEHOLDER] = MeshBuilder::GenerateQuad("Placeholder", Color(1, 1, 1), 50000);
+	meshList[GEO_PLACEHOLDER]->textureID = LoadTGA("Image//Placeholder//black.tga");
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
 
@@ -196,7 +196,6 @@ void Assignment::Init()
 	projectionStack.LoadMatrix(perspective);
 
 	bLightEnabled = true;
-
 }
 
 void Assignment::ReadLevel()
@@ -316,58 +315,90 @@ void Assignment::Update(double dt)
 	//if(Application::IsKeyPressed('P'))
 	//	lights[0].position.y += (float)(10.f * dt);
 	//camera.Update(dt);
-
-	// Update the hero
-	if (dt > 1.0 / 30.0)
-		return;
-
-	//status:done
-	if (Application::IsKeyPressed('W'))
-		currHero->MoveUpDown(true, 1.0f, &tilemap);
-	if (Application::IsKeyPressed('S'))
-		currHero->MoveUpDown(false, 1.0f, &tilemap);
-	if (Application::IsKeyPressed('A'))
-		currHero->MoveLeftRight(true, 1.0f, &tilemap);
-	if (Application::IsKeyPressed('D'))
-		currHero->MoveLeftRight(false, 1.0f, &tilemap);
-
-	currHero->Update(&tilemap, dt);
-	
-	if (currHero->GetPosition().y <= 20)
+	if (Application::IsKeyPressed(VK_RETURN) && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1)
 	{
-		Restart();
+		statemachine.nextstate(2);
 	}
-
-	tilemap.Update();
-	// avatar check with all other objects
-	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
+	if (Application::IsKeyPressed(VK_BACK) && statemachine.the_current_state_of_state_machine->getcurrent_state() == 4)
 	{
-		Avatar *go = (Avatar *)*iter;
-		if (!go->active)
-			continue;
-		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
+		statemachine.nextstate(1);
+	}
+	if (Application::IsKeyPressed(VK_BACK) && statemachine.the_current_state_of_state_machine->getcurrent_state() == 5)
+	{
+		statemachine.nextstate(1);
+	}
+	if (Application::IsKeyPressed('1') && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1) //Achievement Screen
+	{
+		statemachine.nextstate(4);
+	}
+	if (Application::IsKeyPressed('2') && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1) //Options screen
+	{
+		statemachine.nextstate(5);
+	}
+	//if (Application::IsKeyPressed('3') && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1) //Exit
+	//{
+	//	statemachine.nextstate(9);
+	//}
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2 && Application::IsKeyPressed(VK_BACK))
+	{
+		statemachine.nextstate(6);
+	}
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 6 && Application::IsKeyPressed(VK_RETURN))
+	{
+		statemachine.nextstate(2);
+	}
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
+	{
+		// Update the hero
+		if (dt > 1.0 / 30.0)
+			return;
+
+		//status:done
+		if (Application::IsKeyPressed('W'))
+			currHero->MoveUpDown(true, 1.0f, &tilemap);
+		if (Application::IsKeyPressed('S'))
+			currHero->MoveUpDown(false, 1.0f, &tilemap);
+		if (Application::IsKeyPressed('A'))
+			currHero->MoveLeftRight(true, 1.0f, &tilemap);
+		if (Application::IsKeyPressed('D'))
+			currHero->MoveLeftRight(false, 1.0f, &tilemap);
+
+		currHero->Update(&tilemap, dt);
+
+		if (currHero->GetPosition().y <= 20)
 		{
-			GameObject *other = (GameObject *)*iter2;
-			if (!other->active)
-				continue;
-			if (go->CheckCollision(other,&tilemap))
-			{
-				go->CollisionResponse(other, &tilemap);
-			}
+			Restart();
 		}
 
-		for (vector<Avatar*>::iterator iter3 = iter+1; iter3 != m_avatarList.end(); iter3++)
+		tilemap.Update();
+		// avatar check with all other objects
+		for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
 		{
-			Avatar *other = (Avatar *)*iter3;
-			if (!other->active)
+			Avatar *go = (Avatar *)*iter;
+			if (!go->active)
 				continue;
-			if (go->meshName == "HERO")
+			for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
 			{
-				other->CheckStrategy(go, &tilemap);
+				GameObject *other = (GameObject *)*iter2;
+				if (!other->active)
+					continue;
+				if (go->CheckCollision(other, &tilemap))
+				{
+					go->CollisionResponse(other, &tilemap);
+				}
 			}
-			if (go->CheckCollision(other,&tilemap))
+
+			for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
 			{
-				go->CollisionResponse(other,&tilemap);
+				Avatar *other = (Avatar *)*iter3;
+				if (!other->active)
+					continue;
+				if (go->meshName == "HERO")
+					other->CheckStrategy(go, &tilemap);
+				if (go->CheckCollision(other, &tilemap))
+				{
+					go->CollisionResponse(other, &tilemap);
+				}
 			}
 		}
 	}
@@ -386,8 +417,8 @@ void Assignment::Update(double dt)
 		goToNextLevel = false;
 	}
 
-
 	fps = (float)(1.f / dt);
+	
 }
 
 void Assignment::RenderText(Mesh* mesh, std::string text, Color color)
@@ -627,11 +658,77 @@ void Assignment::Render()
 	std::ostringstream sss;
 	sss.precision(5);
 
-	sss.str("");
-	Render2DMesh(meshList[GEO_MARIO], false);
-	sss.str("");
-	sss << " X" << currHero->health;
-	RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 1)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Main Menu Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 200);
+		sss.str("");
+		sss << "Press Enter to start da level";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 180);
+		sss.str("");
+		sss << "Press 1 to go to achievements";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 160);
+		sss.str("");
+		sss << "Press 2 to go to options";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 140);
+		
+	}
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
+	{
+		sss.str("");
+		Render2DMesh(meshList[GEO_MARIO], false);
+		sss.str("");
+		sss << " X" << currHero->health;
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
+	}
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 4) //Achievenemts
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Temp Achievement Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		sss.str("");
+		sss << "Press Enter to main menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+	}
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 5)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Temp Options Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		sss.str("");
+		sss << "Press Enter to main menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+	}
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 6) //pause menu
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Temp Pause Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		sss.str("");
+		sss << "Press Enter to resume da level";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+	}
+	
 }
 
 void Assignment::Exit()
@@ -710,25 +807,4 @@ void Assignment::ClearLevel()
 		go->meshTexture = "";
 	}
 
-}
-
-//Setting Gamestates, Returning gamestates
-void Assignment::SetCurrentState(STATE state)
-{
-	this->currState = state;
-}
-
-void Assignment::SetCurrentPauseMenuState(PAUSEMENU pausemenu)
-{
-	this->currpauseMenuState = pausemenu;
-}
-
-STATE Assignment::GetCurrentState()
-{
-	return currState;
-}
-
-PAUSEMENU Assignment::GetCurrentPauseMenuState()
-{
-	return currpauseMenuState;
 }
