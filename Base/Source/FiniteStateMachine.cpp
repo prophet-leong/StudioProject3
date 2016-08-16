@@ -81,6 +81,7 @@ state * state_main_menu::change_state(int choice)
 	{
 		reinterpret_cast<state_exit *>(this)->state_exit::state_exit();
 	}
+	return this;
 }
 state * state_play::change_state(int choice)
 {
@@ -93,6 +94,7 @@ state * state_play::change_state(int choice)
 	{
 		reinterpret_cast<state_main_menu *>(this)->state_main_menu::state_main_menu();
 	}
+	return this;
 }
 
 state * state_continue::change_state(int choice)
@@ -102,6 +104,7 @@ state * state_continue::change_state(int choice)
 	{
 		reinterpret_cast<state_play *>(this)->state_play::state_play();
 	}
+	return this;
 }
 
 state * state_Achievements::change_state(int choice)
@@ -111,6 +114,7 @@ state * state_Achievements::change_state(int choice)
 	{
 		reinterpret_cast<state_main_menu *>(this)->state_main_menu::state_main_menu();
 	}
+	return this;
 }
 
 state * state_Options::change_state(int choice)
@@ -120,6 +124,7 @@ state * state_Options::change_state(int choice)
 	{
 		reinterpret_cast<state_main_menu *>(this)->state_main_menu::state_main_menu();
 	}
+	return this;
 }
 
 state * state_pause_menu::change_state(int choice)
@@ -137,6 +142,7 @@ state * state_pause_menu::change_state(int choice)
 	{
 		reinterpret_cast<state_play *>(this)->state_play::state_play();
 	}
+	return this;
 }
 
 state * state_in_game_options::change_state(int choice)
@@ -146,6 +152,7 @@ state * state_in_game_options::change_state(int choice)
 	{
 		reinterpret_cast<state_pause_menu *>(this)->state_pause_menu::state_pause_menu();
 	}
+	return this;
 }
 
 state * state_back_to_main_menu::change_state(int choice)
@@ -155,11 +162,13 @@ state * state_back_to_main_menu::change_state(int choice)
 	{
 		reinterpret_cast<state_main_menu *>(this)->state_main_menu::state_main_menu();
 	}
+	return this;
 }
 
 state * state_exit::change_state(int choice)
 {
 	cout << "exiting" << endl;
+	return this;
 }
 
 

@@ -27,7 +27,7 @@ public:
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
 	void HeroTakeDamage(int damage);
 
-	vector<Bullet>Projectile;
+	//vector<Bullet>Projectile;
 private:
 //hero info
 	//hero basic value
