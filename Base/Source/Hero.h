@@ -3,7 +3,7 @@
 
 #include "avatar.h"
 #include "TileMap.h"
-
+#include "Bullet.h"
 class Hero : public Avatar
 {
 public:
@@ -26,6 +26,8 @@ public:
 	void MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap);
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
 	void HeroTakeDamage(int damage);
+
+	vector<Bullet>Projectile;
 private:
 //hero info
 	//hero basic value
@@ -36,7 +38,7 @@ private:
 	int DamageBoost;
 	int moveX, moveY;
 	int initX, initY;
-
+	
 };
 
 

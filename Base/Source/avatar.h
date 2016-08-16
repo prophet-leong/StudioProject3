@@ -43,7 +43,7 @@ public:
 	bool moveUp, moveDown, moveLeft, moveRight;
 	//for different powerups
 	Bag* inventory;
-
+	Vector2 direction;
 
 protected:
 	//for Animation

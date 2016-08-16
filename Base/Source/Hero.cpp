@@ -15,6 +15,7 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	heroShield = 0;
 	heroDamage = 1;
 	DamageBoost = 0;
+	direction.Set(0, 0);
 }
 
 Hero::~Hero()
@@ -45,6 +46,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 					{
 					   DamageBoost = go->GetIncrement();
 					   go->SetActivated(true);
+					  // Projectile.push_back(Bullet(Position,direction, heroDamage + DamageBoost, 5, BULLET_ELEMENT::FIRE));
 					}
 				}
 
@@ -135,6 +137,7 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		if (moveLeft)
 		{
 			Position.x -= (int)(8.0f * timeDiff);
+			direction.Set(-1, 0);
 		}
 		AnimationInvert = true;
 		AnimationCounterLR--;
@@ -147,6 +150,7 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		if (moveRight)
 		{
 			Position.x += (int)(8.0f * timeDiff);
+			direction.Set(1, 0);
 		}
 		AnimationInvert = false;
 		AnimationCounterLR++;
@@ -162,7 +166,10 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 	if (mode)
 	{
 		if (moveUp)
+		{
 			Position.y += (int)(8.0f * timeDiff);
+			direction.Set(0, 1);
+		}
 
 		AnimationInvert = true;
 		AnimationCounterUD--;
@@ -174,6 +181,7 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 		if (moveDown)
 		{
 			Position.y -= (int)(8.0f * timeDiff);
+			direction.Set(0, -1);
 		}
 		AnimationInvert = false;
 		AnimationCounterUD++;
