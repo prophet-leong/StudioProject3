@@ -2,7 +2,6 @@
 #define POWER_UP
 #include "GeometryType.h"
 #include "GameObject.h"
-//#include "Hero.h"
 #include <string>
 using std::string;
 
