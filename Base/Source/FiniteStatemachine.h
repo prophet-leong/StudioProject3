@@ -87,11 +87,11 @@ public:
 	state * change_state(int choice);
 };
 
-class state_exit : public state
+class state_died : public state
 {
 public:
-	state_exit();
-	~state_exit(){};
+	state_died();
+	~state_died(){};
 	state * change_state(int choice);
 };
 
@@ -99,7 +99,7 @@ class the_state_machine
 {
 private:
 public:
-	state *thecurrentstate;
+	state *the_current_state_of_state_machine;
 	the_state_machine();
 	~the_state_machine(){};
 	void nextstate(int choice);
