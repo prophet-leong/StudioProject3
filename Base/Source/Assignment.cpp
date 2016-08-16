@@ -184,6 +184,8 @@ void Assignment::Init()
 	meshList[GEO_TILEHERO_FRAME3] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME3", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME3]->textureID = LoadTGA("Image//tile2_hero_frame_3.tga");
 
+	meshList[GEO_PLACEHOLDER] = MeshBuilder::GenerateQuad("Placeholder", Color(1, 1, 1), 50000);
+	meshList[GEO_PLACEHOLDER]->textureID = LoadTGA("Image//Placeholder//black.tga");
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
 
@@ -323,21 +325,7 @@ void Assignment::Update(double dt)
 	//if(Application::IsKeyPressed('P'))
 	//	lights[0].position.y += (float)(10.f * dt);
 	//camera.Update(dt);
-
-	/*switch (gamestate)
-	{
-	case STATE_MAIN_MENU:
-	{
-		if (Application::IsKeyPressed(VK_RETURN))
-		{
-			gamestate = STATE_PLAY;
-		}
-		break;
-	}
-	}
-	if (gamestate == STATE_PLAY)
-	{*/
-	if (Application::IsKeyPressed(VK_RETURN))
+	if (Application::IsKeyPressed(VK_RETURN) && statemachine.thecurrentstate->getcurrent_state() == 1)
 	{
 		statemachine.nextstate(2);
 	}
@@ -653,11 +641,28 @@ void Assignment::Render()
 	std::ostringstream sss;
 	sss.precision(5);
 
-	sss.str("");
-	Render2DMesh(meshList[GEO_MARIO], false);
-	sss.str("");
-	sss << " X" << currHero->health;
-	RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
+	if (statemachine.thecurrentstate->getcurrent_state() == 2)
+	{
+		sss.str("");
+		Render2DMesh(meshList[GEO_MARIO], false);
+		sss.str("");
+		sss << " X" << currHero->health;
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
+	}
+	if (statemachine.thecurrentstate->getcurrent_state() == 1)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Main Menu Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 200);
+		sss.str("");
+		sss << "Press Enter to start da level";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 180);
+		
+	}
 	
 }
 
