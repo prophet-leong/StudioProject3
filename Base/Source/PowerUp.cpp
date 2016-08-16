@@ -1,12 +1,9 @@
 #include "PowerUp.h"
 
 PowerUp::PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUpName)
+:GameObject(x,y,PowerUpName,typeOfTile)
 {
-	this->x = x;
-	this->y = y;
-	this->type = typeOfTile;
-	this->PowerUpName = PowerUpName;
-	this->inBag = inBag;
+	this->inBag = false;
 }
 
 PowerUp::~PowerUp()
@@ -24,9 +21,33 @@ void PowerUp::SetInBag(bool isInBag)
 }
 string PowerUp::GetPowerUpName()
 {
-	return PowerUpName;
+	return meshName;
 }
 void PowerUp::SetPowerUpName(string newName)
 {
-	this->PowerUpName = newName;
+	this->meshName = newName;
+}
+void PowerUp::SetActivated(bool activated)
+{
+	this->activated = activated;
+}
+bool PowerUp::GetActivated()
+{
+	return activated;
+}
+INCREMENT_STAT PowerUp::GetIncrementStat()
+{
+	return increment_type;
+}
+void PowerUp::SetIncrementStat(INCREMENT_STAT stat)
+{
+	increment_type = stat;
+}
+int PowerUp::GetIncrement()
+{
+	return increment;
+}
+void PowerUp::SetIncrement(int increase)
+{
+	increment = increase;
 }

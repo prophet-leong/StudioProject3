@@ -1,63 +1,188 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\Avatar.cpp" />
-    <ClCompile Include="Source\Bag.cpp" />
-    <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\Camera2.cpp" />
-    <ClCompile Include="Source\Camera3.cpp" />
-    <ClCompile Include="Source\Enemy.cpp" />
-    <ClCompile Include="Source\EnmyAI.cpp" />
-    <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\Hero.cpp" />
-    <ClCompile Include="Source\LoadOBJ.cpp" />
-    <ClCompile Include="Source\LoadTGA.cpp" />
-    <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Mesh.cpp" />
-    <ClCompile Include="Source\MeshBuilder.cpp" />
-    <ClCompile Include="Source\Assignment.cpp" />
-    <ClCompile Include="Source\PowerUp.cpp" />
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Assignment.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Avatar.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bag.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera2.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera3.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Hero.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTGA.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PowerUp.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Strategy.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Strategy_Escape.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Strategy_Kill.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tile.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TileMap.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="Source\PowerUp_Shield.cpp" />
-    <ClCompile Include="Source\shader.cpp" />
-    <ClCompile Include="Source\Strategy.cpp" />
-    <ClCompile Include="Source\Strategy_Escape.cpp" />
-    <ClCompile Include="Source\Strategy_Kill.cpp" />
-    <ClCompile Include="Source\Tile.cpp" />
-    <ClCompile Include="Source\TileMap.cpp" />
-    <ClCompile Include="Source\Utility.cpp" />
+=======
+    <ClCompile Include="Source\PowerUp_Shield.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\avatar.h" />
-    <ClInclude Include="Source\Bag.h" />
-    <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Camera2.h" />
-    <ClInclude Include="Source\Camera3.h" />
-    <ClInclude Include="Source\Enemy.h" />
-    <ClInclude Include="Source\EnemyAI.h" />
-    <ClInclude Include="Source\GameObject.h" />
-    <ClInclude Include="Source\GeometryType.h" />
-    <ClInclude Include="Source\Hero.h" />
-    <ClInclude Include="Source\Light.h" />
-    <ClInclude Include="Source\LoadOBJ.h" />
-    <ClInclude Include="Source\LoadTGA.h" />
-    <ClInclude Include="Source\Material.h" />
-    <ClInclude Include="Source\Mesh.h" />
-    <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\PowerUp.h" />
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TileMap.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tile.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy_Kill.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Strategy_Escape.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SharedData.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PowerUp.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTGA.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Hero.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera3.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera2.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bag.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\avatar.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Assignment.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GeometryType.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shader.hpp">
+      <Filter>Source</Filter>
+    </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Source\PowerUp_Shield.h" />
-    <ClInclude Include="Source\Scene.h" />
-    <ClInclude Include="Source\Assignment.h" />
-    <ClInclude Include="Source\shader.hpp" />
-    <ClInclude Include="Source\SharedData.h" />
-    <ClInclude Include="Source\Strategy.h" />
-    <ClInclude Include="Source\Strategy_Escape.h" />
-    <ClInclude Include="Source\Strategy_Kill.h" />
-    <ClInclude Include="Source\Tile.h" />
-    <ClInclude Include="Source\TileMap.h" />
-    <ClInclude Include="Source\Utility.h" />
-    <ClInclude Include="Source\Vertex.h" />
-    <ClInclude Include="Source\MapGeneration.h" />
+=======
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PowerUp_Shield.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+>>>>>>> Stashed changes
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{78cd85b8-d747-4aaf-9918-28d0beea9e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{38a77ed1-05f1-4fac-8738-0f255a3b125c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\TeckLee">
+      <UniqueIdentifier>{b927cefd-46c4-43a0-a081-af24f64dad32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\TeckLee">
+      <UniqueIdentifier>{a5812ab1-f8cb-4d7c-a0c1-ef1247b525d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

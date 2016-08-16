@@ -222,11 +222,12 @@ void Assignment::ReadLevel()
 			{
 			
 			case 1:
-			{						
+			{
 				Tile *newTile = (Tile*)FetchGO(m_goList);
 				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				break;
 			}
+			
 			case 2:
 			{
 				Enemy* enemy = (Enemy*)FetchGO(m_avatarList);
@@ -694,6 +695,7 @@ void Assignment::ClearLevel()
 	{
 		GameObject *go = (GameObject *)*iter;
 		go->active = false;
+		go->health = 0;
 		go->meshName = "";
 		go->meshTexture = "";
 	}
@@ -702,6 +704,7 @@ void Assignment::ClearLevel()
 	{
 		GameObject *go = (GameObject *)*iter;
 		go->active = false;
+		go->health = 0;
 		go->meshName = "";
 		go->meshTexture = "";
 	}

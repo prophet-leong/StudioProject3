@@ -25,9 +25,15 @@ public:
 	//movement
 	void MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap);
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
-
+	void HeroTakeDamage(int damage);
 private:
 //hero info
+	//hero basic value
+	int heroDamage;
+	int heroHealth;
+	//buffed values
+	int heroShield;
+	int DamageBoost;
 	int moveX, moveY;
 	int initX, initY;
 

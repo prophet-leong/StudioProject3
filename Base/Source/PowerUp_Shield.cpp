@@ -8,12 +8,27 @@ PowerUp_Shield::PowerUp_Shield(int x, int y, GEOMETRY_TYPE typeOfTile, string po
 	this->maxDuration = maxDuration;
 	this->duration = maxDuration;
 }
-void PowerUp_Shield::Update(/*Hero* hero,*/ double dt)
+void PowerUp_Shield::Update(double dt)
 {
 	if (active)
 	{
-		/*hero->health;*/
+		if (duration >= maxDuration)
+		{
+			SetIncrementStat(INCREMENT_STAT::SHIELD);
+			SetIncrement(damageMitigation);
+		}
+		duration -= dt;
+		if (duration <= 0)
+		{
+			active = false;
+			duration = maxDuration;
+		}
 	}
+}
+void PowerUp_Shield::activate()
+{
+	if (active == false)
+		active = true;
 }
 
 PowerUp_Shield::~PowerUp_Shield()

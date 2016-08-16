@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Debug/
 Release/
 *.opensdf
@@ -32,8 +31,7 @@ ipch/
 *.exe
 *.out
 *.app
-MyGraphics/Source/Quest.h.orig
-=======
+MyGraphics/Source/Quest.h.orig 
 *.obj
 *.log
 *.lastbuildstate
@@ -44,5 +42,4 @@ MyGraphics/Source/Quest.h.orig
 *.suo
 *.exe
 *.lib
-*.dll
->>>>>>> 739cce34e41c577284e87e923b43f52d63ce387d
+*.dll 

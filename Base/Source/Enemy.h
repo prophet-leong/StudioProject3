@@ -12,6 +12,11 @@ public:
 
 	GEOMETRY_TYPE texture[NUM_GEOMETRY];
 	
+	enum name
+	{
+		basic,
+	};
+	name enemyname;
 
 	// Set the destination of this enemy 
 	void SetDestination(const int pos_x,const int pos_y);

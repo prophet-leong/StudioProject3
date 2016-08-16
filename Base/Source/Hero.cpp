@@ -12,6 +12,9 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	{
 		this->texture[i] = typeOfTile[i];
 	}
+	heroShield = 0;
+	heroDamage = 1;
+	DamageBoost = 0;
 }
 
 Hero::~Hero()
@@ -24,6 +27,29 @@ void Hero::Update(TileMap* tilemap , double dt)
 	{
 		PowerUp *go = (PowerUp *)*iter;
 		go->Update(dt);
+		if (go->active)
+		{
+			switch (go->GetIncrementStat())
+			{
+				case SHIELD:
+				{
+					if (go->GetActivated() == false)
+					{
+						heroShield = go->GetIncrement();
+						go->SetActivated(true);
+					}
+				}
+				case ATTACK:
+				{
+					if (go->GetActivated() == false)
+					{
+					   DamageBoost = go->GetIncrement();
+					   go->SetActivated(true);
+					}
+				}
+
+			}
+		}
 	}
 
 	moveLeft = moveRight = moveUp = moveDown = true;
@@ -157,4 +183,11 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 
 	SetTexture(texture[AnimationCounterLR]);
 }
-
+void Hero::HeroTakeDamage(int damage)
+{
+	if (heroShield <= 0)
+		health -= damage;
+	else
+		heroShield -= damage;
+		
+}

@@ -13,7 +13,7 @@ public:
 	GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	virtual ~GameObject();
 
-	virtual void Init(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
+	void Init(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	void SetPos(int x,int y);
 	void SetPos(Vector2 newPos);
 	void SetTexture(GEOMETRY_TYPE newTexture);
@@ -21,6 +21,7 @@ public:
 	Vector2 GetPosition();
 
 	//public variables
+	int health;
 	bool active;
 	Vector2 scale;
 
