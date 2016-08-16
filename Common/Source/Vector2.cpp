@@ -13,7 +13,7 @@ Vector2::Vector2(const Vector2 &rhs)
 	y = rhs.y;
 }
 
-void Vector2::Set(float a, float b)
+void Vector2::Set(float x, float y)
 {
 	this->x = x;
 	this->y = y;
