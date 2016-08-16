@@ -321,6 +321,36 @@ void Assignment::Update(double dt)
 	//if(Application::IsKeyPressed('P'))
 	//	lights[0].position.y += (float)(10.f * dt);
 	//camera.Update(dt);
+
+	////////////////////////////////////////////////////PLS READ////////////////////////////////////////////////////////////////
+	/*
+	statemachines.nextstate() maybe take in enums instead to be easier to understand
+	suggestion : 
+	have a update function that have all the statemachine condition
+	all the class can actually access application and should be able to use Application::IsKeyPressed()
+	
+	instead of having a 
+	if(...)
+	{
+	 ......
+	}
+	if(...)
+	{
+	 ......
+	}
+	use
+	if(...)
+	{
+	....
+	}
+	else if(....)
+	{
+	.....
+	}
+	this will reduce the number of checks made by the computer
+	same for render
+	*/
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	if (Application::IsKeyPressed(VK_RETURN) && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1)
 	{
 		statemachine.nextstate(2);
@@ -392,22 +422,10 @@ void Assignment::Update(double dt)
 				GameObject *other = (GameObject *)*iter2;
 				if (!other->active)
 					continue;
-				if (go->CheckCollision(other, &tilemap))
-				{
-					go->CollisionResponse(other, &tilemap);
-				}
-			}
-
-			for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
-			{
-				Avatar *other = (Avatar *)*iter3;
-				if (!other->active)
-					continue;
 				if (go->meshName == "HERO")
-					other->CheckStrategy(go, &tilemap);
+					go->CheckStrategy(go, &tilemap);
 				if (go->CheckCollision(other, &tilemap))
 				{
-
 					go->CollisionResponse(other, &tilemap);
 				}
 			}
