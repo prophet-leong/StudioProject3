@@ -52,7 +52,7 @@ state_back_to_main_menu::state_back_to_main_menu() : state(8)
 
 
 //Exits Game
-state_exit::state_exit() : state(9)
+state_died::state_died() : state(9)
 {
 
 }
@@ -79,7 +79,7 @@ state * state_main_menu::change_state(int choice)
 	}
 	else if (choice == 9) // to exit game
 	{
-		reinterpret_cast<state_exit *>(this)->state_exit::state_exit();
+		reinterpret_cast<state_died *>(this)->state_died::state_died();
 	}
 	return this;
 }
@@ -165,7 +165,7 @@ state * state_back_to_main_menu::change_state(int choice)
 	return this;
 }
 
-state * state_exit::change_state(int choice)
+state * state_died::change_state(int choice)
 {
 	cout << "exiting" << endl;
 	return this;
@@ -174,12 +174,12 @@ state * state_exit::change_state(int choice)
 
 
 // the actual state machine
-the_state_machine::the_state_machine() : thecurrentstate(new state_main_menu())
+the_state_machine::the_state_machine() : the_current_state_of_state_machine(new state_main_menu())
 {
 
 }
 
 void the_state_machine::nextstate(int choice)
 {
-	thecurrentstate = thecurrentstate->change_state(choice);
+	the_current_state_of_state_machine = the_current_state_of_state_machine->change_state(choice);
 }
