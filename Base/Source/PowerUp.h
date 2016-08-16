@@ -9,6 +9,7 @@ using std::string;
 // but also need to be able to be kept in bag
 enum INCREMENT_STAT
 {
+	NO_SKILL,
 	SHIELD,
 	ATTACK,
 	NUM_INCREMENT_STAT
@@ -20,8 +21,10 @@ public:
 	virtual ~PowerUp();
 
 	virtual void Update(double dt) = 0;
-	virtual void activate() =0;
+	virtual void activate(){};
 	INCREMENT_STAT GetIncrementStat();
+	void SetSPCost(int SP);
+	int GetSPCost();
 	void SetIncrementStat(INCREMENT_STAT stat);
 	int GetIncrement();
 	void SetIncrement(int increase);
@@ -31,12 +34,13 @@ public:
 	void SetPowerUpName(string newName);
 	void SetActivated(bool activated);
 	bool GetActivated();
+	GEOMETRY_TYPE GetGeoType();
 private:
 	bool inBag;
 	bool activated;
 	INCREMENT_STAT increment_type;
 	GEOMETRY_TYPE type;
 	int increment;
-
+	int SP_Cost;
 };
 #endif

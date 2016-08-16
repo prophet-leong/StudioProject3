@@ -1,24 +1,27 @@
 #include "Bullet.h"
 
 
-
-Bullet::Bullet(Vector2 position, Vector2 direction, int damage, int speed, BULLET_ELEMENT element)
+Bullet::Bullet(Vector2 position, Vector2 direction, int damage, int speed,GEOMETRY_TYPE Geo_Type ,BULLET_ELEMENT element)
+:GameObject(position.x,position.y,"Bullet",Geo_Type)
 {
-	this->position = position;
 	this->Direction = direction;
 	this->damage = damage;
 	this->bulletSpeed = speed;
 	this->element = element;
+	active = true;
 }
-Vector2 Bullet::GetPosition()
+void Bullet::Update(double dt)
 {
-	return position;
+	if (active)
+	{
+		Position = Position + (Direction*(float)bulletSpeed);
+	}
 }
-
 int Bullet::GetDamage()
 {
 	return damage;
 }
+
 Bullet::~Bullet()
 {
 }

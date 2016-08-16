@@ -15,7 +15,11 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	heroShield = 0;
 	heroDamage = 1;
 	DamageBoost = 0;
-	direction.Set(0, 0);
+	attackTime = 0.5f;
+	attackTimer = 0.5f;
+	allowAttack = true;
+	direction.Set(1, 0);
+	currentPowerUp = 0;
 }
 
 Hero::~Hero()
@@ -24,36 +28,25 @@ Hero::~Hero()
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)
 {
-	for (vector<PowerUp*>::iterator iter = inventory->powerUpList.begin(); iter != inventory->powerUpList.end(); iter++)
+	if (!inventory->powerUpList.empty())
 	{
-		PowerUp *go = (PowerUp *)*iter;
+		PowerUp *go = inventory->powerUpList[currentPowerUp];
 		go->Update(dt);
-		if (go->active)
+		switch (go->GetIncrementStat())
 		{
-			switch (go->GetIncrementStat())
+			case SHIELD:
 			{
-				case SHIELD:
+				if (go->active && go->GetActivated() == false)
 				{
-					if (go->GetActivated() == false)
-					{
-						heroShield = go->GetIncrement();
-						go->SetActivated(true);
-					}
+					heroShield = go->GetIncrement();
+					go->SetActivated(true);
 				}
-				case ATTACK:
-				{
-					if (go->GetActivated() == false)
-					{
-					   DamageBoost = go->GetIncrement();
-					   go->SetActivated(true);
-					  // Projectile.push_back(Bullet(Position,direction, heroDamage + DamageBoost, 5, BULLET_ELEMENT::FIRE));
-					}
-				}
-
 			}
 		}
 	}
 
+	AttackCooldown(dt);
+	BulletUpdate(dt);
 	moveLeft = moveRight = moveUp = moveDown = true;
 
 	inventory->Update(dt);
@@ -65,7 +58,41 @@ void Hero::Update(TileMap* tilemap , double dt)
 	
 	Constrain(tilemap);
 }
-
+void Hero::AttackCooldown(double dt)
+{
+	if (allowAttack == false)
+	{
+		attackTimer -= dt;
+		if (attackTimer <= 0)
+			allowAttack = true;
+	}
+}
+void Hero::NormalAttack()
+{
+	if (allowAttack == true)
+	{
+		attackTimer = attackTime;
+		allowAttack = false;
+		Projectile.push_back(Bullet(Position, direction, heroDamage));
+	}
+}
+void Hero::SkillAttack()
+{
+	if (allowAttack == true && !inventory->powerUpList.empty() && inventory->powerUpList[currentPowerUp]->GetIncrementStat() == ATTACK)
+	{
+		attackTimer = attackTime;
+		allowAttack = false;
+		inventory->powerUpList[currentPowerUp];
+		Projectile.push_back(Bullet(Position , direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE));
+	}
+}
+void Hero::BulletUpdate(double dt)
+{
+	for (int i = 0; i < Projectile.size(); ++i)
+	{
+		Projectile[i].Update(dt);
+	}
+}
 //status::done
 void Hero::Constrain(TileMap* tilemap)
 {
@@ -137,8 +164,8 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		if (moveLeft)
 		{
 			Position.x -= (int)(8.0f * timeDiff);
-			direction.Set(-1, 0);
 		}
+		direction.Set(-1, 0);
 		AnimationInvert = true;
 		AnimationCounterLR--;
 		if (AnimationCounterLR < 0)
@@ -150,8 +177,8 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		if (moveRight)
 		{
 			Position.x += (int)(8.0f * timeDiff);
-			direction.Set(1, 0);
 		}
+		direction.Set(1, 0);
 		AnimationInvert = false;
 		AnimationCounterLR++;
 		if (AnimationCounterLR > 3)
@@ -168,9 +195,8 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 		if (moveUp)
 		{
 			Position.y += (int)(8.0f * timeDiff);
-			direction.Set(0, 1);
 		}
-
+		direction.Set(0, 1);
 		AnimationInvert = true;
 		AnimationCounterUD--;
 		if (AnimationCounterUD < 0)
@@ -181,8 +207,8 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 		if (moveDown)
 		{
 			Position.y -= (int)(8.0f * timeDiff);
-			direction.Set(0, -1);
 		}
+		direction.Set(0, -1);
 		AnimationInvert = false;
 		AnimationCounterUD++;
 		if (AnimationCounterUD > 3)

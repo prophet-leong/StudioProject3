@@ -1,6 +1,8 @@
 #ifndef BULLET_H
 #define BULLET_H
 #include <Vector2.h>
+#include "GeometryType.h"
+#include "GameObject.h"
 enum BULLET_ELEMENT
 {
 	NO_ELEMENT,
@@ -10,18 +12,17 @@ enum BULLET_ELEMENT
 	WIND,
 	NUM_ELEMENTS
 };
-class Bullet
+class Bullet :public GameObject
 {
 public:
-	Bullet(Vector2 position, Vector2 direction, int damage, int speed, BULLET_ELEMENT = BULLET_ELEMENT::NO_ELEMENT);
+	Bullet(Vector2 position, Vector2 direction, int damage, int speed = 10,GEOMETRY_TYPE type = GEO_SALT ,BULLET_ELEMENT = BULLET_ELEMENT::NO_ELEMENT);
 	~Bullet();
-	Vector2 GetPosition();
+	void Update(double dt);
 	int GetDamage();
 private:
 	BULLET_ELEMENT element;
 	int bulletSpeed;
 	int damage;
-	Vector2 position;
 	Vector2 Direction;
 };
 

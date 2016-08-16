@@ -51,3 +51,15 @@ void PowerUp::SetIncrement(int increase)
 {
 	increment = increase;
 }
+GEOMETRY_TYPE PowerUp::GetGeoType()
+{
+	return type;
+}
+void PowerUp::SetSPCost(int SP)
+{
+	SP_Cost = SP;
+}
+int PowerUp::GetSPCost()
+{
+	return SP_Cost;
+}
