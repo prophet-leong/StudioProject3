@@ -10,12 +10,25 @@ Bullet::Bullet(Vector2 position, Vector2 direction, int damage, int speed,GEOMET
 	this->element = element;
 	active = true;
 }
-void Bullet::Update(double dt)
+bool Bullet::CheckCollision(GameObject* go ,float units)
+{
+	if ((Position - go->GetPosition()).LengthSquare() <= units*units)
+	{
+		return true;
+	}
+}
+void Bullet::Update(GameObject* go ,double dt)
 {
 	if (active)
 	{
 		Position = Position + (Direction*(float)bulletSpeed);
+		if (CheckCollision(go,5))
+			SetUnactive();
 	}
+}
+void Bullet::SetUnactive()
+{
+	active = false;
 }
 int Bullet::GetDamage()
 {
