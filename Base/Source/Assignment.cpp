@@ -655,9 +655,12 @@ void Assignment::Render()
 
 	for (int i = 0; i < currHero->Projectile.size(); ++i)
 	{
-		Render2DMesh(meshList[currHero->Projectile[i].type], false, 1, 1,
-			currHero->Projectile[i].GetPosition().x - tilemap.offSet_x, 
-			currHero->Projectile[i].GetPosition().y - tilemap.offSet_y);
+		if (currHero->Projectile[i]->active)
+		{
+			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
+			currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x, 
+			currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
+		}
 	}
 
 

@@ -2,7 +2,7 @@
 #define BULLET_H
 #include <Vector2.h>
 #include "GeometryType.h"
-#include "GameObject.h"
+#include "Collideables.h"
 enum BULLET_ELEMENT
 {
 	NO_ELEMENT,
@@ -12,16 +12,20 @@ enum BULLET_ELEMENT
 	WIND,
 	NUM_ELEMENTS
 };
-class Bullet :public GameObject
+class Bullet :public Collideables
 {
 public:
+	Bullet();
 	Bullet(Vector2 position, Vector2 direction, int damage, int speed = 10,GEOMETRY_TYPE type = GEO_SALT ,BULLET_ELEMENT = BULLET_ELEMENT::NO_ELEMENT);
 	~Bullet();
-	void Update(GameObject* go,double dt);
+	void set(Vector2 position, Vector2 direction, int damage, int speed = 10, GEOMETRY_TYPE type = GEO_SALT, BULLET_ELEMENT = BULLET_ELEMENT::NO_ELEMENT);
+	void Update(double dt);
 	int GetDamage();
 	void SetUnactive();
-	bool CheckCollision(GameObject* go,float units);
+	bool CheckCollision(GameObject* go, float units = 15);
+	void CollisionResponse();
 private:
+	Vector2 defaultPosition;
 	BULLET_ELEMENT element;
 	int bulletSpeed;
 	int damage;
