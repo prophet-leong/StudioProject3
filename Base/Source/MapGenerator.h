@@ -2,9 +2,6 @@
 #define GENERATOR_H
 #include "TileMap.h"
 #include "MapNode.h"
-#include "Hero.h"
-#include "Enemy.h"
-#include "Tile.h"
 
 class Generator
 {
@@ -27,6 +24,8 @@ public:
 
 	void GenerateStructure(/*int seed*/);
 	void Read(TileMap * tilemap);
+	bool Check(Vector2 AddtoNext);
+	void GoToNextLevel(Vector2 AddToCurrent);
 
 	const unsigned int MaxRooms = LEVELS_END;
 	unsigned int CurRooms;

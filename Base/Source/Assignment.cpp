@@ -135,6 +135,13 @@ void Assignment::Init()
 	MapRandomizer = new Generator();
 	MapRandomizer->GenerateStructure();
 
+	//gates
+	for (int i = 0; i < 4; ++i)
+	{
+		Gate * newGate = new Gate(0,0,"GEO_GATE",GEO_COIN,*MapRandomizer);
+		Gates.push_back(newGate);
+	}
+
 	ReadLevel();
 
 	for(int i = 0; i < NUM_GEOMETRY; ++i)
@@ -230,29 +237,54 @@ void Assignment::ReadLevel()
 				break;
 			}*/
 
-			}
-		}
-	}
-
-	//REAR map
-	for (int i = 0; i < rearmap.GetNumRows(); i++)
-	{
-		for (int k = 0; k < rearmap.GetNumColumns(); k++)
-		{
-			switch (rearmap.map[i][k])
-			{
-			case 2:
-			{
-				Tile *newTile = (Tile*)FetchGO(m_rearList);
-				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILETREE", GEO_TILETREE);
-				break;
-			}
+			//Up door
 			case 3:
 			{
-				Tile *newTile = (Tile*)FetchGO(m_rearList);
-				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILESTRUCTURE", GEO_TILESTRUCTURE);
+				//if there is a room next door, create door
+				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0,1));
+				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+					Gates[tilemap.map[i][k] - 3]->active = true;
 				break;
 			}
+
+			//Right door
+			case 4:
+			{
+				Gates[tilemap.map[i][k] - 3]->active = true;
+				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1,0 ));
+				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+
+				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				
+				break;
+			}
+
+			//Down door
+			case 5:
+			{
+				Gates[tilemap.map[i][k] - 3]->active = true;
+				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, -1));
+				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+
+				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				break;
+			}
+
+			//Left Door
+			case 6:
+			{
+				Gates[tilemap.map[i][k] - 3]->active = true;
+				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(-1, 0));
+				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+
+				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				break;
+			}
+
 			}
 		}
 	}
@@ -262,13 +294,9 @@ void Assignment::Restart()
 {
 	currHero->health -= 1;
 	if (currHero->health <= 0)
-	{
-		//if (currLevel != LEVEL1)
-		{
-			//currLevel = (LEVEL)(currLevel - 1);
-			ClearLevel();
-			ReadLevel();
-		}
+	{ 
+		ClearLevel();
+		ReadLevel(); 
 		currHero->Restart();
 	}
 	currHero->Reset(&tilemap);
@@ -352,6 +380,7 @@ void Assignment::Update(double dt)
 	*/
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	statemachine.FMSupdate();
+
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{
 		// Update the hero
@@ -381,38 +410,8 @@ void Assignment::Update(double dt)
 		}
 
 		tilemap.Update();
-		// avatar check with all other objects
-		for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
-		{
-			Avatar *go = (Avatar *)*iter;
-			if (!go->active)
-				continue;
-			for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
-			{
-				GameObject *other = (GameObject *)*iter2;
-				if (!other->active)
-					continue;
-				if (go->meshName == "HERO")
-					go->CheckStrategy(go, &tilemap);
-				if (go->CheckCollision(other, &tilemap))
-				{
-					go->CollisionResponse(other, &tilemap);
-				}
-			}
-			
-			for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
-			{
-				Avatar *other = (Avatar *)*iter3;
-				if (!other->active)
-					continue;
-				if (go->meshName == "HERO")
-					go->CheckStrategy(go, &tilemap);
-				if (go->CheckCollision(other, &tilemap))
-				{
-					go->CollisionResponse(other, &tilemap);
-				}
-			}
-		}
+	
+		UpdateAllObjects();
 
 		if (goToRestart)
 		{
@@ -421,7 +420,6 @@ void Assignment::Update(double dt)
 		}
 		if (goToNextLevel)
 		{
-			//currLevel = (LEVEL)(currLevel + 1);
 			ClearLevel();
 			ReadLevel();
 			currHero->Reset(&tilemap);
@@ -429,6 +427,52 @@ void Assignment::Update(double dt)
 		}
 
 		fps = (float)(1.f / dt);
+	}
+}
+
+void Assignment::UpdateAllObjects()
+{
+	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
+	{
+		Avatar *go = (Avatar*)*iter;
+		if (!go->active)
+			continue;
+
+		for (vector<Gate*>::iterator iter4 = Gates.begin(); iter4 != Gates.end(); iter4++)
+		{
+			Gate *other = (Gate *)*iter4;
+			if (!other->active)
+				continue;
+			if (go->meshName != "HERO")
+				continue;
+			if (other->CheckCollision(go, &tilemap))
+			{
+				other->CollisionResponse();
+				goToNextLevel = true;
+			}
+		}
+
+		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
+		{
+			GameObject *other = (GameObject *)*iter2;
+			if (!other->active)
+				continue;
+			if (go->CheckCollision(other, &tilemap))
+			{
+				go->CollisionResponse(other, &tilemap);
+			}
+		}
+
+		for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
+		{
+			Avatar *other = (Avatar *)*iter3;
+			if (!other->active)
+				continue;
+			if (other->CheckCollision(go, &tilemap))
+			{
+				other->CollisionResponse(go, &tilemap);
+			}
+		}
 	}
 }
 
@@ -713,15 +757,6 @@ void Assignment::Exit()
  ********************************************************************************/
 void Assignment::LoadLevel()
 {
-	//load rear
-	for (vector<GameObject*>::iterator iter = m_rearList.begin(); iter != m_rearList.end(); iter++)
-	{
-		GameObject *go = (GameObject *)*iter;
-		if (!go->active)
-			continue;
-		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x*0.25f, go->GetPosition().y - tilemap.offSet_y*0.25f);
-	}
-
 	//load actual
 	for (vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
 	{
@@ -734,24 +769,27 @@ void Assignment::LoadLevel()
 	//render avatars
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
 	{
-		Avatar *go = (Avatar *)*iter;
+		Avatar*go = (Avatar*)*iter;
 		if (!go->active)
 			continue;
 
+		if (go->meshName == "HERO")
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, false, currHero->GetAnimationInvert());
+	}
+
+	//renderGate
+	for (vector<Gate*>::iterator iter = Gates.begin(); iter != Gates.end(); iter++)
+	{
+		Gate*go = (Gate*)*iter;
+		if (!go->active)
+			continue;
+
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
 }
 
 void Assignment::ClearLevel()
 {
-	for (vector<GameObject*>::iterator iter = m_rearList.begin(); iter != m_rearList.end(); iter++)
-	{
-		GameObject *go = (GameObject *)*iter;
-		go->active = false;
-		go->meshName = "";
-		go->meshTexture = "";
-	}
-
 	for (vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
 	{
 		GameObject *go = (GameObject *)*iter;
@@ -763,16 +801,23 @@ void Assignment::ClearLevel()
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
 	{
 		Avatar *go = (Avatar *)*iter;
-
-		go->active = false;
+		if (go->meshName == "HERO")
+			continue;
 		go->health = 0;
+		go->active = false;
+		go->meshName = "";
+		go->meshTexture = "";
+	}
+
+	for (vector<Gate*>::iterator iter = Gates.begin(); iter != Gates.end(); iter++)
+	{
+		Gate *go = (Gate *)*iter;
+		go->active = false;
 		go->meshName = "";
 		go->meshTexture = "";
 	}
 
 }
-
-
 
 /*Individual functions to render what when the state happens*/
 void Assignment::render_main_menu()

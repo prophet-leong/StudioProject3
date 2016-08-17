@@ -26,7 +26,7 @@ void Generator::GenerateStructure(/*int seed*/)
 
 		//check surrounding
 		if (!CheckRoom(newRoom))
-			GenerateLevel(MaxRooms, newRoom); 
+			GenerateLevel(MaxRooms, newRoom);
 	}
 }
 
@@ -63,6 +63,7 @@ bool Generator::CheckRoom(Vector2 newRoom)
 
 void Generator::GenerateLevel(int number,Vector2 position)
 {
+	srand(time(NULL));
 	Node*startRoom = new Node(rand() % number, position);
 	Rooms.push_back(startRoom);
 	CurRooms++;
@@ -102,4 +103,21 @@ void Generator::Read(TileMap * tilemap)
 		}
 	
 	}
+}
+
+void Generator::GoToNextLevel(Vector2 AddToCurrent)
+{
+	playerRoomPosition = playerRoomPosition + AddToCurrent;
+}
+
+bool Generator::Check(Vector2 AddToNext)
+{
+	Vector2 tempPos = playerRoomPosition + AddToNext;
+	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
+	{
+		Node *curr = (Node *)*iter;
+		if (curr->RoomPosition == tempPos)
+			return true;
+	}
+	return false;
 }

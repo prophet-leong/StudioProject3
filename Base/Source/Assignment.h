@@ -15,6 +15,8 @@
 #include "GeometryType.h"
 #include "MapGenerator.h"
 #include "FiniteStatemachine.h"
+#include "Gate.h"
+
 
 class Assignment : public Scene
 {
@@ -81,6 +83,9 @@ private:
 	bool goToNextLevel = false;
 	bool goToRestart = false;
 
+
+	// Main Update Loop
+	void UpdateAllObjects();
 	//private functions
 	void ReadLevel();
 	void LoadLevel();
@@ -130,13 +135,16 @@ private:
 	// Hero's information
 	Hero* currHero;
 
+	//Gates
+
 	//The maps
-	TileMap tilemap, rearmap;
+	TileMap tilemap;
 
 	//All Objects
+
+	vector<Gate*>Gates;
 	vector<Avatar*> m_avatarList;
 	vector<GameObject*> m_goList;
-	vector<GameObject*> m_rearList;
 
 	//Map RNG
 	Generator* MapRandomizer;
