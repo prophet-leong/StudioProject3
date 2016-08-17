@@ -25,6 +25,7 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 Hero::~Hero()
 {
 }
+
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)
 {
@@ -114,18 +115,19 @@ void Hero::Constrain(TileMap* tilemap)
 //Soft-Reset
 void Hero::Reset(TileMap* tilemap)
 {
+	active = true;
 	SetPos(initX, initY);
 	SetAnimationCounterLR(0);
 	SetAnimationInvert(false);
-	SetToStop();
 	inventory->powerUpList.clear();
 	scale.y = 1.f;
 	tilemap->offSet_x = 0;
 	tilemap->fineOffSet_y = 0;
+
 }
 
 //Full-Reset
-void Hero::Restart(TileMap* tilemap)
+void Hero::Restart()
 {
 	health = 3;
 }

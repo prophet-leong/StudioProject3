@@ -22,7 +22,8 @@ public:
 		float timeDiff);
 	void Constrain(TileMap* tilemap);
 	void Reset(TileMap* tilemap);
-	void Restart(TileMap* tilemap);
+	void Restart();
+
 	//movement
 	void MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap);
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
