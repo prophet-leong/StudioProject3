@@ -1,17 +1,17 @@
 #include "Gate.h"
 
 Gate::Gate()
-	:GameObject()
+	:Collideables()
 	, generator(NULL)
 {
 	active = false;
 }
 
-Gate::Gate(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, Generator generator)
-	: GameObject(x,y,meshName,typeOfTile)
+Gate::Gate(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, Generator*generator)
+	: Collideables(x,y,meshName,typeOfTile)
 {
 	active = false;
-	this->generator = &generator;
+	this->generator = generator;
 }
 
 Gate::~Gate()

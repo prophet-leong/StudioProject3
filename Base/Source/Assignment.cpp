@@ -128,7 +128,7 @@ void Assignment::Init()
 
 	// Initialise the hero's position
 	GEOMETRY_TYPE heroTexture[] = { GEO_TILEHERO_FRAME0, GEO_TILEHERO_FRAME1, GEO_TILEHERO_FRAME2, GEO_TILEHERO_FRAME3 };
-	currHero = new Hero(32, 160, "HERO", heroTexture , 4);
+	currHero = new Hero(512, 400, "HERO", heroTexture , 4);
 	currHero->health = 3;
 	m_avatarList.push_back(currHero);
 
@@ -138,7 +138,7 @@ void Assignment::Init()
 	//gates
 	for (int i = 0; i < 4; ++i)
 	{
-		Gate * newGate = new Gate(0,0,"GEO_GATE",GEO_COIN,*MapRandomizer);
+		Gate * newGate = new Gate(0,0,"GEO_GATE",GEO_COIN,MapRandomizer);
 		Gates.push_back(newGate);
 	}
 
@@ -222,7 +222,10 @@ void Assignment::ReadLevel()
 		{
 			switch (tilemap.map[i][k])
 			{
-			
+			case 0:
+			{
+				break;
+			}
 			case 1:
 			{
 				Tile *newTile = (Tile*)FetchGO(m_goList);
@@ -243,19 +246,19 @@ void Assignment::ReadLevel()
 				//if there is a room next door, create door
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0,1));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
 					Gates[tilemap.map[i][k] - 3]->active = true;
+
 				break;
 			}
 
 			//Right door
 			case 4:
 			{
-				Gates[tilemap.map[i][k] - 3]->active = true;
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1,0 ));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 
-				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
 					Gates[tilemap.map[i][k] - 3]->active = true;
 				
 				break;
@@ -264,11 +267,10 @@ void Assignment::ReadLevel()
 			//Down door
 			case 5:
 			{
-				Gates[tilemap.map[i][k] - 3]->active = true;
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, -1));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 
-				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
 					Gates[tilemap.map[i][k] - 3]->active = true;
 				break;
 			}
@@ -276,11 +278,10 @@ void Assignment::ReadLevel()
 			//Left Door
 			case 6:
 			{
-				Gates[tilemap.map[i][k] - 3]->active = true;
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(-1, 0));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 
-				//if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
 					Gates[tilemap.map[i][k] - 3]->active = true;
 				break;
 			}
@@ -304,81 +305,6 @@ void Assignment::Restart()
 
 void Assignment::Update(double dt)
 {
-	//if(Application::IsKeyPressed('1'))
-	//	glEnable(GL_CULL_FACE);
-	//if(Application::IsKeyPressed('2'))
-	//	glDisable(GL_CULL_FACE);
-	//if(Application::IsKeyPressed('3'))
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//if(Application::IsKeyPressed('4'))
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//
-	//if(Application::IsKeyPressed('5'))
-	//{
-	//	lights[0].type = Light::LIGHT_POINT;
-	//	glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
-	//}
-	//else if(Application::IsKeyPressed('6'))
-	//{
-	//	lights[0].type = Light::LIGHT_DIRECTIONAL;
-	//	glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
-	//}
-	//else if(Application::IsKeyPressed('7'))
-	//{
-	//	lights[0].type = Light::LIGHT_SPOT;
-	//	glUniform1i(m_parameters[U_LIGHT0_TYPE], lights[0].type);
-	//}
-	//else if(Application::IsKeyPressed('8'))
-	//{
-	//	bLightEnabled = true;
-	//}
-	//else if(Application::IsKeyPressed('9'))
-	//{
-	//	bLightEnabled = false;
-	//}
-	//if(Application::IsKeyPressed('I'))
-	//	lights[0].position.z -= (float)(10.f * dt);
-	//if(Application::IsKeyPressed('K'))
-	//	lights[0].position.z += (float)(10.f * dt);
-	//if(Application::IsKeyPressed('J'))
-	//	lights[0].position.x -= (float)(10.f * dt);
-	//if(Application::IsKeyPressed('L'))
-	//	lights[0].position.x += (float)(10.f * dt);
-	//if(Application::IsKeyPressed('O'))
-	//	lights[0].position.y -= (float)(10.f * dt);
-	//if(Application::IsKeyPressed('P'))
-	//	lights[0].position.y += (float)(10.f * dt);
-	//camera.Update(dt);
-
-	////////////////////////////////////////////////////PLS READ////////////////////////////////////////////////////////////////
-	/*
-	statemachines.nextstate() maybe take in enums instead to be easier to understand
-	suggestion : 
-	have a update function that have all the statemachine condition
-	all the class can actually access application and should be able to use Application::IsKeyPressed()
-	
-	instead of having a 
-	if(...)
-	{
-	 ......
-	}
-	if(...)
-	{
-	 ......
-	}
-	use
-	if(...)
-	{
-	....
-	}
-	else if(....)
-	{
-	.....
-	}
-	this will reduce the number of checks made by the computer
-	same for render
-	*/
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	statemachine.FMSupdate();
 
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
@@ -442,8 +368,6 @@ void Assignment::UpdateAllObjects()
 		{
 			Gate *other = (Gate *)*iter4;
 			if (!other->active)
-				continue;
-			if (go->meshName != "HERO")
 				continue;
 			if (other->CheckCollision(go, &tilemap))
 			{

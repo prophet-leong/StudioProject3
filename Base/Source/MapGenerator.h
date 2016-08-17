@@ -22,7 +22,7 @@ public:
 	};
 	LEVELS level;
 
-	void GenerateStructure(/*int seed*/);
+	void GenerateStructure(/*string seed*/);
 	void Read(TileMap * tilemap);
 	bool Check(Vector2 AddtoNext);
 	void GoToNextLevel(Vector2 AddToCurrent);

@@ -1,14 +1,14 @@
 #ifndef GATE_H
 #define GATE_H
-#include "GameObject.h"
+#include "Collideables.h"
 #include "Hero.h"
 #include "MapGenerator.h"
 
-class Gate : public GameObject
+class Gate : public Collideables
 {
 public:
 	Gate();
-	Gate(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, Generator generator);
+	Gate(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, Generator * generator);
 	virtual ~Gate();
 
 	virtual bool CheckCollision(Avatar* theHero, TileMap* tilemap);

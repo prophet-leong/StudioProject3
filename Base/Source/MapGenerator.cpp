@@ -12,10 +12,10 @@ Generator::~Generator()
 {
 }
 
-void Generator::GenerateStructure(/*int seed*/)
+void Generator::GenerateStructure(/*string seed*/)
 {
 	srand(time(NULL));
-	
+	//srand (stoi(seed));
 	if (CurRooms == 0)
 		GenerateLevel(MaxRooms,Vector2(0,0));
 
@@ -63,14 +63,18 @@ bool Generator::CheckRoom(Vector2 newRoom)
 
 void Generator::GenerateLevel(int number,Vector2 position)
 {
-	srand(time(NULL));
 	Node*startRoom = new Node(rand() % number, position);
 	Rooms.push_back(startRoom);
 	CurRooms++;
 }
-
+#include<iostream>
 void Generator::Read(TileMap * tilemap)
 {
+	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
+	{
+		Node *curr = (Node *)*iter;
+		std::cout << curr->RoomPosition << endl;
+	}
 	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
 	{
 		Node *curr = (Node *)*iter;
