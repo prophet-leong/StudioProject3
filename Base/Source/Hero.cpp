@@ -25,7 +25,21 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 Hero::~Hero()
 {
 }
-
+void Hero::CollisionResponse(GameObject* other, TileMap* tilemap)
+{
+	BasicCollisionResponse(other, tilemap);
+}
+void Hero::BulletCollision(GameObject* other, TileMap* tilemap)
+{
+	for (int i = 0; i < Projectile.size(); ++i)
+	{
+		if (Projectile[i]->active)
+		{
+			if (Projectile[i]->CheckCollision(other))
+				Projectile[i]->CollisionResponse();
+		}
+	}
+}
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)
 {

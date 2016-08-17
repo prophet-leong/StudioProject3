@@ -3,17 +3,18 @@
 
 Bullet::Bullet()
 {
+	meshName = "Bullet";
 	active = false;
 }
 Bullet::Bullet(Vector2 position, Vector2 direction, int damage, int speed,GEOMETRY_TYPE Geo_Type ,BULLET_ELEMENT element)
 :Collideables(position.x, position.y, "Bullet", Geo_Type),
 defaultPosition(position)
 {
+	active = true;
 	this->Direction = direction;
 	this->damage = damage;
 	this->bulletSpeed = speed;
 	this->element = element;
-	active = true;
 }
 void Bullet::set(Vector2 position, Vector2 direction, int damage, int speed, GEOMETRY_TYPE Geo_Type, BULLET_ELEMENT element)
 {
@@ -24,12 +25,11 @@ void Bullet::set(Vector2 position, Vector2 direction, int damage, int speed, GEO
 	this->element = element;
 	SetPos(position);
 	defaultPosition = position;
-	meshName = "Bullet";
 	type = Geo_Type;
 }
-bool Bullet::CheckCollision(GameObject* go ,float units)
+bool Bullet::CheckCollision(GameObject* go)
 {
-	if ((Position - go->GetPosition()).LengthSquare() <= units*units)
+	if ((Position - go->GetPosition()).LengthSquare() <= 15*15)
 	{
 		return true;
 	}

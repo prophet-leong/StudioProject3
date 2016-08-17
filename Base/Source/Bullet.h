@@ -22,7 +22,7 @@ public:
 	void Update(double dt);
 	int GetDamage();
 	void SetUnactive();
-	bool CheckCollision(GameObject* go, float units = 15);
+	bool CheckCollision(GameObject* go);
 	void CollisionResponse();
 private:
 	Vector2 defaultPosition;
