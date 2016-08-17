@@ -394,10 +394,10 @@ void Assignment::Update(double dt)
 					continue;
 				if (go->meshName == "HERO")
 					go->CheckStrategy(go, &tilemap);
-				if (go->CheckCollision(other, &tilemap))
-				{
+				//if (go->CheckCollision(other, &tilemap))
+				//{
+				//}
 					go->CollisionResponse(other, &tilemap);
-				}
 			}
 			
 			for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)

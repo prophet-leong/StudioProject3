@@ -25,9 +25,17 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 Hero::~Hero()
 {
 }
+
 void Hero::CollisionResponse(GameObject* other, TileMap* tilemap)
 {
-	BasicCollisionResponse(other, tilemap);
+	if (other->type == GEO_TILEGROUND )
+	{
+		if (BasicCheckCollision(other, tilemap) == true)
+		{
+			BasicCollisionResponse(other, tilemap);
+		}
+		BulletCollision(other, tilemap);
+	}
 }
 void Hero::BulletCollision(GameObject* other, TileMap* tilemap)
 {
@@ -36,7 +44,9 @@ void Hero::BulletCollision(GameObject* other, TileMap* tilemap)
 		if (Projectile[i]->active)
 		{
 			if (Projectile[i]->CheckCollision(other))
+			{
 				Projectile[i]->CollisionResponse();
+			}
 		}
 	}
 }
