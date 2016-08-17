@@ -26,7 +26,7 @@ Hero::~Hero()
 {
 }
 
-void Hero::CollisionResponse(GameObject* other, TileMap* tilemap)
+void Hero::CollisionContainer(GameObject* other, TileMap* tilemap)
 {
 	if (other->type == GEO_TILEGROUND )
 	{
@@ -34,10 +34,19 @@ void Hero::CollisionResponse(GameObject* other, TileMap* tilemap)
 		{
 			BasicCollisionResponse(other, tilemap);
 		}
-		BulletCollision(other, tilemap);
+		BulletCollision(other);
 	}
 }
-void Hero::BulletCollision(GameObject* other, TileMap* tilemap)
+void Hero::CollisionContainer(Avatar * other)
+{
+	Bullet* object;
+	object = BulletCollision(other);
+	if (object != NULL)
+	{
+		other->health -= object->GetDamage();
+	}	
+}
+Bullet* Hero::BulletCollision(GameObject* other)
 {
 	for (int i = 0; i < Projectile.size(); ++i)
 	{
@@ -46,9 +55,11 @@ void Hero::BulletCollision(GameObject* other, TileMap* tilemap)
 			if (Projectile[i]->CheckCollision(other))
 			{
 				Projectile[i]->CollisionResponse();
+				return Projectile[i];
 			}
 		}
 	}
+	return NULL;
 }
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)

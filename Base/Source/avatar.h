@@ -14,7 +14,8 @@ public:
 	//functions
 	//virtual void update(double dt) = 0;
 	virtual bool CheckCollision(GameObject* other, TileMap* tilemap);
-	virtual void CollisionResponse(GameObject* other, TileMap* tilemap);
+	virtual void CollisionContainer(GameObject* other, TileMap* tilemap);
+	virtual void CollisionContainer(Avatar * other){};
 	virtual void CheckStrategy(GameObject* other, TileMap* tilemap);
 	bool BasicCheckCollision(GameObject* other, TileMap* tilemap);
 	void BasicCollisionResponse(GameObject* other, TileMap* tilemap);

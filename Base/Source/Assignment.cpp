@@ -381,10 +381,7 @@ void Assignment::UpdateAllObjects()
 			GameObject *other = (GameObject *)*iter2;
 			if (!other->active)
 				continue;
-			if (go->CheckCollision(other, &tilemap))
-			{
-				go->CollisionResponse(other, &tilemap);
-			}
+			go->CollisionContainer(other, &tilemap);
 		}
 
 		for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
@@ -392,10 +389,10 @@ void Assignment::UpdateAllObjects()
 			Avatar *other = (Avatar *)*iter3;
 			if (!other->active)
 				continue;
-			if (other->CheckCollision(go, &tilemap))
-			{
-				other->CollisionResponse(go, &tilemap);
-			}
+			go->CollisionContainer(other);//bullet
+			go->CollisionContainer(other, &tilemap);//hero to enemy collision
+			other->CollisionContainer(go);//bullet
+			other->CollisionContainer(go, &tilemap);//enemy to hero collision
 		}
 	}
 }

@@ -8,7 +8,6 @@ public:
 	Collideables(){};
 	Collideables(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
 	virtual ~Collideables();
-	virtual bool CheckCollision(GameObject * other, TileMap* tilemap){ return false; };
-	virtual void CollisionResponse(GameObject * other, TileMap* tilemap){};
+	virtual void CollisionContainer(GameObject * other, TileMap* tilemap){};
 };
 
