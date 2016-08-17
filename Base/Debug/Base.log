@@ -1,21 +1,8 @@
-﻿Build started 8/17/2016 12:38:11 PM.
+﻿Build started 8/17/2016 12:58:16 PM.
      1>Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\508\Desktop\Sp3 Solution folder\/Common/Source" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glew/include" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Assignment.cpp
-         Assignment.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(159): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(162): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(165): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(168): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(171): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(174): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(177): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(180): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(183): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(186): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(192): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(195): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(654): warning C4018: '<' : signed/unsigned mismatch
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\508\Desktop\Sp3 Solution folder\/Common/Source" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glew/include" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt source\FiniteStateMachine.cpp
+         FiniteStateMachine.cpp
        Link:
          D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\Debug" /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/lib-msvc100" /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\/glew/lib" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.lib" /MACHINE:X86 Debug\Application.obj
          Debug\Avatar.obj
@@ -53,4 +40,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.42
+Time Elapsed 00:00:01.16

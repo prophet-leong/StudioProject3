@@ -232,5 +232,16 @@ void the_state_machine::FMSupdate()
 			{
 				the_current_state_of_state_machine->change_state(2);
 			}
+			if (Application::IsKeyPressed('1'))
+			{
+				the_current_state_of_state_machine->change_state(7);
+			}
+		}
+		else if (the_current_state_of_state_machine->getcurrent_state() == 7)
+		{
+			if (Application::IsKeyPressed(VK_BACK))
+			{
+				the_current_state_of_state_machine->change_state(6);
+			}
 		}
 }

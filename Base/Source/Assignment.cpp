@@ -797,7 +797,7 @@ void Assignment::render_achievement_screen()
 		sss << "Temp Achievement Screen LOL";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
 		sss.str("");
-		sss << "Press Enter to main menu";
+		sss << "Press Backspace to main menu";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
 
 	}
@@ -816,7 +816,7 @@ void Assignment::render_options_screen()
 		sss << "Temp Options Screen LOL";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
 		sss.str("");
-		sss << "Press Enter to main menu";
+		sss << "Press Backspace to main menu";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
 
 	}
@@ -841,5 +841,19 @@ void Assignment::render_pause_menu()
 }
 void Assignment::render_in_game_option_screen()
 {
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 7) //pause menu
+	{
+		stringstream sss;
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
 
+		sss.str("");
+		sss << "Temp in-game Options Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		sss.str("");
+		sss << "Press Backspace to return";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+	}
 }
