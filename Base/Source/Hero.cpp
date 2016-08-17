@@ -15,8 +15,8 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	heroShield = 0;
 	heroDamage = 1;
 	DamageBoost = 0;
-	attackTime = 0.5f;
-	attackTimer = 0.5f;
+	attackTime = 0.2f;
+	attackTimer = 0.2f;
 	allowAttack = true;
 	direction.Set(1, 0);
 	currentPowerUp = 0;
@@ -26,6 +26,30 @@ Hero::~Hero()
 {
 }
 
+void Hero::CollisionResponse(GameObject* other, TileMap* tilemap)
+{
+	if (other->type == GEO_TILEGROUND )
+	{
+		if (BasicCheckCollision(other, tilemap) == true)
+		{
+			BasicCollisionResponse(other, tilemap);
+		}
+		BulletCollision(other, tilemap);
+	}
+}
+void Hero::BulletCollision(GameObject* other, TileMap* tilemap)
+{
+	for (int i = 0; i < Projectile.size(); ++i)
+	{
+		if (Projectile[i]->active)
+		{
+			if (Projectile[i]->CheckCollision(other))
+			{
+				Projectile[i]->CollisionResponse();
+			}
+		}
+	}
+}
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)
 {
@@ -70,8 +94,9 @@ Bullet* Hero::FetchGO()
 			return go;
 		}
 	}
-
-		Projectile.push_back(new Bullet());
+	Bullet *newBullet = new Bullet();
+	Projectile.push_back(newBullet);
+	return newBullet;
 }
 void Hero::AttackCooldown(double dt)
 {
@@ -89,7 +114,7 @@ void Hero::NormalAttack()
 	{
 		attackTimer = attackTime;
 		allowAttack = false;
-		Projectile.push_back(new Bullet(Position, direction, heroDamage));
+		FetchGO()->set(Position, direction, heroDamage);
 	}
 }
 
@@ -100,7 +125,7 @@ void Hero::SkillAttack()
 		attackTimer = attackTime;
 		allowAttack = false;
 		inventory->powerUpList[currentPowerUp];
-		Projectile.push_back(new Bullet(Position , direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE));
+		FetchGO()->set(Position, direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE);
 	}
 }
 

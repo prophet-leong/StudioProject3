@@ -23,6 +23,7 @@ public:
 	void Constrain(TileMap* tilemap);
 	void Reset(TileMap* tilemap);
 	void Restart();
+	void CollisionResponse(GameObject* other, TileMap* tilemap);
 
 	//movement
 	void MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap);
@@ -34,6 +35,7 @@ public:
 	void NormalAttack();
 	void SkillAttack();
 	//bullet update
+	void BulletCollision(GameObject* other, TileMap* tilemap);
 	Bullet*FetchGO();
 	void BulletUpdate(double dt);
 	vector<Bullet *>Projectile;
