@@ -430,7 +430,19 @@ void Assignment::Update(double dt)
 					go->CollisionResponse(other, &tilemap);
 				}
 			}
-
+			
+			for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
+			{
+				Avatar *other = (Avatar *)*iter3;
+				if (!other->active)
+					continue;
+				if (go->meshName == "HERO")
+					go->CheckStrategy(go, &tilemap);
+				if (go->CheckCollision(other, &tilemap))
+				{
+					go->CollisionResponse(other, &tilemap);
+				}
+			}
 		}
 
 		if (goToRestart)
