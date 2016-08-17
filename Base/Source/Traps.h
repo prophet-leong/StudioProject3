@@ -9,10 +9,11 @@ enum Trap_type
 {
 	TRAP_START=0,
 	SPIKE_TRAP,
+	POISONED_BLOCK,
 };
 class C_Traps : public Collideables
 {
-private:
+protected:
 	Vector2 Position;
 	float Damage_taken;
 public:
@@ -26,6 +27,8 @@ public:
 
 class C_SpikeTrap : public C_Traps
 {
+private:
+
 public:
 	C_SpikeTrap();
 	C_SpikeTrap(Vector2 position, float damage_taken, GEOMETRY_TYPE type = GEO_SPIKE_TRAP, Trap_type = Trap_type::SPIKE_TRAP);
@@ -34,6 +37,19 @@ public:
 	virtual bool CheckCollision(Avatar* other, TileMap *tilemap);
 	virtual void CollisionResponse(Avatar* other, TileMap *tilemap);
 	virtual bool checkdeath();
+};
+
+class C_PoisonedBlock : public C_Traps
+{
+public:
+	C_PoisonedBlock();
+	C_PoisonedBlock(Vector2 position, float damage_taken, GEOMETRY_TYPE type = GEO_SPIKE_TRAP, Trap_type traptype = Trap_type::POISONED_BLOCK);
+	~C_PoisonedBlock();
+
+	virtual bool CheckCollision(Avatar* other, TileMap *tilemap);
+	virtual void CollisionResponse(Avatar* other, TileMap *tilemap);
+	virtual bool checkdeath();
+
 };
 
 #endif
