@@ -17,7 +17,7 @@ void Generator::GenerateStructure(/*int seed*/)
 	srand(time(NULL));
 	
 	if (CurRooms == 0)
-		GenerateLevel(MaxRooms + 1,Vector2(0,0));
+		GenerateLevel(MaxRooms,Vector2(0,0));
 
 	while (CurRooms < MaxRooms)
 	{
@@ -26,7 +26,7 @@ void Generator::GenerateStructure(/*int seed*/)
 
 		//check surrounding
 		if (!CheckRoom(newRoom))
-			GenerateLevel(MaxRooms + 1, newRoom); 
+			GenerateLevel(MaxRooms, newRoom); 
 	}
 }
 

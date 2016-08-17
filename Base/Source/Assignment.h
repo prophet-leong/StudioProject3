@@ -143,6 +143,13 @@ private:
 
 	//the state machine
 	the_state_machine statemachine;
+
+	//individual render functions
+	void render_main_menu();
+	void render_achievement_screen();
+	void render_options_screen();
+	void render_pause_menu();
+	void render_in_game_option_screen();
 	
 };
 

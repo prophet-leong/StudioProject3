@@ -1,4 +1,5 @@
 #include "FiniteStatemachine.h"
+#include "Application.h"
 
 //constructors
 state::state() : current_state(0)
@@ -82,6 +83,10 @@ state * state_main_menu::change_state(int choice)
 		reinterpret_cast<state_died *>(this)->state_died::state_died();
 	}
 	return this;
+}
+void state_main_menu::changestate()
+{
+
 }
 state * state_play::change_state(int choice)
 {
@@ -182,4 +187,50 @@ the_state_machine::the_state_machine() : the_current_state_of_state_machine(new 
 void the_state_machine::nextstate(int choice)
 {
 	the_current_state_of_state_machine = the_current_state_of_state_machine->change_state(choice);
+}
+void the_state_machine::FMSupdate()
+{
+		if (the_current_state_of_state_machine->getcurrent_state() == 1)
+		{
+			if (Application::IsKeyPressed(VK_RETURN))
+			{
+				the_current_state_of_state_machine->change_state(2);
+			}
+			else if (Application::IsKeyPressed('1'))
+			{
+				the_current_state_of_state_machine->change_state(4);
+			}
+			else if (Application::IsKeyPressed('2'))
+			{
+				the_current_state_of_state_machine->change_state(5);
+			}
+		}
+		else if (the_current_state_of_state_machine->getcurrent_state() == 2)
+		{
+			if (Application::IsKeyPressed(VK_BACK))
+			{
+				the_current_state_of_state_machine->change_state(6);
+			}
+		}
+		else if (the_current_state_of_state_machine->getcurrent_state() == 4)
+		{
+			if (Application::IsKeyPressed(VK_BACK))
+			{
+				the_current_state_of_state_machine->change_state(1);
+			}
+		}
+		else if (the_current_state_of_state_machine->getcurrent_state() == 5)
+		{
+			if (Application::IsKeyPressed(VK_BACK))
+			{
+				the_current_state_of_state_machine->change_state(1);
+			}
+		}
+		else if (the_current_state_of_state_machine->getcurrent_state() == 6)
+		{
+			if (Application::IsKeyPressed(VK_RETURN))
+			{
+				the_current_state_of_state_machine->change_state(2);
+			}
+		}
 }

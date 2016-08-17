@@ -28,7 +28,7 @@ public:
 	void GenerateStructure(/*int seed*/);
 	void Read(TileMap * tilemap);
 
-	const unsigned int MaxRooms = 7;
+	const unsigned int MaxRooms = LEVELS_END;
 	unsigned int CurRooms;
 
 private:

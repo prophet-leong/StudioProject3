@@ -351,38 +351,7 @@ void Assignment::Update(double dt)
 	same for render
 	*/
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
-	if (Application::IsKeyPressed(VK_RETURN) && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1)
-	{
-		statemachine.nextstate(2);
-	}
-	if (Application::IsKeyPressed(VK_BACK) && statemachine.the_current_state_of_state_machine->getcurrent_state() == 4)
-	{
-		statemachine.nextstate(1);
-	}
-	if (Application::IsKeyPressed(VK_BACK) && statemachine.the_current_state_of_state_machine->getcurrent_state() == 5)
-	{
-		statemachine.nextstate(1);
-	}
-	if (Application::IsKeyPressed('1') && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1) //Achievement Screen
-	{
-		statemachine.nextstate(4);
-	}
-	if (Application::IsKeyPressed('2') && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1) //Options screen
-	{
-		statemachine.nextstate(5);
-	}
-	//if (Application::IsKeyPressed('3') && statemachine.the_current_state_of_state_machine->getcurrent_state() == 1) //Exit
-	//{
-	//	statemachine.nextstate(9);
-	//}
-	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2 && Application::IsKeyPressed(VK_BACK))
-	{
-		statemachine.nextstate(6);
-	}
-	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 6 && Application::IsKeyPressed(VK_RETURN))
-	{
-		statemachine.nextstate(2);
-	}
+	statemachine.FMSupdate();
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{
 		// Update the hero
@@ -693,27 +662,6 @@ void Assignment::Render()
 	//On screen text UI
 	std::ostringstream sss;
 	sss.precision(5);
-
-	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 1)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
-		RenderMesh(meshList[GEO_PLACEHOLDER], false);
-		modelStack.PopMatrix();
-		sss.str("");
-		sss << "Main Menu Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 200);
-		sss.str("");
-		sss << "Press Enter to start da level";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 180);
-		sss.str("");
-		sss << "Press 1 to go to achievements";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 160);
-		sss.str("");
-		sss << "Press 2 to go to options";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 140);
-
-	}
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{
 		sss.str("");
@@ -722,48 +670,12 @@ void Assignment::Render()
 		sss << " X" << currHero->health;
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
 	}
-	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 4) //Achievenemts
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
-		RenderMesh(meshList[GEO_PLACEHOLDER], false);
-		modelStack.PopMatrix();
-		sss.str("");
-		sss << "Temp Achievement Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
-		sss.str("");
-		sss << "Press Enter to main menu";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
-
-	}
-	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 5)
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
-		RenderMesh(meshList[GEO_PLACEHOLDER], false);
-		modelStack.PopMatrix();
-		sss.str("");
-		sss << "Temp Options Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
-		sss.str("");
-		sss << "Press Enter to main menu";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
-
-	}
-	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 6) //pause menu
-	{
-		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
-		RenderMesh(meshList[GEO_PLACEHOLDER], false);
-		modelStack.PopMatrix();
-		sss.str("");
-		sss << "Temp Pause Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
-		sss.str("");
-		sss << "Press Enter to resume da level";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
-
-	}
+	
+	render_main_menu();
+	render_achievement_screen();
+	render_options_screen();
+	render_pause_menu();
+	render_in_game_option_screen();
 	
 }
 
@@ -840,5 +752,92 @@ void Assignment::ClearLevel()
 		go->meshName = "";
 		go->meshTexture = "";
 	}
+
+}
+
+
+
+/*Individual functions to render what when the state happens*/
+void Assignment::render_main_menu()
+{
+	stringstream sss;
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 1)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Main Menu Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 200);
+		sss.str("");
+		sss << "Press Enter to start da level";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 180);
+		sss.str("");
+		sss << "Press 1 to go to achievements";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 160);
+		sss.str("");
+		sss << "Press 2 to go to options";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 140);
+
+	}
+}
+void Assignment::render_achievement_screen()
+{
+	stringstream sss;
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 4) //Achievenemts
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Temp Achievement Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		sss.str("");
+		sss << "Press Enter to main menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+	}
+
+}
+void Assignment::render_options_screen()
+{
+	stringstream sss;
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 5)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Temp Options Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		sss.str("");
+		sss << "Press Enter to main menu";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+	}
+}
+void Assignment::render_pause_menu()
+{
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 6) //pause menu
+	{
+		stringstream sss;
+		modelStack.PushMatrix();
+		modelStack.Translate(200, 200, -2);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+		sss.str("");
+		sss << "Temp Pause Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		sss.str("");
+		sss << "Press Enter to resume da level";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+	}
+}
+void Assignment::render_in_game_option_screen()
+{
 
 }
