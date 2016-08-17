@@ -662,6 +662,8 @@ void Assignment::Render()
 	// Render the background image
 	RenderBackground();
 
+	
+
 	//loading/rendering of level
 	LoadLevel();
 
@@ -677,6 +679,14 @@ void Assignment::Render()
 
 
 	//On screen text UI
+	
+	
+	render_main_menu();
+	render_achievement_screen();
+	render_options_screen();
+	render_pause_menu();
+	render_in_game_option_screen();
+	
 	std::ostringstream sss;
 	sss.precision(5);
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
@@ -687,13 +697,6 @@ void Assignment::Render()
 		sss << " X" << currHero->health;
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 0, 0), 30, 0, 0);
 	}
-	
-	render_main_menu();
-	render_achievement_screen();
-	render_options_screen();
-	render_pause_menu();
-	render_in_game_option_screen();
-	
 }
 
 void Assignment::Exit()
