@@ -22,39 +22,22 @@ public:
 	void SetAnimationCounterUD(int AnimationCounterUD);
 	void SetAnimationInvert(bool AnimationInvert);
 
-	//jumping
-	void SetOnFreeFall(bool isOnFreeFall);
-	void SetToJumpUpwards(bool isOnJumpUpwards);
-	void SetJumpSpeed(int newJumpSpeed);
-	void SetToStop();
-
 	//getters
 	int GetAnimationCounterUD();
 	int GetAnimationCounterLR();
 	bool GetAnimationInvert();
 
-	//jumping
-	bool isOnGround();
-	bool isJumpUpwards();
-	bool isFreeFall();
-	int   GetJumpspeed();
-
 	//public variables
 	bool moveUp, moveDown, moveLeft, moveRight;
+	int health;
 	//for different powerups
 	Bag* inventory;
 	Vector2 direction;
-
 protected:
 	//for Animation
 	bool AnimationInvert;
 	int AnimationCounterLR;
 	int AnimationCounterUD;
-
-	//for jumping
-	bool inMidAir_Up, inMidAir_Down;
-	int jumpSpeed;
-	int UpwardsFrame;
 
 };
 

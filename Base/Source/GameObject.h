@@ -21,7 +21,6 @@ public:
 	Vector2 GetPosition();
 
 	//public variables
-	int health;
 	bool active;
 	Vector2 scale;
 

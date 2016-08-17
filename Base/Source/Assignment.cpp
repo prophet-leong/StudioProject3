@@ -269,7 +269,7 @@ void Assignment::Restart()
 			ClearLevel();
 			ReadLevel();
 		}
-		currHero->Restart(&tilemap);
+		currHero->Restart();
 	}
 	currHero->Reset(&tilemap);
 }
@@ -403,6 +403,7 @@ void Assignment::Update(double dt)
 			currHero->NormalAttack();
 		if (Application::IsKeyPressed('F'))
 			currHero->SkillAttack();
+
 		currHero->Update(&tilemap, dt);
 
 		if (currHero->GetPosition().y <= 20)
@@ -429,6 +430,7 @@ void Assignment::Update(double dt)
 					go->CollisionResponse(other, &tilemap);
 				}
 			}
+
 		}
 
 		if (goToRestart)
