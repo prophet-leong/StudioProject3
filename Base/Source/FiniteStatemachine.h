@@ -5,7 +5,6 @@
 using std::cout;
 using std::endl;
 
-
 class state
 {
 private:
@@ -28,6 +27,8 @@ public:
 	state_main_menu();
 	~state_main_menu(){};
 	state * change_state(int choice);
+	//void testing change state
+	void changestate();
 };
 
 class state_play : public state
@@ -103,6 +104,8 @@ public:
 	the_state_machine();
 	~the_state_machine(){};
 	void nextstate(int choice);
+	void FMSupdate();
+
 };
 
 //enum STATE

@@ -59,7 +59,20 @@ void Hero::Update(TileMap* tilemap , double dt)
 	
 	Constrain(tilemap);
 }
+Bullet* Hero::FetchGO()
+{
+	for (std::vector<Bullet*>::iterator iter = Projectile.begin(); iter != Projectile.end(); ++iter)
+	{
+		Bullet *go = *iter;
+		if (!go->active)
+		{
+			go->active = true;
+			return go;
+		}
+	}
 
+		Projectile.push_back(new Bullet());
+}
 void Hero::AttackCooldown(double dt)
 {
 	if (allowAttack == false)
@@ -76,7 +89,7 @@ void Hero::NormalAttack()
 	{
 		attackTimer = attackTime;
 		allowAttack = false;
-		Projectile.push_back(Bullet(Position, direction, heroDamage));
+		Projectile.push_back(new Bullet(Position, direction, heroDamage));
 	}
 }
 
@@ -87,7 +100,7 @@ void Hero::SkillAttack()
 		attackTimer = attackTime;
 		allowAttack = false;
 		inventory->powerUpList[currentPowerUp];
-		Projectile.push_back(Bullet(Position , direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE));
+		Projectile.push_back(new Bullet(Position , direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE));
 	}
 }
 
@@ -95,7 +108,7 @@ void Hero::BulletUpdate(double dt)
 {
 	for (int i = 0; i < Projectile.size(); ++i)
 	{
-		Projectile[i].Update(dt);
+		Projectile[i]->Update(dt);
 	}
 }
 

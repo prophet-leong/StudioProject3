@@ -28,13 +28,15 @@ public:
 	void MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap);
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
 	void HeroTakeDamage(int damage);
+	
 	//debound for attacking so that spamming wont occur
 	void AttackCooldown(double dt);
 	void NormalAttack();
 	void SkillAttack();
 	//bullet update
+	Bullet*FetchGO();
 	void BulletUpdate(double dt);
-	vector<Bullet>Projectile;
+	vector<Bullet *>Projectile;
 private:
 //hero info
 	//hero basic value

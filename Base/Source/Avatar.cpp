@@ -1,7 +1,7 @@
 #include "avatar.h"
 
 Avatar::Avatar()
-	:GameObject()
+	:Collideables()
 	, AnimationCounterLR(0)
 	, AnimationCounterUD(0)
 	, AnimationInvert(false)
@@ -15,7 +15,7 @@ Avatar::Avatar()
 }
 
 Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
-	: GameObject(x, y, meshName, typeOfTile)
+	: Collideables(x, y, meshName, typeOfTile)
 	, AnimationCounterLR(0)
 	, AnimationCounterUD(0)
 	, AnimationInvert(false)
@@ -35,39 +35,44 @@ Avatar::~Avatar()
 
 /////////////////FUNCTIONS///////////////////////
 
-bool Avatar::CheckCollision(GameObject* other,TileMap* tilemap)
+bool Avatar::BasicCheckCollision(GameObject* other,TileMap* tilemap)
 {
 	return ( (GetPosition() - other->GetPosition()).LengthSquare() < 1.5f*tilemap->GetTileSize()*tilemap->GetTileSize() );
 }
-
+bool Avatar::CheckCollision(GameObject* other, TileMap* tilemap)
+{
+	return ((GetPosition() - other->GetPosition()).LengthSquare() < 1.5f*tilemap->GetTileSize()*tilemap->GetTileSize());
+}
 void Avatar::CollisionResponse(GameObject* other, TileMap* tilemap)
 {
 	if (other->type == GEO_TILEGROUND)//|| whatever other object you want that have collision)
+		BasicCollisionResponse(other, tilemap);
+}
+void Avatar::BasicCollisionResponse(GameObject* other, TileMap* tilemap)
+{
+	if (GetPosition().x < other->GetPosition().x && other->GetPosition().x - GetPosition().x <= tilemap->GetTileSize())
 	{
-		if (GetPosition().x < other->GetPosition().x && other->GetPosition().x - GetPosition().x <= tilemap->GetTileSize())
-		{
-			if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
-				other->GetPosition().y >= GetPosition().y && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
-				moveRight = false;
-		}
-		else if (other->GetPosition().x < GetPosition().x && GetPosition().x - other->GetPosition().x <= tilemap->GetTileSize())
-		{
-			if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
-				other->GetPosition().y >= GetPosition().y && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
-				moveLeft = false;
-		} 
-		if (GetPosition().y < other->GetPosition().y && other->GetPosition().y - GetPosition().y <= tilemap->GetTileSize())
-		{
-			if (GetPosition().x >= other->GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize() * 0.75f ||
-				other->GetPosition().x >= GetPosition().x && other->GetPosition().x - GetPosition().x < tilemap->GetTileSize() * 0.75f)
-				moveUp = false;
-		}
-		else if (other->GetPosition().y < GetPosition().y && GetPosition().y - other->GetPosition().y <= tilemap->GetTileSize())
-		{
-			if (GetPosition().x >= other->GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize()* 0.75f ||
-				other->GetPosition().x >= GetPosition().x && other->GetPosition().x - GetPosition().x < tilemap->GetTileSize()* 0.75f)
-				moveDown = false;
-		}
+		if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
+			other->GetPosition().y >= GetPosition().y && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
+			moveRight = false;
+	}
+	else if (other->GetPosition().x < GetPosition().x && GetPosition().x - other->GetPosition().x <= tilemap->GetTileSize())
+	{
+		if (GetPosition().y >= other->GetPosition().y && GetPosition().y - other->GetPosition().y < tilemap->GetTileSize() ||
+			other->GetPosition().y >= GetPosition().y && other->GetPosition().y - GetPosition().y < tilemap->GetTileSize())
+			moveLeft = false;
+	}
+	if (GetPosition().y < other->GetPosition().y && other->GetPosition().y - GetPosition().y <= tilemap->GetTileSize())
+	{
+		if (GetPosition().x >= other->GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize() * 0.75f ||
+			other->GetPosition().x >= GetPosition().x && other->GetPosition().x - GetPosition().x < tilemap->GetTileSize() * 0.75f)
+			moveUp = false;
+	}
+	else if (other->GetPosition().y < GetPosition().y && GetPosition().y - other->GetPosition().y <= tilemap->GetTileSize())
+	{
+		if (GetPosition().x >= other->GetPosition().x && GetPosition().x - other->GetPosition().x < tilemap->GetTileSize()* 0.75f ||
+			other->GetPosition().x >= GetPosition().x && other->GetPosition().x - GetPosition().x < tilemap->GetTileSize()* 0.75f)
+			moveDown = false;
 	}
 }
 

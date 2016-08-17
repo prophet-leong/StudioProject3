@@ -1,43 +1,10 @@
-﻿Build started 16/8/2016 11:13:34 PM.
-     1>Project "C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Base\Base.vcxproj" on node 2 (Build target(s)).
+﻿Build started 8/17/2016 12:58:16 PM.
+     1>Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/Common/Source" /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glew/include" /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\Assignment.cpp Source\Camera.cpp Source\Camera2.cpp Source\Camera3.cpp Source\Hero.cpp Source\Strategy_Kill.cpp Source\main.cpp
-         Hero.cpp
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(54): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(55): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(57): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(66): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(95): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(107): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(111): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(140): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(146): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(152): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\hero.cpp(158): warning C4244: '+=' : conversion from 'float' to 'int', possible loss of data
-         Assignment.cpp
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(159): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(162): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(165): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(168): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(171): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(174): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(177): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(180): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(183): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(186): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(192): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(195): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\assignment.cpp(667): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         main.cpp
-         Strategy_Kill.cpp
-         Camera3.cpp
-         Camera2.cpp
-         Camera.cpp
-         Application.cpp
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\508\Desktop\Sp3 Solution folder\/Common/Source" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glew/include" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt source\FiniteStateMachine.cpp
+         FiniteStateMachine.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug" /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glfw/lib-msvc100" /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glew/lib" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.lib" /MACHINE:X86 Debug\Application.obj
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\Debug" /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/lib-msvc100" /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\/glew/lib" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.lib" /MACHINE:X86 Debug\Application.obj
          Debug\Avatar.obj
          Debug\Bag.obj
          Debug\Bullet.obj
@@ -68,9 +35,9 @@
          Debug\Utility.obj
      1>Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
      1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-         Base.vcxproj -> C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.exe
-     1>Done Building Project "C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Base\Base.vcxproj" (Build target(s)).
+         Base.vcxproj -> C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.exe
+     1>Done Building Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.76
+Time Elapsed 00:00:01.16

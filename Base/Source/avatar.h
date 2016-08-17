@@ -3,8 +3,8 @@
 #include "GameObject.h"
 #include "Bag.h"
 #include "TileMap.h"
-
-class Avatar :public GameObject
+#include "Collideables.h"
+class Avatar :public Collideables
 {
 public:
 	Avatar();
@@ -16,7 +16,8 @@ public:
 	virtual bool CheckCollision(GameObject* other, TileMap* tilemap);
 	virtual void CollisionResponse(GameObject* other, TileMap* tilemap);
 	virtual void CheckStrategy(GameObject* other, TileMap* tilemap);
-
+	bool BasicCheckCollision(GameObject* other, TileMap* tilemap);
+	void BasicCollisionResponse(GameObject* other, TileMap* tilemap);
 	//setters
 	void SetAnimationCounterLR(int AnimationCounterLR);
 	void SetAnimationCounterUD(int AnimationCounterUD);
