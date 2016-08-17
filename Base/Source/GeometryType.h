@@ -1,5 +1,7 @@
 #ifndef GEOMETRYTYPE_H
 #define GEOMETRYTYPE_H
+////comment this out later
+#include <iostream>
 
 enum GEOMETRY_TYPE
 {

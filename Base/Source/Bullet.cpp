@@ -43,7 +43,7 @@ void Bullet::Update(double dt)
 	if (active)
 	{
 		Position = Position + (Direction*(float)bulletSpeed);
-		if ((defaultPosition - Position).LengthSquare() > 100.f*100.f)
+		if ((defaultPosition - Position).LengthSquare() > 250.f*250.f)
 			SetUnactive();
 	}
 }
