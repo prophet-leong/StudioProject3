@@ -67,7 +67,7 @@ C_PoisonedBlock::~C_PoisonedBlock()
 
 bool C_PoisonedBlock::CheckCollision(Avatar* other, TileMap *tilemap)
 {
-
+	return false;
 }
 void C_PoisonedBlock::CollisionResponse(Avatar* other, TileMap *tilemap)
 {
@@ -75,5 +75,5 @@ void C_PoisonedBlock::CollisionResponse(Avatar* other, TileMap *tilemap)
 }
 bool C_PoisonedBlock::checkdeath()
 {
-
+	return false;
 }
