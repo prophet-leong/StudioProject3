@@ -4,6 +4,7 @@
 #include "Bag.h"
 #include "TileMap.h"
 #include "Collideables.h"
+#include "Bullet.h"
 class Avatar :public Collideables
 {
 public:
@@ -32,6 +33,12 @@ public:
 	//public variables
 	bool moveUp, moveDown, moveLeft, moveRight;
 	int health;
+	//bullet
+	virtual Bullet* BulletCollision(GameObject* other);
+	virtual Bullet*FetchGO();
+	virtual void BulletUpdate(double dt);
+	//vector to hold the bullets
+	vector<Bullet *>Projectile;
 	//for different powerups
 	Bag* inventory;
 	Vector2 direction;

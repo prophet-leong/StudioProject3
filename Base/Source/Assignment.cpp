@@ -375,7 +375,6 @@ void Assignment::UpdateAllObjects()
 				goToNextLevel = true;
 			}
 		}
-
 		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
 		{
 			GameObject *other = (GameObject *)*iter2;

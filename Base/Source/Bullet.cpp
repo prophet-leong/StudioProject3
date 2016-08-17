@@ -27,13 +27,10 @@ void Bullet::set(Vector2 position, Vector2 direction, int damage, int speed, GEO
 	defaultPosition = position;
 	type = Geo_Type;
 }
-#include <iostream>
 bool Bullet::CheckCollision(GameObject* go)
 {
 	if ((Position - go->GetPosition()).LengthSquare() <= 32*32)
 	{
-		std::cout << GetPosition().x << "  " << GetPosition().y << std::endl;
-		std::cout << go->GetPosition().x << "  " << go->GetPosition().y << std::endl;
 		return true;
 	}
 	return false;

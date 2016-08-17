@@ -3,7 +3,7 @@
 
 #include "avatar.h"
 #include "TileMap.h"
-#include "Bullet.h"
+
 
 class Hero : public Avatar
 {
@@ -38,7 +38,6 @@ public:
 	Bullet* BulletCollision(GameObject* other);
 	Bullet*FetchGO();
 	void BulletUpdate(double dt);
-	vector<Bullet *>Projectile;
 private:
 //hero info
 	//hero basic value

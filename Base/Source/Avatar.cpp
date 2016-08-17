@@ -117,3 +117,41 @@ bool Avatar::GetAnimationInvert()
 	return AnimationInvert;
 }
 
+//default bullet updates
+Bullet* Avatar::BulletCollision(GameObject* other)
+{
+	for (int i = 0; i < Projectile.size(); ++i)
+	{
+		if (Projectile[i]->active)
+		{
+			if (Projectile[i]->CheckCollision(other))
+			{
+				Projectile[i]->CollisionResponse();
+				return Projectile[i];
+			}
+		}
+	}
+	return NULL;
+}
+Bullet* Avatar::FetchGO()
+{
+	for (std::vector<Bullet*>::iterator iter = Projectile.begin(); iter != Projectile.end(); ++iter)
+	{
+		Bullet *go = *iter;
+		if (!go->active)
+		{
+			go->active = true;
+			return go;
+		}
+	}
+	Bullet *newBullet = new Bullet();
+	Projectile.push_back(newBullet);
+	return newBullet;
+}
+void Avatar::BulletUpdate(double dt)
+{
+	for (int i = 0; i < Projectile.size(); ++i)
+	{
+		Projectile[i]->Update(dt);
+	}
+}
