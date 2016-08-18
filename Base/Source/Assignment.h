@@ -16,7 +16,7 @@
 #include "MapGenerator.h"
 #include "FiniteStatemachine.h"
 #include "Gate.h"
-
+#include "SharedData.h"
 
 class Assignment : public Scene
 {

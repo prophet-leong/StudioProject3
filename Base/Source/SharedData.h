@@ -28,6 +28,17 @@ enum PAGEMODE{
 	NUM_PAGES
 };
 
+enum DOOR
+{
+	NONE,
+	CENTER,
+	UP,
+	DOWN, 
+	LEFT,
+	RIGHT,
+
+	NUM_DOORS,
+};
 
 class SharedData{
 
@@ -41,6 +52,8 @@ public:
 
 	bool SD_ChangeScene;
 	bool SD_QuitGame;
+
+	DOOR SD_CurrDoor;
 
 	unsigned SD_health;
 

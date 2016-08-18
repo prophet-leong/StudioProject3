@@ -131,14 +131,18 @@ void Assignment::Init()
 	currHero = new Hero(512, 400, "HERO", heroTexture , 4);
 	currHero->health = 3;
 	m_avatarList.push_back(currHero);
+	
+	SharedData::GetInstance()->SD_CurrDoor = CENTER;
 
 	MapRandomizer = new Generator();
 	MapRandomizer->GenerateStructure();
+	MapRandomizer->Read(&tilemap);
+	MapRandomizer->ConnectRooms();
 
 	//gates
 	for (int i = 0; i < 4; ++i)
 	{
-		Gate * newGate = new Gate(0,0,"GEO_GATE",GEO_COIN,MapRandomizer);
+		Gate * newGate = new Gate(0, 0, "GEO_GATE", GEO_COIN, MapRandomizer);
 		Gates.push_back(newGate);
 	}
 
@@ -222,10 +226,6 @@ void Assignment::ReadLevel()
 		{
 			switch (tilemap.map[i][k])
 			{
-			case 0:
-			{
-				break;
-			}
 			case 1:
 			{
 				Tile *newTile = (Tile*)FetchGO(m_goList);
@@ -239,14 +239,19 @@ void Assignment::ReadLevel()
 				enemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				break;
 			}*/
-
+			
 			//Up door
 			case 3:
 			{
 				//if there is a room next door, create door
+				if (SharedData::GetInstance()->SD_CurrDoor == DOWN)
+				{
+					currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() - tilemap.GetTileSize());
+					SharedData::GetInstance()->SD_CurrDoor = NONE;
+				}
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0,1));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (MapRandomizer->GetCurrentRoom()->up != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
 
 				break;
@@ -255,10 +260,15 @@ void Assignment::ReadLevel()
 			//Right door
 			case 4:
 			{
+				if (SharedData::GetInstance()->SD_CurrDoor == LEFT)
+				{
+					currHero->SetPos(k*tilemap.GetTileSize() - tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					SharedData::GetInstance()->SD_CurrDoor = NONE;
+				}
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1,0 ));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 
-				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (MapRandomizer->GetCurrentRoom()->right != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
 				
 				break;
@@ -267,10 +277,15 @@ void Assignment::ReadLevel()
 			//Down door
 			case 5:
 			{
+				if (SharedData::GetInstance()->SD_CurrDoor == UP)
+				{
+					currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() + tilemap.GetTileSize());
+					SharedData::GetInstance()->SD_CurrDoor = NONE;
+				}
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, -1));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 
-				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (MapRandomizer->GetCurrentRoom()->down != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
 				break;
 			}
@@ -278,10 +293,15 @@ void Assignment::ReadLevel()
 			//Left Door
 			case 6:
 			{
+				if (SharedData::GetInstance()->SD_CurrDoor == RIGHT)
+				{
+					currHero->SetPos(k*tilemap.GetTileSize() + tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					SharedData::GetInstance()->SD_CurrDoor = NONE;
+				}
 				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(-1, 0));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 
-				if (Gates[tilemap.map[i][k] - 3]->Check(Gates[tilemap.map[i][k] - 3]->GetLocation()))
+				if (MapRandomizer->GetCurrentRoom()->left != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
 				break;
 			}
@@ -348,7 +368,7 @@ void Assignment::Update(double dt)
 		{
 			ClearLevel();
 			ReadLevel();
-			currHero->Reset(&tilemap);
+			//currHero->Reset(&tilemap);
 			goToNextLevel = false;
 		}
 
@@ -358,6 +378,7 @@ void Assignment::Update(double dt)
 
 void Assignment::UpdateAllObjects()
 {
+	//hero enemy enemy
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
 	{
 		Avatar *go = (Avatar*)*iter;
@@ -734,6 +755,10 @@ void Assignment::ClearLevel()
 	{
 		Gate *go = (Gate *)*iter;
 		go->active = false;
+		go->up = false;
+		go->down = false;
+		go->left = false;
+		go->right = false;
 		go->meshName = "";
 		go->meshTexture = "";
 	}

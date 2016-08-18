@@ -26,6 +26,9 @@ public:
 	void Read(TileMap * tilemap);
 	bool Check(Vector2 AddtoNext);
 	void GoToNextLevel(Vector2 AddToCurrent);
+	void ConnectRooms();
+
+	Node* GetCurrentRoom();
 
 	const unsigned int MaxRooms = LEVELS_END;
 	unsigned int CurRooms;
@@ -39,6 +42,7 @@ private:
 
 	vector<Node*>Rooms;
 	Vector2 playerRoomPosition;
+	Vector2 up, down, left, right;
 
 };
 
