@@ -345,11 +345,6 @@ void Assignment::Update(double dt)
 
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 10)
 	{
-		if (Application::IsKeyPressed('A'))
-		{
-			cout << 'a';
-			ssss << "a";
-		}
 	}
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{

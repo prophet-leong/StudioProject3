@@ -317,6 +317,32 @@ extern "C" {
 #define GLFW_KEY_BACKSLASH          92  /* \ */
 #define GLFW_KEY_RIGHT_BRACKET      93  /* ] */
 #define GLFW_KEY_GRAVE_ACCENT       96  /* ` */
+#define GLFW_KEY_a					97
+#define GLFW_KEY_b					98
+#define GLFW_KEY_c					99
+#define GLFW_KEY_d					100
+#define GLFW_KEY_e					101
+#define GLFW_KEY_f					102
+#define GLFW_KEY_g					103
+#define GLFW_KEY_h					104
+#define GLFW_KEY_i					105
+#define GLFW_KEY_j					106
+#define GLFW_KEY_k					107
+#define GLFW_KEY_l					108
+#define GLFW_KEY_m					109
+#define GLFW_KEY_n					110
+#define GLFW_KEY_o					111
+#define GLFW_KEY_p					112
+#define GLFW_KEY_q					113
+#define GLFW_KEY_r					114
+#define GLFW_KEY_s					115
+#define GLFW_KEY_t					116
+#define GLFW_KEY_u					117
+#define GLFW_KEY_v					118
+#define GLFW_KEY_w					119
+#define GLFW_KEY_x					120
+#define GLFW_KEY_y					121
+#define GLFW_KEY_z					122
 #define GLFW_KEY_WORLD_1            161 /* non-US #1 */
 #define GLFW_KEY_WORLD_2            162 /* non-US #2 */
 
