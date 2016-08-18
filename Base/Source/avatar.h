@@ -34,7 +34,7 @@ public:
 	bool moveUp, moveDown, moveLeft, moveRight;
 	int health;
 	//bullet
-	virtual Bullet* BulletCollision(GameObject* other);
+	virtual Bullet* BulletCollision(GameObject* other, TileMap* tilemap);
 	virtual Bullet*FetchGO();
 	virtual void BulletUpdate(double dt);
 	//vector to hold the bullets

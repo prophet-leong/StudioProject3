@@ -22,8 +22,8 @@ public:
 	void Update(double dt);
 	int GetDamage();
 	void SetUnactive();
-	bool CheckCollision(GameObject* go);
-	void CollisionResponse();
+	virtual bool CheckCollision(GameObject* other,TileMap*tilemap);
+	virtual void CollisionResponse(GameObject* other, TileMap*tilemap);
 private:
 	Vector2 defaultPosition;
 	BULLET_ELEMENT element;

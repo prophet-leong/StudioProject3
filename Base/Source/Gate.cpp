@@ -47,7 +47,7 @@ void Gate::SetLocation(Vector2 newLocation)
 
 }
 
-bool Gate::CheckCollision(Avatar* theHero, TileMap* tilemap)
+bool Gate::CheckCollision(GameObject* theHero, TileMap* tilemap)
 {
 	if (theHero->meshName != "HERO")
 		return false;
@@ -55,7 +55,7 @@ bool Gate::CheckCollision(Avatar* theHero, TileMap* tilemap)
 	return (GetPosition() - theHero->GetPosition()).LengthSquare()< tilemap->GetTileSize() * tilemap->GetTileSize();
 }
 
-void Gate::CollisionResponse()
+void Gate::CollisionResponse(GameObject* theHero, TileMap* tilemap)
 {
 	generator->GoToNextLevel(nextLocation);
 	if (up)

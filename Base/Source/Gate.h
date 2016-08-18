@@ -12,8 +12,8 @@ public:
 	Gate(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, Generator * generator);
 	virtual ~Gate();
 
-	virtual bool CheckCollision(Avatar* theHero, TileMap* tilemap);
-	virtual void CollisionResponse();
+	virtual bool CheckCollision(GameObject* theHero, TileMap* tilemap);
+	virtual void CollisionResponse(GameObject* theHero, TileMap* tilemap);
 
 	Vector2 GetLocation();
 	void SetLocation(Vector2 newLocation);

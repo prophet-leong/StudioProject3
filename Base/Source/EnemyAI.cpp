@@ -1,7 +1,12 @@
 #include "EnemyAI.h"
 
-EnemyAI::EnemyAI(int x, int y, string meshName, GEOMETRY_TYPE tileOfTile[], int numberOfTextures)
+EnemyAI::EnemyAI(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[], int numberOfTextures)
+	:Avatar(x,y,meshName,typeOfTile[0])
 {
+	for (int i = 0; i < numberOfTextures; ++i)
+	{
+		this->texture[i] = typeOfTile[i];
+	}
 }
 
 EnemyAI::~EnemyAI()
@@ -101,7 +106,6 @@ void EnemyAI::UpdataTimer(double dt)
 	}
 }
 
-
 void EnemyAI::init()
 {
 	switch (type)
@@ -118,6 +122,7 @@ void EnemyAI::init()
 	
 
 }
+
 void EnemyAI::Update(double dt)
 {
 	UpdataTimer(dt);
@@ -129,6 +134,15 @@ void EnemyAI::Update(double dt)
 	}
 }
 
+bool EnemyAI::CheckCollision(GameObject* other, TileMap *tilemap)
+{
+	return false;
+}
+
+void EnemyAI::CollisionResponse(GameObject* other, TileMap *tilemap)
+{
+
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 // SET

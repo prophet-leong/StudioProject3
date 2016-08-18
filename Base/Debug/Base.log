@@ -1,35 +1,18 @@
-﻿Build started 8/18/2016 1:08:55 PM.
-     1>Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" on node 2 (Build target(s)).
+﻿Build started 18/8/2016 5:08:08 PM.
+     1>Project "C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Base\Base.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\508\Desktop\Sp3 Solution folder\/Common/Source" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glew/include" /I"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Application.cpp Source\Assignment.cpp Source\Camera.cpp Source\Camera2.cpp Source\Camera3.cpp Source\Strategy_Kill.cpp Source\main.cpp source\FiniteStateMachine.cpp
-         FiniteStateMachine.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\finitestatemachine.cpp(281): warning C4390: ';' : empty controlled statement found; is this the intent?
-         main.cpp
-         Strategy_Kill.cpp
-         Camera3.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\camera3.cpp(386): warning C4244: '+=' : conversion from 'const double' to 'float', possible loss of data
-         Camera2.cpp
-         Camera.cpp
-         Assignment.cpp
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(170): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(173): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(176): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(179): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(182): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(185): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(188): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(191): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(194): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(197): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(203): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(206): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(209): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(212): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>c:\users\508\desktop\sp3 solution folder\base\source\assignment.cpp(668): warning C4018: '<' : signed/unsigned mismatch
-         Application.cpp
-         Generating Code...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/Common/Source" /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glew/include" /I"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glfw/include" /ZI /nologo /W3 /WX- /Od /Oy- /D _VARIADIC_MAX=10 /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\MapGenerator.cpp
+         MapGenerator.cpp
+     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\mapgenerator.cpp(21): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\mapgenerator.cpp(61): warning C4715: 'Generator::RandomDirection' : not all control paths return a value
+     1>c:\users\tecklee\documents\visual studio 2013\projects\gamedev\dm2231_framework_studio_project_3\base\source\mapgenerator.cpp(190): warning C4715: 'Generator::GetCurrentRoom' : not all control paths return a value
        Link:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\Debug" /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\/glfw/lib-msvc100" /LIBPATH:"C:\Users\508\Desktop\Sp3 Solution folder\/glew/lib" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.lib" /MACHINE:X86 Debug\Application.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug" /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glfw/lib-msvc100" /LIBPATH:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\/glew/lib" Common.lib winmm.lib opengl32.lib glu32.lib glew32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.lib" /MACHINE:X86 Debug\AI_State.obj
+         Debug\AI_State_Attack.obj
+         Debug\AI_State_Chase.obj
+         Debug\AI_State_Idle.obj
+         Debug\AI_State_Partol.obj
+         Debug\Application.obj
          Debug\Avatar.obj
          Debug\Bag.obj
          Debug\Bullet.obj
@@ -37,7 +20,7 @@
          Debug\Camera2.obj
          Debug\Camera3.obj
          Debug\Collideables.obj
-         Debug\Enemy.obj
+         Debug\EnemyAI.obj
          Debug\FiniteStateMachine.obj
          Debug\GameObject.obj
          Debug\Gate.obj
@@ -50,10 +33,12 @@
          Debug\Mesh.obj
          Debug\MeshBuilder.obj
          Debug\Assignment.obj
+         Debug\PoisonBlock.obj
          Debug\PowerUp.obj
          Debug\PowerUp_Attack.obj
          Debug\PowerUp_Shield.obj
          Debug\shader.obj
+         Debug\SpikeTrap.obj
          Debug\Strategy.obj
          Debug\Strategy_Escape.obj
          Debug\Strategy_Kill.obj
@@ -61,11 +46,11 @@
          Debug\TileMap.obj
          Debug\Traps.obj
          Debug\Utility.obj
-     1>Application.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+     1>AI_State.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
      1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-         Base.vcxproj -> C:\Users\508\Desktop\Sp3 Solution folder\Debug\Base.exe
-     1>Done Building Project "C:\Users\508\Desktop\Sp3 Solution folder\Base\Base.vcxproj" (Build target(s)).
+         Base.vcxproj -> C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Debug\Base.exe
+     1>Done Building Project "C:\Users\tecklee\Documents\Visual Studio 2013\Projects\GameDev\DM2231_Framework_Studio_Project_3\Base\Base.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:05.61
+Time Elapsed 00:00:00.93

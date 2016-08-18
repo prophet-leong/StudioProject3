@@ -14,15 +14,16 @@ C_SpikeTrap::~C_SpikeTrap()
 {
 
 }
-bool C_SpikeTrap::CheckCollision(Avatar* other, TileMap *tilemap)
+bool C_SpikeTrap::CheckCollision(GameObject* other, TileMap *tilemap)
 {
 	return (GetPosition() - other->GetPosition()).LengthSquare() <= tilemap->GetTileSize() * tilemap->GetTileSize();
 }
-void C_SpikeTrap::CollisionResponse(Avatar* other, TileMap *tilemap)
+void C_SpikeTrap::CollisionResponse(GameObject* other, TileMap *tilemap)
 {
-	if (other->meshName == "HERO")
+	Avatar* Other = (Avatar*)other;
+	if (Other->meshName == "HERO")
 	{
-		other->health -= 1;
+		Other->health -= 1;
 	}
 }
 bool C_SpikeTrap::checkdeath()
