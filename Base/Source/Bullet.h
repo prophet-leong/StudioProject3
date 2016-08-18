@@ -21,6 +21,7 @@ public:
 	void set(Vector2 position, Vector2 direction, int damage, int speed = 10, GEOMETRY_TYPE type = GEO_SALT, BULLET_ELEMENT = BULLET_ELEMENT::NO_ELEMENT);
 	void Update(double dt);
 	int GetDamage();
+	BULLET_ELEMENT GetElementType();
 	void SetUnactive();
 	virtual bool CheckCollision(GameObject* other,TileMap*tilemap);
 	virtual void CollisionResponse(GameObject* other, TileMap*tilemap);

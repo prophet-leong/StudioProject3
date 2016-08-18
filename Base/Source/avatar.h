@@ -13,7 +13,8 @@ public:
 	virtual ~Avatar();
 
 	//functions
-	//virtual void update(double dt) = 0;
+	virtual void Update(TileMap* tilemap, double dt);
+	
 	virtual bool CheckCollision(GameObject* other, TileMap* tilemap);
 	virtual void CollisionContainer(GameObject* other, TileMap* tilemap);//avatar to avatar
 	virtual void CollisionContainer(Avatar * other){};//this bullet check with avatar
@@ -41,7 +42,8 @@ public:
 	vector<Bullet *>Projectile;
 	//bullet element reaction
 	virtual void SetElementState(BULLET_ELEMENT element);
-	virtual void ElementStateUpdate();
+	virtual void ElementStateUpdate(double dt);
+	virtual BULLET_ELEMENT GetElement();
 	//for different powerups
 	Vector2 direction;
 protected:

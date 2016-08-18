@@ -214,6 +214,9 @@ void Assignment::Init()
 	meshList[GEO_SALT] = MeshBuilder::Generate2DMesh("treeSalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_SALT]->textureID = LoadTGA("Image//tree.tga");
 
+	meshList[GEO_FIRE] = MeshBuilder::Generate2DMesh("treeSalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRE]->textureID = LoadTGA("Image//Fire.tga");
+
 	meshList[GEO_FIRESALT] = MeshBuilder::Generate2DMesh("coinsalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_FIRESALT]->textureID = LoadTGA("Image//coin.tga");
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
@@ -375,7 +378,10 @@ void Assignment::Update(double dt)
 		if (Application::IsKeyPressed('F'))
 			currHero->SkillAttack();
 
-		currHero->Update(&tilemap, dt);
+		for (int i = 0; i < m_avatarList.size(); ++i)
+		{
+			m_avatarList[i]->Update(&tilemap, dt);
+		}
 
 		tilemap.Update();
 	
@@ -779,15 +785,10 @@ void Assignment::LoadLevel()
 		if (!go->active)
 			continue;
 
-		if (go->meshName == "HERO")
-		{
-			float rotation = Math::RadianToDegree(atan2(go->direction.y, go->direction.x));
-			Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, rotation,false, currHero->GetAnimationInvert());
-		}
-		else if (go->meshName == "GEO_ENEMY")
-		{
-			Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
-		}
+		float rotation = Math::RadianToDegree(atan2(go->direction.y, go->direction.x));
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, rotation,false, currHero->GetAnimationInvert());
+		if(go->GetElement() == FIRE)
+			Render2DMesh(meshList[GEO_FIRE], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, rotation, false, currHero->GetAnimationInvert());
 	}
 
 	

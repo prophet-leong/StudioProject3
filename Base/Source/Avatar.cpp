@@ -34,6 +34,10 @@ Avatar::~Avatar()
 }
 
 /////////////////FUNCTIONS///////////////////////
+void Avatar::Update(TileMap* tilemap, double dt)
+{
+	ElementStateUpdate(dt);
+}
 
 bool Avatar::BasicCheckCollision(GameObject* other,TileMap* tilemap)
 {
@@ -155,16 +159,21 @@ void Avatar::BulletUpdate(double dt)
 		Projectile[i]->Update(dt);
 	}
 }
+BULLET_ELEMENT Avatar::GetElement()
+{
+	return element;
+}
 void Avatar::SetElementState(BULLET_ELEMENT element)
 {
 	this->element = element;
 	element_Status = 1.0f;
 	tick = 2;
 }
-void Avatar::ElementStateUpdate()
+void Avatar::ElementStateUpdate(double dt)
 {
 	if (element != BULLET_ELEMENT::NO_ELEMENT)
 	{
+		element_Status -= dt;
 		if (element_Status <= 0)
 		{
 			switch (element)
@@ -175,6 +184,7 @@ void Avatar::ElementStateUpdate()
 					element = BULLET_ELEMENT::NO_ELEMENT;
 				else
 				{
+					element_Status = 1.0f;
 					--tick;
 					--health;
 				}

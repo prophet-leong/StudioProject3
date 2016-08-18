@@ -29,7 +29,7 @@ void Bullet::set(Vector2 position, Vector2 direction, int damage, int speed, GEO
 }
 bool Bullet::CheckCollision(GameObject* other, TileMap*tilemap)
 {
-	if ((Position - other->GetPosition()).LengthSquare() <= size*size)
+	if ((Position - other->GetPosition()).LengthSquare() <= size*31)
 	{
 		return true;
 	}
@@ -58,7 +58,10 @@ int Bullet::GetDamage()
 {
 	return damage;
 }
-
+BULLET_ELEMENT Bullet::GetElementType()
+{
+	return element;
+}
 Bullet::~Bullet()
 {
 }

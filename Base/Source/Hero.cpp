@@ -143,7 +143,7 @@ void Hero::Reset(TileMap* tilemap)
 	SetAnimationInvert(false); 
 	scale.y = 1.f;
 	tilemap->offSet_x = 0;
-	tilemap->fineOffSet_y = 0; 
+	tilemap->fineOffSet_y = 0;
 }
 
 //Full-Reset
@@ -280,6 +280,7 @@ bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
 		{
 			Avatar* enemy = (Avatar*)other;
 			enemy->health -= bullet->GetDamage();
+			enemy->SetElementState(bullet->GetElementType());
 			//temp isdead
 			if (enemy->health <= 0)
 			{
