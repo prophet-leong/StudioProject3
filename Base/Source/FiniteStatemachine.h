@@ -96,6 +96,16 @@ public:
 	state * change_state(int choice);
 };
 
+class state_enter_seed_screen : public state
+{
+public:
+	state_enter_seed_screen();
+	~state_enter_seed_screen(){};
+	state * change_state(int choice);
+	static bool seedentered(bool enter);
+
+};
+
 class the_state_machine
 {
 private:

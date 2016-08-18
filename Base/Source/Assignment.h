@@ -16,6 +16,7 @@
 #include "MapGenerator.h"
 #include "FiniteStatemachine.h"
 #include "Gate.h"
+#include "Traps.h"
 #include "SharedData.h"
 
 class Assignment : public Scene
@@ -145,6 +146,7 @@ private:
 	vector<Gate*>Gates;
 	vector<Avatar*> m_avatarList;
 	vector<GameObject*> m_goList;
+	vector<C_Traps*>m_gotrapslist;
 
 	//Map RNG
 	Generator* MapRandomizer;
@@ -158,6 +160,7 @@ private:
 	void render_options_screen();
 	void render_pause_menu();
 	void render_in_game_option_screen();
+	void render_enter_seed_screen();
 	
 };
 

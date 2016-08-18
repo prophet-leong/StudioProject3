@@ -166,43 +166,49 @@ void Assignment::Init()
 	meshList[GEO_CONE]->material.kSpecular.Set(0.f, 0.f, 0.f);
 
 	// Load the ground mesh and texture
-	meshList[GEO_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_BACKGROUND", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
+	meshList[GEO_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
 	meshList[GEO_BACKGROUND] ->textureID = LoadTGA("Image//mariobackground.tga");
 
-	meshList[GEO_MARIO] = MeshBuilder::Generate2DMesh("Hero_Pic", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_MARIO] = MeshBuilder::Generate2DMesh("Hero_Pic", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_MARIO]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga");
 
-	meshList[GEO_COIN] = MeshBuilder::Generate2DMesh("coin", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_COIN] = MeshBuilder::Generate2DMesh("coin", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_COIN]->textureID = LoadTGA("Image//coin.tga");
 
-	meshList[GEO_TILEGROUND] = MeshBuilder::Generate2DMesh("GEO_TILEGROUND", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_TILEGROUND] = MeshBuilder::Generate2DMesh("GEO_TILEGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEGROUND]->textureID = LoadTGA("Image//mariotile.tga");
 
-	meshList[GEO_TILETREE] = MeshBuilder::Generate2DMesh("GEO_TILETREE", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_TILETREE] = MeshBuilder::Generate2DMesh("GEO_TILETREE", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILETREE]->textureID = LoadTGA("Image//tree.tga");
 
-	meshList[GEO_TILESTRUCTURE] = MeshBuilder::Generate2DMesh("GEO_TILESTRUCTURE", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_TILESTRUCTURE] = MeshBuilder::Generate2DMesh("GEO_TILESTRUCTURE", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILESTRUCTURE]->textureID = LoadTGA("Image//step4b.tga");
 
-	meshList[GEO_TILEHERO_FRAME0] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME0", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_TILEHERO_FRAME0] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME0", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME0]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga");
 
-	meshList[GEO_TILEHERO_FRAME1] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME1", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_TILEHERO_FRAME1] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME1", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME1]->textureID = LoadTGA("Image//tile2_hero_frame_1.tga");
 
-	meshList[GEO_TILEHERO_FRAME2] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME2", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_TILEHERO_FRAME2] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME2", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME2]->textureID = LoadTGA("Image//tile2_hero_frame_2.tga");
 
-	meshList[GEO_TILEHERO_FRAME3] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME3", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_TILEHERO_FRAME3] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME3", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME3]->textureID = LoadTGA("Image//tile2_hero_frame_3.tga");
 
-	meshList[GEO_PLACEHOLDER] = MeshBuilder::GenerateQuad("Placeholder", Color(1, 1, 1), 50000);
-	meshList[GEO_PLACEHOLDER]->textureID = LoadTGA("Image//Placeholder//black.tga");
+	meshList[GEO_PLACEHOLDER] = MeshBuilder::GenerateQuad("Placeholder", Color(1.f, 1.f, 1.f), 10.f);
+	meshList[GEO_PLACEHOLDER]->textureID = LoadTGA("Image//Placeholder//placeholder.tga");
 
-	meshList[GEO_SALT] = MeshBuilder::Generate2DMesh("treeSalt", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_SPIKE_TRAP] = MeshBuilder::Generate2DMesh("GEO_SPIKED_TRAP", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_SPIKE_TRAP]->textureID = LoadTGA("Image//Traps//Spike_Trap.tga");
+
+	meshList[GEO_POISONED_BLOCK] = MeshBuilder::Generate2DMesh("spiked block", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_POISONED_BLOCK]->textureID = LoadTGA("Image//Traps//Spike_Block.tga");
+
+	meshList[GEO_SALT] = MeshBuilder::Generate2DMesh("treeSalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_SALT]->textureID = LoadTGA("Image//tree.tga");
 
-	meshList[GEO_FIRESALT] = MeshBuilder::Generate2DMesh("coinsalt", Color(1, 1, 1), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRESALT] = MeshBuilder::Generate2DMesh("coinsalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_FIRESALT]->textureID = LoadTGA("Image//coin.tga");
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
@@ -212,6 +218,7 @@ void Assignment::Init()
 	projectionStack.LoadMatrix(perspective);
 
 	bLightEnabled = true;
+	state_enter_seed_screen::seedentered(false);
 }
 
 void Assignment::ReadLevel()
@@ -303,6 +310,14 @@ void Assignment::ReadLevel()
 
 				if (MapRandomizer->GetCurrentRoom()->left != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
+				break;
+			}
+			case 15:
+			{
+				/*Tile *newTile = (Tile*)FetchGO(m_goList);
+				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);*/
+				C_Traps *newTrap = (C_Traps*)FetchGO(m_gotrapslist);
+				newTrap->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP);
 				break;
 			}
 
@@ -677,6 +692,7 @@ void Assignment::Render()
 	render_options_screen();
 	render_pause_menu();
 	render_in_game_option_screen();
+	render_enter_seed_screen();
 	
 	std::ostringstream sss;
 	sss.precision(5);
@@ -736,6 +752,15 @@ void Assignment::LoadLevel()
 
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
+	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
+	{
+		C_Traps* go = (C_Traps*)*iter;
+		if (!go->active)
+		{
+			continue;
+		}
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
+	}
 }
 
 void Assignment::ClearLevel()
@@ -765,6 +790,15 @@ void Assignment::ClearLevel()
 		go->right = false; 
 	}
 
+	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
+	{
+		C_Traps *go = (C_Traps *)*iter;
+		go->active = false;
+		
+		go->meshName = "";
+		go->meshTexture = "";
+	}
+
 }
 
 /*Individual functions to render what when the state happens*/
@@ -774,21 +808,22 @@ void Assignment::render_main_menu()
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 1)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
+		modelStack.Translate(0, 0.f, -2);
+		modelStack.Scale(1.5f, 1.f, 1.f);
 		RenderMesh(meshList[GEO_PLACEHOLDER], false);
 		modelStack.PopMatrix();
 		sss.str("");
 		sss << "Main Menu Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 20.f, 200.f);
 		sss.str("");
 		sss << "Press Enter to start da level";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 180);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 20.f, 180);
 		sss.str("");
 		sss << "Press 1 to go to achievements";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 160);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 20.f, 160);
 		sss.str("");
 		sss << "Press 2 to go to options";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 200, 140);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 20.f, 140);
 
 	}
 }
@@ -798,12 +833,13 @@ void Assignment::render_achievement_screen()
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 4) //Achievenemts
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
+		modelStack.Translate(20.f, 20.f, -2);
+		modelStack.Scale(1.5f, 1.f, 1.f);
 		RenderMesh(meshList[GEO_PLACEHOLDER], false);
 		modelStack.PopMatrix();
 		sss.str("");
 		sss << "Temp Achievement Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200.f);
 		sss.str("");
 		sss << "Press Backspace to main menu";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
@@ -817,12 +853,13 @@ void Assignment::render_options_screen()
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 5)
 	{
 		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
+		modelStack.Translate(20.f, 20.f, -2);
+		modelStack.Scale(1.5f, 1.f, 1.f);
 		RenderMesh(meshList[GEO_PLACEHOLDER], false);
 		modelStack.PopMatrix();
 		sss.str("");
 		sss << "Temp Options Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200.f);
 		sss.str("");
 		sss << "Press Backspace to main menu";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
@@ -835,12 +872,13 @@ void Assignment::render_pause_menu()
 	{
 		stringstream sss;
 		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
+		modelStack.Translate(20.f, 20.f, -2);
+		modelStack.Scale(1.5f, 1.f, 1.f);
 		RenderMesh(meshList[GEO_PLACEHOLDER], false);
 		modelStack.PopMatrix();
 		sss.str("");
 		sss << "Temp Pause Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200.f);
 		sss.str("");
 		sss << "Press Enter to resume da level";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
@@ -853,15 +891,36 @@ void Assignment::render_in_game_option_screen()
 	{
 		stringstream sss;
 		modelStack.PushMatrix();
-		modelStack.Translate(200, 200, -2);
+		modelStack.Translate(20.f, 20.f, -2);
+		modelStack.Scale(1.5f, 1.f, 1.f);
 		RenderMesh(meshList[GEO_PLACEHOLDER], false);
 		modelStack.PopMatrix();
 
 		sss.str("");
 		sss << "Temp in-game Options Screen LOL";
-		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200);
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200.f);
 		sss.str("");
 		sss << "Press Backspace to return";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
 	}
+}
+void Assignment::render_enter_seed_screen()
+{
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 10)
+	{
+		stringstream sss;
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 0, -2);
+		modelStack.Scale(1.5f, 1.f, 1.f);
+		RenderMesh(meshList[GEO_PLACEHOLDER], false);
+		modelStack.PopMatrix();
+
+		sss.str("");
+		sss << "Temp seed Screen LOL";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 200.f);
+		sss.str("");
+		sss << "Press Enter to play";
+		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+	}
+	
 }
