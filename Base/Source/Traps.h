@@ -22,33 +22,8 @@ public:
 	C_Traps(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken);
 	virtual ~C_Traps();
 	virtual bool checkdeath(){ return false; };
+	virtual void collisioncontainer(){};
 };
 
-class C_SpikeTrap : public C_Traps
-{
-private:
-
-public:
-	C_SpikeTrap();
-	C_SpikeTrap(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken, Trap_type = Trap_type::SPIKE_TRAP);
-	virtual ~C_SpikeTrap();
-
-	bool CheckCollision(Avatar* other, TileMap *tilemap);
-	void CollisionResponse(Avatar* other, TileMap *tilemap);
-	virtual bool checkdeath();
-};
-
-class C_PoisonedBlock : public C_Traps
-{
-public:
-	C_PoisonedBlock();
-	C_PoisonedBlock(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken, Trap_type traptype);
-	~C_PoisonedBlock();
-
-	bool CheckCollision(Avatar* other, TileMap *tilemap);
-	void CollisionResponse(Avatar* other, TileMap *tilemap);
-	virtual bool checkdeath();
-
-};
 
 #endif

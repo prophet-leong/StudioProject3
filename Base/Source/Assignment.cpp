@@ -312,13 +312,12 @@ void Assignment::ReadLevel()
 					Gates[tilemap.map[i][k] - 3]->active = true;
 				break;
 			}
-			case 15:
-			{ 
+			case 15: 
+			{
 				C_SpikeTrap *newTrap = (C_SpikeTrap*)FetchGO(m_gotrapslist);
 				newTrap->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP);
 				break;
 			}
-
 
 			//dumb enemy
 			case 10:
@@ -449,6 +448,16 @@ void Assignment::UpdateAllObjects()
 			go->CollisionContainer(other, &tilemap);//hero to enemy collision
 			other->CollisionContainer(go);//bullet
 			other->CollisionContainer(go, &tilemap);//enemy to hero collision
+		}
+		for (vector<C_Traps*>::iterator iter2 = m_gotrapslist.begin(); iter2 != m_gotrapslist.end(); iter2++)
+		{
+			C_SpikeTrap *other = (C_SpikeTrap *)*iter2;
+			if (!other->active)
+				continue;
+			if (other->CheckCollision(go, &tilemap))
+			{
+				other->CollisionResponse(go, &tilemap);
+			}
 		}
 	}
 }

@@ -78,6 +78,12 @@
     <ClCompile Include="Source\Traps.cpp">
       <Filter>Nathan</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PoisonBlock.cpp">
+      <Filter>Nathan</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpikeTrap.cpp">
+      <Filter>Nathan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
@@ -162,6 +168,12 @@
       <Filter>Shuyu</Filter>
     </ClInclude>
     <ClInclude Include="Source\Traps.h">
+      <Filter>Nathan</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PoisonBlock.h">
+      <Filter>Nathan</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpikeTrap.h">
       <Filter>Nathan</Filter>
     </ClInclude>
   </ItemGroup>

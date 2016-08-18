@@ -37,10 +37,12 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Assignment.cpp" />
+    <ClCompile Include="Source\PoisonBlock.cpp" />
     <ClCompile Include="Source\PowerUp.cpp" />
     <ClCompile Include="Source\PowerUp_Attack.cpp" />
     <ClCompile Include="Source\PowerUp_Shield.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\SpikeTrap.cpp" />
     <ClCompile Include="Source\Strategy.cpp" />
     <ClCompile Include="Source\Strategy_Escape.cpp" />
     <ClCompile Include="Source\Strategy_Kill.cpp" />
@@ -77,6 +79,7 @@
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
+    <ClInclude Include="Source\PoisonBlock.h" />
     <ClInclude Include="Source\PowerUp.h" />
     <ClInclude Include="Source\PowerUp_Attack.h" />
     <ClInclude Include="Source\PowerUp_Shield.h" />
@@ -84,6 +87,7 @@
     <ClInclude Include="Source\Assignment.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\SharedData.h" />
+    <ClInclude Include="Source\SpikeTrap.h" />
     <ClInclude Include="Source\Strategy.h" />
     <ClInclude Include="Source\Strategy_Escape.h" />
     <ClInclude Include="Source\Strategy_Kill.h" />
