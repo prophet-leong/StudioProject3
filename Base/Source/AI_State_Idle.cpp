@@ -13,7 +13,8 @@ AI_state_idle::~AI_state_idle()
 
 void AI_state_idle::Update(double dt)
 {
-	
+	cout << "void AI_state_idle::Update()" << endl;
+	// stay there do nothing
 }
 
 void AI_state_idle::SetDestination(const float x, const float y)
