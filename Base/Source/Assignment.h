@@ -160,6 +160,7 @@ private:
 	void render_pause_menu();
 	void render_in_game_option_screen();
 	void render_enter_seed_screen();
+	stringstream ssss;
 	
 };
 

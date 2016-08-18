@@ -225,6 +225,7 @@ void Assignment::Init()
 
 	bLightEnabled = true;
 	state_enter_seed_screen::seedentered(false);
+	ssss.str("");
 }
 
 void Assignment::ReadLevel()
@@ -322,6 +323,7 @@ void Assignment::ReadLevel()
 			{
 				GEOMETRY_TYPE heroTexture[] = { GEO_TILEHERO_FRAME0, GEO_TILEHERO_FRAME1, GEO_TILEHERO_FRAME2, GEO_TILEHERO_FRAME3 };
 				EnemyAI* newEnemy = new EnemyAI(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_ENEMY",heroTexture, 4);
+				newEnemy->health = 10;
 				m_avatarList.push_back(newEnemy); 
 				break;
 			}
@@ -347,6 +349,9 @@ void Assignment::Update(double dt)
 {
 	statemachine.FMSupdate();
 
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 10)
+	{
+	}
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{
 		// Update the hero
@@ -419,18 +424,22 @@ void Assignment::UpdateAllObjects()
 			GameObject *other = (GameObject *)*iter2;
 			if (!other->active)
 				continue;
-			go->CollisionContainer(other, &tilemap);
+			if (go->CheckCollision(other, &tilemap))
+				go->CollisionResponse(other, &tilemap);	
 		}
-
 		for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
 		{
 			Avatar *other = (Avatar *)*iter3;
 			if (!other->active)
 				continue;
-			go->CollisionContainer(other);//bullet
-			go->CollisionContainer(other, &tilemap);//hero to enemy collision
-			other->CollisionContainer(go);//bullet
-			other->CollisionContainer(go, &tilemap);//enemy to hero collision
+			if (go->CheckCollision(other, &tilemap))
+			{
+				go->CollisionResponse(other, &tilemap);
+			}
+			//go->CollisionContainer(other);//bullet
+			//go->CollisionContainer(other, &tilemap);//hero to enemy collision
+			//other->CollisionContainer(go);//bullet
+			//other->CollisionContainer(go, &tilemap);//enemy to hero collision
 		}
 		for (vector<C_Traps*>::iterator iter2 = m_gotrapslist.begin(); iter2 != m_gotrapslist.end(); iter2++)
 		{
@@ -844,7 +853,6 @@ void Assignment::render_main_menu()
 		sss.str("");
 		sss << "Press 2 to go to options";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 20.f, 140);
-
 	}
 }
 void Assignment::render_achievement_screen()
@@ -941,6 +949,9 @@ void Assignment::render_enter_seed_screen()
 		sss.str("");
 		sss << "Press Enter to play";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+		RenderTextOnScreen(meshList[GEO_TEXT], ssss.str(), Color(0, 1, 0), 30, 20.f, 260);
+
 	}
 	
 }

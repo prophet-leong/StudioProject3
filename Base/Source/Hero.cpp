@@ -26,21 +26,6 @@ Hero::~Hero()
 	delete inventory;
 }
  
-Bullet* Hero::BulletCollision(GameObject* other, TileMap* tilemap)
-{
-	for (int i = 0; i < Projectile.size(); ++i)
-	{
-		if (Projectile[i]->active)
-		{
-			if (Projectile[i]->CheckCollision(other,tilemap))
-			{
-				Projectile[i]->CollisionResponse(other, tilemap);
-				return Projectile[i];
-			}
-		}
-	}
-	return NULL;
-}
 //status::done
 void Hero::Update(TileMap* tilemap , double dt)
 {
@@ -73,6 +58,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 	
 	Constrain(tilemap);
 }
+
 Bullet* Hero::FetchGO()
 {
 	for (std::vector<Bullet*>::iterator iter = Projectile.begin(); iter != Projectile.end(); ++iter)
@@ -88,6 +74,7 @@ Bullet* Hero::FetchGO()
 	Projectile.push_back(newBullet);
 	return newBullet;
 }
+
 void Hero::NextPowerUp()
 {
 	if (currentPowerUp < inventory->powerUpList.size())
@@ -95,6 +82,7 @@ void Hero::NextPowerUp()
 	else
 		currentPowerUp = 0;
 }
+
 void Hero::AttackCooldown(double dt)
 {
 	if (allowAttack == false)
@@ -266,18 +254,47 @@ void Hero::HeroTakeDamage(int damage)
 		
 }
 
-
+Bullet* Hero::BulletCollision(GameObject* other, TileMap* tilemap)
+{
+	for (int i = 0; i < Projectile.size(); ++i)
+	{
+		if (Projectile[i]->active)
+		{
+			if (Projectile[i]->CheckCollision(other,tilemap))
+			{
+				Projectile[i]->CollisionResponse(other, tilemap);
+				return Projectile[i];
+			}
+		}
+	}
+	return NULL;
+}
 //virtual collision
-
 bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
-{ 
+{
+	Bullet* bullet = BulletCollision(other, tilemap);
+	if (bullet != NULL)
+	{
+ 		bullet->SetUnactive();
+		if (other->meshName == "GEO_ENEMY")
+		{
+			Avatar* enemy = (Avatar*)other;
+			enemy->health -= bullet->GetDamage();
+			//temp isdead
+			if (enemy->health <= 0)
+			{
+				enemy->active = false;
+			}
+			cout << enemy->health << endl;
+		}
+	}
 
-	return false;
+	return BasicCheckCollision(other,tilemap);
 }
 
 void Hero::CollisionResponse(GameObject* other, TileMap *tilemap)
 {
-
+	BasicCollisionResponse(other, tilemap);
 }
 
 

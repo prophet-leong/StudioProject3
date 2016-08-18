@@ -219,7 +219,7 @@ void the_state_machine::FMSupdate()
 {
 		if (the_current_state_of_state_machine->getcurrent_state() == 1)
 		{
-			if (Application::IsKeyPressed(VK_RETURN))
+			if (Application::IsKeyPressed('A'))
 			{
 				the_current_state_of_state_machine->change_state(10);
 			}

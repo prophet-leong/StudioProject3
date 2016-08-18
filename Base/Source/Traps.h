@@ -23,7 +23,7 @@ public:
 	virtual ~C_Traps();
 	virtual bool CheckCollision(GameObject* other, TileMap *tilemap) = 0;
 	virtual void CollisionResponse(GameObject* other, TileMap *tilemap) = 0;
-	virtual bool checkdeath(){ return false; }; 
+	virtual bool checkdeath(){ return false; };
 };
 
 
