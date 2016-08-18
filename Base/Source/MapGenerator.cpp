@@ -30,7 +30,17 @@ void Generator::GenerateStructure(/*string seed*/)
 
 		//check surrounding
 		if (!CheckRoom(newRoom))
-			GenerateLevel(MaxRooms, newRoom);
+		{
+			if (CurRooms + 1 == MaxRooms)
+			{
+				Node*endRoom = new Node(CurRooms, newRoom);
+				Rooms.push_back(endRoom);
+				CurRooms++;
+			}
+			else
+				GenerateLevel(MaxRooms, newRoom);
+		}
+		
 	}
 }
 
@@ -117,25 +127,34 @@ void Generator::Read(TileMap * tilemap)
 			switch (curr->contentType)
 			{
 		case LEVEL1:
-			tilemap->LoadMap("Image//MapDesign_1.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_1.csv", 1024, 800);
 			break;
 		case LEVEL2:
-			tilemap->LoadMap("Image//MapDesign_2.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_2.csv", 1024, 800);
 			break;
 		case LEVEL3:
-			tilemap->LoadMap("Image//MapDesign_3.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_3.csv", 1024, 800);
 			break;
 		case LEVEL4:
-			tilemap->LoadMap("Image//MapDesign_4.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_4.csv", 1024, 800);
 			break;
 		case LEVEL5:
-			tilemap->LoadMap("Image//MapDesign_5.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_5.csv", 1024, 800);
 			break;
 		case LEVEL6:
-			tilemap->LoadMap("Image//MapDesign_6.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_6.csv", 1024, 800);
 			break;
 		case LEVEL7:
-			tilemap->LoadMap("Image//MapDesign_7.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_7.csv", 1024, 800);
+			break;
+		case LEVEL8:
+			tilemap->LoadMap("Image//Maps//MapDesign_8.csv", 1024, 800);
+			break; 
+		case LEVEL9:
+			tilemap->LoadMap("Image//Maps//MapDesign_9.csv", 1024, 800);
+			break; 
+		case LEVEL10:
+			tilemap->LoadMap("Image//Maps//MapDesign_10.csv", 1024, 800);
 			break;
 			}
 		}

@@ -18,6 +18,9 @@ public:
 		LEVEL5,
 		LEVEL6,
 		LEVEL7,
+		LEVEL8,
+		LEVEL9,
+		LEVEL10,
 		LEVELS_END,
 	};
 	LEVELS level;
