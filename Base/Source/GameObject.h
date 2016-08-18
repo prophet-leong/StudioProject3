@@ -26,7 +26,6 @@ public:
 
 	//Mesh* mesh;
 	string meshName;
-	string meshTexture;
 	GEOMETRY_TYPE type;
 protected:
 	Vector2 Position;

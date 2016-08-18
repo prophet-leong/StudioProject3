@@ -41,10 +41,13 @@ enum GEOMETRY_TYPE
 	//bullet for hero
 	GEO_SALT,
 	GEO_FIRESALT,
-	NUM_GEOMETRY,
 
 	//Trap Section
 	GEO_SPIKE_TRAP,
+	GEO_POISONED_BLOCK,
+
+	NUM_GEOMETRY,
+
 
 
 };

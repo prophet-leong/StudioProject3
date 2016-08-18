@@ -18,8 +18,6 @@ GameObject::GameObject(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	, scale(1.f,1.f)
 	, meshName(meshName)
 {
-	//mesh = MeshBuilder::Generate2DMesh(meshName, Color(1, 1, 1), 0.0f, 0.0f, size * scale.x, size * scale.y);
-	//mesh->textureID = LoadTGA(meshTexture.c_str());
 	type = typeOfTile;
 }
 
@@ -51,8 +49,7 @@ void GameObject::SetPos(Vector2 newPos)
 
 void GameObject::SetTexture(GEOMETRY_TYPE newTexture)
 {
-	type = newTexture;
-	//mesh->textureID = LoadTGA(meshTexture.c_str());
+	type = newTexture; 
 }
 
 Vector2 GameObject::GetPosition()

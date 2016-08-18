@@ -20,10 +20,12 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	allowAttack = true;
 	direction.Set(1, 0);
 	currentPowerUp = 0;
+	inventory = new Bag();
 }
 
 Hero::~Hero()
 {
+	delete inventory;
 }
 
 void Hero::CollisionContainer(GameObject* other, TileMap* tilemap)
@@ -80,7 +82,6 @@ void Hero::Update(TileMap* tilemap , double dt)
 			}
 		}
 	}
-
 	AttackCooldown(dt);
 	BulletUpdate(dt);
 	moveLeft = moveRight = moveUp = moveDown = true;
@@ -108,6 +109,13 @@ Bullet* Hero::FetchGO()
 	Bullet *newBullet = new Bullet();
 	Projectile.push_back(newBullet);
 	return newBullet;
+}
+void Hero::NextPowerUp()
+{
+	if (currentPowerUp < inventory->powerUpList.size())
+		currentPowerUp++;
+	else
+		currentPowerUp = 0;
 }
 void Hero::AttackCooldown(double dt)
 {

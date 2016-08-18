@@ -13,6 +13,9 @@ public:
 	int contentType;
 
 	Vector2 RoomPosition;
+
+	Node *up, *down, *left, *right;
+
 };
 
 

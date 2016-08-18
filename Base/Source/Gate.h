@@ -3,6 +3,7 @@
 #include "Collideables.h"
 #include "Hero.h"
 #include "MapGenerator.h"
+#include "SharedData.h"
 
 class Gate : public Collideables
 {
@@ -17,8 +18,10 @@ public:
 	Vector2 GetLocation();
 	void SetLocation(Vector2 newLocation);
 	bool Check(Vector2 Check);
+	  
+	//public direction
+	bool up, down, left, right;
 private:
-	string direction;
 	Vector2 nextLocation;
 	Generator* generator;
 };

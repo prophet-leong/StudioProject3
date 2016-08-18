@@ -58,6 +58,11 @@ state_died::state_died() : state(9)
 
 }
 
+state_enter_seed_screen::state_enter_seed_screen() : state(10)
+{
+
+}
+
 //These Functions will handle the changing of states
 state * state_main_menu::change_state(int choice)
 {
@@ -81,6 +86,10 @@ state * state_main_menu::change_state(int choice)
 	else if (choice == 9) // to exit game
 	{
 		reinterpret_cast<state_died *>(this)->state_died::state_died();
+	}
+	else if (choice == 10)
+	{
+		reinterpret_cast<state_enter_seed_screen *>(this)->state_enter_seed_screen::state_enter_seed_screen();
 	}
 	return this;
 }
@@ -176,6 +185,24 @@ state * state_died::change_state(int choice)
 	return this;
 }
 
+state * state_enter_seed_screen::change_state(int choice)
+{
+	if (choice == 2)
+	{
+		reinterpret_cast<state_play *>(this)->state_play::state_play();
+	}
+	return this;
+}
+
+bool state_enter_seed_screen::seedentered(bool enter)
+{
+	if (enter == true)
+	{
+		return true;
+	}
+	else
+		return false;
+}
 
 
 // the actual state machine
@@ -194,7 +221,7 @@ void the_state_machine::FMSupdate()
 		{
 			if (Application::IsKeyPressed(VK_RETURN))
 			{
-				the_current_state_of_state_machine->change_state(2);
+				the_current_state_of_state_machine->change_state(10);
 			}
 			else if (Application::IsKeyPressed('1'))
 			{
@@ -204,6 +231,7 @@ void the_state_machine::FMSupdate()
 			{
 				the_current_state_of_state_machine->change_state(5);
 			}
+
 		}
 		else if (the_current_state_of_state_machine->getcurrent_state() == 2)
 		{
@@ -242,6 +270,15 @@ void the_state_machine::FMSupdate()
 			if (Application::IsKeyPressed(VK_BACK))
 			{
 				the_current_state_of_state_machine->change_state(6);
+			}
+		}
+		else if (the_current_state_of_state_machine->getcurrent_state() == 10)
+		{
+			if (Application::IsKeyPressed(VK_RETURN))
+			{
+				state_enter_seed_screen::seedentered(true);
+				if (state_enter_seed_screen::seedentered(true));
+				the_current_state_of_state_machine->change_state(2);
 			}
 		}
 }

@@ -30,6 +30,8 @@ public:
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
 	void HeroTakeDamage(int damage);
 	
+
+	void NextPowerUp();
 	//debound for attacking so that spamming wont occur
 	void AttackCooldown(double dt);
 	void NormalAttack();
@@ -38,6 +40,7 @@ public:
 	Bullet* BulletCollision(GameObject* other);
 	Bullet*FetchGO();
 	void BulletUpdate(double dt);
+	Bag* inventory;
 private:
 //hero info
 	//hero basic value

@@ -5,6 +5,10 @@ Generator::Generator()
 	: CurRooms(0)
 	, level(LEVEL1)
 	, playerRoomPosition(0,0)
+	, up(0, 1)
+	, down(0, -1)
+	, left(-1, 0)
+	, right(1, 0)
 {
 }
 
@@ -26,7 +30,17 @@ void Generator::GenerateStructure(/*string seed*/)
 
 		//check surrounding
 		if (!CheckRoom(newRoom))
-			GenerateLevel(MaxRooms, newRoom);
+		{
+			if (CurRooms + 1 == MaxRooms)
+			{
+				Node*endRoom = new Node(CurRooms, newRoom);
+				Rooms.push_back(endRoom);
+				CurRooms++;
+			}
+			else
+				GenerateLevel(MaxRooms, newRoom);
+		}
+		
 	}
 }
 
@@ -36,17 +50,13 @@ Vector2 Generator::RandomDirection()
 	switch (direction)
 	{
 	case 1:
-		return Vector2(0, 1);
-		break;
+		return up;
 	case 2:
-		return Vector2(0, -1);
-		break;
+		return down;
 	case 3:
-		return Vector2(1, 0);
-		break;
+		return left;
 	case 4:
-		return Vector2(-1, 0);
-		break;
+		return right; 
 	}
 }
 
@@ -59,6 +69,39 @@ bool Generator::CheckRoom(Vector2 newRoom)
 			return true;
 	}
 	return false;
+}
+
+void Generator::ConnectRooms()
+{
+	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
+	{
+		Node *curr = (Node *)*iter;
+		for (vector<Node*>::iterator iter2 = iter+1; iter2 != Rooms.end(); ++iter2)
+		{
+			Node *next = (Node *)*iter2;
+
+			if (curr->RoomPosition + up == next->RoomPosition)
+			{
+				curr->up = next;
+				next->down = curr;
+			}
+			if (curr->RoomPosition + down == next->RoomPosition)
+			{
+				curr->down = next;
+				next->up = curr;
+			}
+			if (curr->RoomPosition + left == next->RoomPosition)
+			{
+				curr->left = next;
+				next->right = curr;
+			}
+			if (curr->RoomPosition + right == next->RoomPosition)
+			{
+				curr->right = next;
+				next->left = curr;
+			}
+		}
+	}
 }
 
 void Generator::GenerateLevel(int number,Vector2 position)
@@ -80,28 +123,38 @@ void Generator::Read(TileMap * tilemap)
 		Node *curr = (Node *)*iter;
 		if (curr->RoomPosition == playerRoomPosition)
 		{
+			curr->contentType = 0;
 			switch (curr->contentType)
 			{
 		case LEVEL1:
-			tilemap->LoadMap("Image//MapDesign_1.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_1.csv", 1024, 800);
 			break;
 		case LEVEL2:
-			tilemap->LoadMap("Image//MapDesign_2.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_2.csv", 1024, 800);
 			break;
 		case LEVEL3:
-			tilemap->LoadMap("Image//MapDesign_3.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_3.csv", 1024, 800);
 			break;
 		case LEVEL4:
-			tilemap->LoadMap("Image//MapDesign_4.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_4.csv", 1024, 800);
 			break;
 		case LEVEL5:
-			tilemap->LoadMap("Image//MapDesign_5.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_5.csv", 1024, 800);
 			break;
 		case LEVEL6:
-			tilemap->LoadMap("Image//MapDesign_6.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_6.csv", 1024, 800);
 			break;
 		case LEVEL7:
-			tilemap->LoadMap("Image//MapDesign_7.csv", 1024, 800);
+			tilemap->LoadMap("Image//Maps//MapDesign_7.csv", 1024, 800);
+			break;
+		case LEVEL8:
+			tilemap->LoadMap("Image//Maps//MapDesign_8.csv", 1024, 800);
+			break; 
+		case LEVEL9:
+			tilemap->LoadMap("Image//Maps//MapDesign_9.csv", 1024, 800);
+			break; 
+		case LEVEL10:
+			tilemap->LoadMap("Image//Maps//MapDesign_10.csv", 1024, 800);
 			break;
 			}
 		}
@@ -124,4 +177,14 @@ bool Generator::Check(Vector2 AddToNext)
 			return true;
 	}
 	return false;
+}
+
+Node* Generator::GetCurrentRoom()
+{
+	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
+	{
+		Node *curr = (Node *)*iter;
+		if (curr->RoomPosition == playerRoomPosition)
+			return curr;
+	}
 }
