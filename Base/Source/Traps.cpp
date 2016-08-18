@@ -1,7 +1,7 @@
 #include "Traps.h"
 
 
-C_Traps::C_Traps() : Collideables(), Damage_taken(0), traptype(TRAP_START)
+C_Traps::C_Traps() : Collideables(), Damage_taken(0), traptype(SPIKE_TRAP)
 {
 
 }
@@ -16,10 +16,7 @@ C_Traps::~C_Traps()
 
 }
 
-void C_Traps::Init(int x, int y, string meshName, GEOMETRY_TYPE geotype)
-{
 
-}
 
 C_SpikeTrap::C_SpikeTrap() : C_Traps()
 {

@@ -744,6 +744,15 @@ void Assignment::LoadLevel()
 
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
+	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
+	{
+		C_Traps* go = (C_Traps*)*iter;
+		if (!go->active)
+		{
+			continue;
+		}
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
+	}
 }
 
 void Assignment::ClearLevel()
@@ -775,6 +784,15 @@ void Assignment::ClearLevel()
 		go->down = false;
 		go->left = false;
 		go->right = false;
+		go->meshName = "";
+		go->meshTexture = "";
+	}
+
+	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
+	{
+		C_Traps *go = (C_Traps *)*iter;
+		go->active = false;
+		
 		go->meshName = "";
 		go->meshTexture = "";
 	}

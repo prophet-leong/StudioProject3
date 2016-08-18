@@ -23,7 +23,6 @@ public:
 	virtual bool CheckCollision(Avatar* go, TileMap *tilemap){ return false; };
 	virtual void CollisionResponse(Avatar* other, TileMap *tilemap){};
 	virtual bool checkdeath(){ return false; };
-	virtual void Init(int x, int y, string meshName, GEOMETRY_TYPE geotype);
 };
 
 class C_SpikeTrap : public C_Traps
