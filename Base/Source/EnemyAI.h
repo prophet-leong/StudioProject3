@@ -23,7 +23,6 @@ class EnemyAI : public Avatar
 		NUM_STATE
 	};
 
-
 	enum Enemy
 	{
 		GHOST,

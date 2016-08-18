@@ -9,8 +9,7 @@
 #include "Light.h"
 #include "Vector2.h"
 #include "TileMap.h"
-#include "Hero.h"
-#include "Enemy.h"
+#include "Hero.h" 
 #include "Tile.h"
 #include "GeometryType.h"
 #include "MapGenerator.h"
@@ -18,6 +17,7 @@
 #include "Gate.h"
 #include "Traps.h"
 #include "SharedData.h"
+#include "EnemyAI.h"
 
 class Assignment : public Scene
 {
@@ -147,7 +147,7 @@ private:
 	vector<Avatar*> m_avatarList;
 	vector<GameObject*> m_goList;
 	vector<C_Traps*>m_gotrapslist;
-
+	 
 	//Map RNG
 	Generator* MapRandomizer;
 

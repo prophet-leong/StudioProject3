@@ -11,6 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AI_State.cpp" />
+    <ClCompile Include="Source\AI_State_Attack.cpp" />
+    <ClCompile Include="Source\AI_State_Chase.cpp" />
+    <ClCompile Include="Source\AI_State_Idle.cpp" />
+    <ClCompile Include="Source\AI_State_Partol.cpp" />
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Avatar.cpp" />
     <ClCompile Include="Source\Bag.cpp" />
@@ -19,7 +24,7 @@
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\Collideables.cpp" />
-    <ClCompile Include="Source\Enemy.cpp" />
+    <ClCompile Include="Source\EnemyAI.cpp" />
     <ClCompile Include="source\FiniteStateMachine.cpp" />
     <ClCompile Include="Source\GameObject.cpp" />
     <ClCompile Include="Source\Gate.cpp" />
@@ -45,6 +50,11 @@
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\AI_State.h" />
+    <ClInclude Include="Source\AI_State_Attack.h" />
+    <ClInclude Include="Source\AI_State_Chase.h" />
+    <ClInclude Include="Source\AI_State_Idle.h" />
+    <ClInclude Include="Source\AI_State_Partol.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\avatar.h" />
     <ClInclude Include="Source\Bag.h" />
@@ -53,7 +63,7 @@
     <ClInclude Include="Source\Camera2.h" />
     <ClInclude Include="Source\Camera3.h" />
     <ClInclude Include="Source\Collideables.h" />
-    <ClInclude Include="Source\Enemy.h" />
+    <ClInclude Include="Source\EnemyAI.h" />
     <ClInclude Include="source\FiniteStatemachine.h" />
     <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\Gate.h" />

@@ -38,9 +38,6 @@
     <ClCompile Include="source\FiniteStateMachine.cpp">
       <Filter>Nathan</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Enemy.cpp">
-      <Filter>Shuyu</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Strategy_Kill.cpp">
       <Filter>Shuyu</Filter>
     </ClCompile>
@@ -60,6 +57,27 @@
       <Filter>TeckLee</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collideables.cpp" />
+    <ClCompile Include="Source\AI_State.cpp">
+      <Filter>Shuyu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AI_State_Attack.cpp">
+      <Filter>Shuyu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AI_State_Chase.cpp">
+      <Filter>Shuyu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AI_State_Idle.cpp">
+      <Filter>Shuyu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AI_State_Partol.cpp">
+      <Filter>Shuyu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnemyAI.cpp">
+      <Filter>Shuyu</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Traps.cpp">
+      <Filter>Nathan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
@@ -103,9 +121,6 @@
     <ClInclude Include="source\FiniteStatemachine.h">
       <Filter>Nathan</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Enemy.h">
-      <Filter>Shuyu</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Strategy_Kill.h">
       <Filter>Shuyu</Filter>
     </ClInclude>
@@ -128,6 +143,27 @@
       <Filter>TeckLee</Filter>
     </ClInclude>
     <ClInclude Include="Source\Collideables.h" />
+    <ClInclude Include="Source\AI_State.h">
+      <Filter>Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AI_State_Attack.h">
+      <Filter>Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AI_State_Chase.h">
+      <Filter>Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AI_State_Idle.h">
+      <Filter>Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AI_State_Partol.h">
+      <Filter>Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnemyAI.h">
+      <Filter>Shuyu</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Traps.h">
+      <Filter>Nathan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Junxiang">

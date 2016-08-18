@@ -239,14 +239,14 @@ void Assignment::ReadLevel()
 				break;
 
 			}
-			
+
 			/*case 2:
 			{
-				Enemy* enemy = (Enemy*)FetchGO(m_avatarList);
-				enemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
-				break;
+			Enemy* enemy = (Enemy*)FetchGO(m_avatarList);
+			enemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
+			break;
 			}*/
-			
+
 			//Up door
 			case 3:
 			{
@@ -256,7 +256,7 @@ void Assignment::ReadLevel()
 					currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() - tilemap.GetTileSize());
 					SharedData::GetInstance()->SD_CurrDoor = NONE;
 				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0,1));
+				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, 1));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 				if (MapRandomizer->GetCurrentRoom()->up != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
@@ -272,12 +272,12 @@ void Assignment::ReadLevel()
 					currHero->SetPos(k*tilemap.GetTileSize() - tilemap.GetTileSize(), i*tilemap.GetTileSize());
 					SharedData::GetInstance()->SD_CurrDoor = NONE;
 				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1,0 ));
+				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1, 0));
 				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 
 				if (MapRandomizer->GetCurrentRoom()->right != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
-				
+
 				break;
 			}
 
@@ -313,10 +313,8 @@ void Assignment::ReadLevel()
 				break;
 			}
 			case 15:
-			{
-				/*Tile *newTile = (Tile*)FetchGO(m_goList);
-				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);*/
-				C_Traps *newTrap = (C_Traps*)FetchGO(m_gotrapslist);
+			{ 
+				C_SpikeTrap *newTrap = (C_SpikeTrap*)FetchGO(m_gotrapslist);
 				newTrap->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP);
 				break;
 			}
@@ -325,7 +323,8 @@ void Assignment::ReadLevel()
 			//dumb enemy
 			case 10:
 			{
-
+				EnemyAI* newEnemy = (EnemyAI*)FetchGO(m_avatarList);
+				newEnemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_ENEMY",GEO_MARIO);
 				break;
 			}
 
@@ -410,6 +409,17 @@ void Assignment::UpdateAllObjects()
 		if (!go->active)
 			continue;
 
+		for (vector<C_Traps*>::iterator iter5 = m_gotrapslist.begin(); iter5 != m_gotrapslist.end(); iter5++)
+		{
+			C_SpikeTrap *other = (C_SpikeTrap *)*iter5;
+			if (!other->active)
+				continue;
+			if (other->CheckCollision(go, &tilemap))
+			{
+				other->CollisionResponse(go,&tilemap); 
+			}
+		}
+
 		for (vector<Gate*>::iterator iter4 = Gates.begin(); iter4 != Gates.end(); iter4++)
 		{
 			Gate *other = (Gate *)*iter4;
@@ -421,6 +431,7 @@ void Assignment::UpdateAllObjects()
 				goToNextLevel = true;
 			}
 		}
+
 		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
 		{
 			GameObject *other = (GameObject *)*iter2;
@@ -755,6 +766,10 @@ void Assignment::LoadLevel()
 			float rotation = Math::RadianToDegree(atan2(go->direction.y, go->direction.x));
 			Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, rotation,false, currHero->GetAnimationInvert());
 		}
+		else
+		{
+			Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
+		}
 	}
 
 	//renderGate
@@ -775,6 +790,7 @@ void Assignment::LoadLevel()
 		}
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
+	 
 }
 
 void Assignment::ClearLevel()

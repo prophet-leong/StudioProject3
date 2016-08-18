@@ -11,6 +11,7 @@ enum Trap_type
 	SPIKE_TRAP,
 	POISONED_BLOCK,
 };
+
 class C_Traps : public Collideables
 {
 protected:
@@ -20,8 +21,6 @@ public:
 	C_Traps();
 	C_Traps(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken);
 	virtual ~C_Traps();
-	virtual bool CheckCollision(Avatar* go, TileMap *tilemap){ return false; };
-	virtual void CollisionResponse(Avatar* other, TileMap *tilemap){};
 	virtual bool checkdeath(){ return false; };
 };
 
@@ -34,8 +33,8 @@ public:
 	C_SpikeTrap(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken, Trap_type = Trap_type::SPIKE_TRAP);
 	virtual ~C_SpikeTrap();
 
-	virtual bool CheckCollision(Avatar* other, TileMap *tilemap);
-	virtual void CollisionResponse(Avatar* other, TileMap *tilemap);
+	bool CheckCollision(Avatar* other, TileMap *tilemap);
+	void CollisionResponse(Avatar* other, TileMap *tilemap);
 	virtual bool checkdeath();
 };
 
@@ -46,8 +45,8 @@ public:
 	C_PoisonedBlock(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken, Trap_type traptype);
 	~C_PoisonedBlock();
 
-	virtual bool CheckCollision(Avatar* other, TileMap *tilemap);
-	virtual void CollisionResponse(Avatar* other, TileMap *tilemap);
+	bool CheckCollision(Avatar* other, TileMap *tilemap);
+	void CollisionResponse(Avatar* other, TileMap *tilemap);
 	virtual bool checkdeath();
 
 };
