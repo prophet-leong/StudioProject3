@@ -795,8 +795,7 @@ void Assignment::ClearLevel()
 		C_Traps *go = (C_Traps *)*iter;
 		go->active = false;
 		
-		go->meshName = "";
-		go->meshTexture = "";
+		go->meshName = ""; 
 	}
 
 }

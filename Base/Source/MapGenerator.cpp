@@ -30,7 +30,17 @@ void Generator::GenerateStructure(/*string seed*/)
 
 		//check surrounding
 		if (!CheckRoom(newRoom))
-			GenerateLevel(MaxRooms, newRoom);
+		{
+			if (CurRooms + 1 == MaxRooms)
+			{
+				Node*endRoom = new Node(CurRooms, newRoom);
+				Rooms.push_back(endRoom);
+				CurRooms++;
+			}
+			else
+				GenerateLevel(MaxRooms, newRoom);
+		}
+		
 	}
 }
 
@@ -138,6 +148,12 @@ void Generator::Read(TileMap * tilemap)
 			break;
 		case LEVEL8:
 			tilemap->LoadMap("Image//Maps//MapDesign_8.csv", 1024, 800);
+			break; 
+		case LEVEL9:
+			tilemap->LoadMap("Image//Maps//MapDesign_9.csv", 1024, 800);
+			break; 
+		case LEVEL10:
+			tilemap->LoadMap("Image//Maps//MapDesign_10.csv", 1024, 800);
 			break;
 			}
 		}
