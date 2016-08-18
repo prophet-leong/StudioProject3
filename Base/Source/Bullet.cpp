@@ -29,7 +29,7 @@ void Bullet::set(Vector2 position, Vector2 direction, int damage, int speed, GEO
 }
 bool Bullet::CheckCollision(GameObject* go)
 {
-	if ((Position - go->GetPosition()).LengthSquare() <= 32*32)
+	if ((Position - go->GetPosition()).LengthSquare() <= size*size)
 	{
 		return true;
 	}

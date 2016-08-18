@@ -25,12 +25,12 @@ Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	, moveRight(true)
 	, health(0)
 {
-	inventory = new Bag();
+	//inventory = new Bag();
 }
 
 Avatar::~Avatar()
 {
-	delete inventory;
+	//delete inventory;
 }
 
 /////////////////FUNCTIONS///////////////////////
@@ -153,5 +153,33 @@ void Avatar::BulletUpdate(double dt)
 	for (int i = 0; i < Projectile.size(); ++i)
 	{
 		Projectile[i]->Update(dt);
+	}
+}
+void Avatar::SetElementState(BULLET_ELEMENT element)
+{
+	this->element = element;
+	element_Status = 1.0f;
+	tick = 2;
+}
+void Avatar::ElementStateUpdate()
+{
+	if (element != BULLET_ELEMENT::NO_ELEMENT)
+	{
+		if (element_Status <= 0)
+		{
+			switch (element)
+			{
+			case FIRE:
+			{
+				if (tick == 0)
+					element = BULLET_ELEMENT::NO_ELEMENT;
+				else
+				{
+					--tick;
+					--health;
+				}
+			}
+			}
+		}
 	}
 }

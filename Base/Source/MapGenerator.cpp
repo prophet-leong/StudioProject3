@@ -5,6 +5,10 @@ Generator::Generator()
 	: CurRooms(0)
 	, level(LEVEL1)
 	, playerRoomPosition(0,0)
+	, up(0, 1)
+	, down(0, -1)
+	, left(-1, 0)
+	, right(1, 0)
 {
 }
 
@@ -36,17 +40,13 @@ Vector2 Generator::RandomDirection()
 	switch (direction)
 	{
 	case 1:
-		return Vector2(0, 1);
-		break;
+		return up;
 	case 2:
-		return Vector2(0, -1);
-		break;
+		return down;
 	case 3:
-		return Vector2(1, 0);
-		break;
+		return left;
 	case 4:
-		return Vector2(-1, 0);
-		break;
+		return right; 
 	}
 }
 
@@ -59,6 +59,39 @@ bool Generator::CheckRoom(Vector2 newRoom)
 			return true;
 	}
 	return false;
+}
+
+void Generator::ConnectRooms()
+{
+	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
+	{
+		Node *curr = (Node *)*iter;
+		for (vector<Node*>::iterator iter2 = iter+1; iter2 != Rooms.end(); ++iter2)
+		{
+			Node *next = (Node *)*iter2;
+
+			if (curr->RoomPosition + up == next->RoomPosition)
+			{
+				curr->up = next;
+				next->down = curr;
+			}
+			if (curr->RoomPosition + down == next->RoomPosition)
+			{
+				curr->down = next;
+				next->up = curr;
+			}
+			if (curr->RoomPosition + left == next->RoomPosition)
+			{
+				curr->left = next;
+				next->right = curr;
+			}
+			if (curr->RoomPosition + right == next->RoomPosition)
+			{
+				curr->right = next;
+				next->left = curr;
+			}
+		}
+	}
 }
 
 void Generator::GenerateLevel(int number,Vector2 position)
@@ -124,4 +157,14 @@ bool Generator::Check(Vector2 AddToNext)
 			return true;
 	}
 	return false;
+}
+
+Node* Generator::GetCurrentRoom()
+{
+	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
+	{
+		Node *curr = (Node *)*iter;
+		if (curr->RoomPosition == playerRoomPosition)
+			return curr;
+	}
 }
