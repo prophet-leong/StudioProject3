@@ -135,8 +135,7 @@ void Assignment::Init()
 	SharedData::GetInstance()->SD_CurrDoor = CENTER;
 
 	MapRandomizer = new Generator();
-	MapRandomizer->GenerateStructure();
-	MapRandomizer->Read(&tilemap);
+	MapRandomizer->GenerateStructure(); 
 	MapRandomizer->ConnectRooms();
 
 	//gates
@@ -231,6 +230,7 @@ void Assignment::ReadLevel()
 				Tile *newTile = (Tile*)FetchGO(m_goList);
 				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
 				break;
+
 			}
 			
 			/*case 2:
@@ -303,6 +303,14 @@ void Assignment::ReadLevel()
 
 				if (MapRandomizer->GetCurrentRoom()->left != nullptr)
 					Gates[tilemap.map[i][k] - 3]->active = true;
+				break;
+			}
+
+
+			//dumb enemy
+			case 10:
+			{
+
 				break;
 			}
 
@@ -735,9 +743,7 @@ void Assignment::ClearLevel()
 	for (vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
 	{
 		GameObject *go = (GameObject *)*iter;
-		go->active = false;
-		go->meshName = "";
-		go->meshTexture = "";
+		go->active = false; 
 	}
 
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
@@ -746,9 +752,7 @@ void Assignment::ClearLevel()
 		if (go->meshName == "HERO")
 			continue;
 		go->health = 0;
-		go->active = false;
-		go->meshName = "";
-		go->meshTexture = "";
+		go->active = false; 
 	}
 
 	for (vector<Gate*>::iterator iter = Gates.begin(); iter != Gates.end(); iter++)
@@ -758,9 +762,7 @@ void Assignment::ClearLevel()
 		go->up = false;
 		go->down = false;
 		go->left = false;
-		go->right = false;
-		go->meshName = "";
-		go->meshTexture = "";
+		go->right = false; 
 	}
 
 }
