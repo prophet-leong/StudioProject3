@@ -118,15 +118,15 @@ bool Avatar::GetAnimationInvert()
 }
 
 //default bullet updates
-Bullet* Avatar::BulletCollision(GameObject* other)
+Bullet* Avatar::BulletCollision(GameObject* other,TileMap* tilemap)
 {
 	for (int i = 0; i < Projectile.size(); ++i)
 	{
 		if (Projectile[i]->active)
 		{
-			if (Projectile[i]->CheckCollision(other))
+			if (Projectile[i]->CheckCollision(other,tilemap))
 			{
-				Projectile[i]->CollisionResponse();
+				Projectile[i]->CollisionResponse(other, tilemap);
 				return Projectile[i];
 			}
 		}

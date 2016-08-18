@@ -36,6 +36,11 @@ public:
 	EnemyAI(int x, int y, string meshName, GEOMETRY_TYPE tileOfTile[], int numberOfTextures);
 	virtual~EnemyAI();
 
+	GEOMETRY_TYPE texture[4];
+	//collision
+	virtual bool CheckCollision(GameObject* other, TileMap *tilemap);
+	virtual void CollisionResponse(GameObject* other, TileMap *tilemap);
+
 	// SET
 	void SetPosition(float x, float y){ this->Position.x = x; this->Position.y = y; }
 	void SetEnemyPosition(float x, float y){ this->theEnemyPosition.x = x; this->theEnemyPosition.y = y; }

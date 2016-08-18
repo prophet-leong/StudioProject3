@@ -131,7 +131,7 @@ void Assignment::Init()
 	currHero = new Hero(512, 400, "HERO", heroTexture , 4);
 	currHero->health = 3;
 	m_avatarList.push_back(currHero);
-	
+
 	SharedData::GetInstance()->SD_CurrDoor = CENTER;
 
 	MapRandomizer = new Generator();
@@ -235,18 +235,11 @@ void Assignment::ReadLevel()
 			{
 			case 1:
 			{
-				Tile *newTile = (Tile*)FetchGO(m_goList);
-				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
+				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
+				m_goList.push_back(newTile); 
 				break;
 
 			}
-
-			/*case 2:
-			{
-			Enemy* enemy = (Enemy*)FetchGO(m_avatarList);
-			enemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
-			break;
-			}*/
 
 			//Up door
 			case 3:
@@ -315,16 +308,17 @@ void Assignment::ReadLevel()
 			}
 			case 15: 
 			{
-				C_SpikeTrap *newTrap = (C_SpikeTrap*)FetchGO(m_gotrapslist);
-				newTrap->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP);
+				C_SpikeTrap *newTrap = new C_SpikeTrap(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP,1);
+				m_gotrapslist.push_back(newTrap); 
 				break;
 			}
 
 			//dumb enemy
 			case 10:
 			{
-				EnemyAI* newEnemy = (EnemyAI*)FetchGO(m_avatarList);
-				newEnemy->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_ENEMY",GEO_MARIO);
+				GEOMETRY_TYPE heroTexture[] = { GEO_TILEHERO_FRAME0, GEO_TILEHERO_FRAME1, GEO_TILEHERO_FRAME2, GEO_TILEHERO_FRAME3 };
+				EnemyAI* newEnemy = new EnemyAI(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_ENEMY",heroTexture, 4);
+				m_avatarList.push_back(newEnemy); 
 				break;
 			}
 
@@ -417,17 +411,6 @@ void Assignment::UpdateAllObjects()
 		if (!go->active)
 			continue;
 
-		for (vector<C_Traps*>::iterator iter5 = m_gotrapslist.begin(); iter5 != m_gotrapslist.end(); iter5++)
-		{
-			C_SpikeTrap *other = (C_SpikeTrap *)*iter5;
-			if (!other->active)
-				continue;
-			if (other->CheckCollision(go, &tilemap))
-			{
-				other->CollisionResponse(go,&tilemap); 
-			}
-		}
-
 		for (vector<Gate*>::iterator iter4 = Gates.begin(); iter4 != Gates.end(); iter4++)
 		{
 			Gate *other = (Gate *)*iter4;
@@ -435,7 +418,7 @@ void Assignment::UpdateAllObjects()
 				continue;
 			if (other->CheckCollision(go, &tilemap))
 			{
-				other->CollisionResponse();
+				other->CollisionResponse(go, &tilemap);
 				goToNextLevel = true;
 			}
 		}
@@ -784,7 +767,7 @@ void Assignment::LoadLevel()
 			float rotation = Math::RadianToDegree(atan2(go->direction.y, go->direction.x));
 			Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, rotation,false, currHero->GetAnimationInvert());
 		}
-		else
+		else if (go->meshName == "GEO_ENEMY")
 		{
 			Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 		}
@@ -813,10 +796,23 @@ void Assignment::LoadLevel()
 
 void Assignment::ClearLevel()
 {
-	for (vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
+	while (m_goList.size() > 0)
 	{
-		GameObject *go = (GameObject *)*iter;
-		go->active = false; 
+		GameObject *go = m_goList.back();
+		delete go;
+		m_goList.pop_back();
+	}
+	while (m_avatarList.size() > 1)
+	{
+		GameObject *go = m_avatarList.back();
+		delete go;
+		m_avatarList.pop_back();
+	}
+	while (m_gotrapslist.size() > 0)
+	{
+		GameObject *go = m_gotrapslist.back(); 
+		delete go;
+		m_gotrapslist.pop_back();
 	}
 
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)

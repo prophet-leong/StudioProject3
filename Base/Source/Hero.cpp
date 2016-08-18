@@ -3,9 +3,7 @@
 //'x' and 'y' is position , meshName = name of the mesh , typeoftile = geometry type , numberoftextures = amount of textures for 'typeOfTile' 1 texture = 1
 Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberOfTextures)
 	: moveX(0)
-	, moveY(0)
-	, initX(x)
-	, initY(y)
+	, moveY(0) 
 	, Avatar(x, y, meshName, typeOfTile[0])
 {
 	for (int i = 0; i < numberOfTextures; ++i)
@@ -27,36 +25,16 @@ Hero::~Hero()
 {
 	delete inventory;
 }
-
-void Hero::CollisionContainer(GameObject* other, TileMap* tilemap)
-{
-	if (other->type == GEO_TILEGROUND )
-	{
-		if (BasicCheckCollision(other, tilemap) == true)
-		{
-			BasicCollisionResponse(other, tilemap);
-		}
-		BulletCollision(other);
-	}
-}
-void Hero::CollisionContainer(Avatar * other)
-{
-	Bullet* object;
-	object = BulletCollision(other);
-	if (object != NULL)
-	{
-		other->health -= object->GetDamage();
-	}	
-}
-Bullet* Hero::BulletCollision(GameObject* other)
+ 
+Bullet* Hero::BulletCollision(GameObject* other, TileMap* tilemap)
 {
 	for (int i = 0; i < Projectile.size(); ++i)
 	{
 		if (Projectile[i]->active)
 		{
-			if (Projectile[i]->CheckCollision(other))
+			if (Projectile[i]->CheckCollision(other,tilemap))
 			{
-				Projectile[i]->CollisionResponse();
+				Projectile[i]->CollisionResponse(other, tilemap);
 				return Projectile[i];
 			}
 		}
@@ -172,15 +150,12 @@ void Hero::Constrain(TileMap* tilemap)
 //Soft-Reset
 void Hero::Reset(TileMap* tilemap)
 {
-	active = true;
-	SetPos(initX, initY);
+	active = true; 
 	SetAnimationCounterLR(0);
-	SetAnimationInvert(false);
-	inventory->powerUpList.clear();
+	SetAnimationInvert(false); 
 	scale.y = 1.f;
 	tilemap->offSet_x = 0;
-	tilemap->fineOffSet_y = 0;
-
+	tilemap->fineOffSet_y = 0; 
 }
 
 //Full-Reset
@@ -290,3 +265,18 @@ void Hero::HeroTakeDamage(int damage)
 		heroShield -= damage;
 		
 }
+
+
+//virtual collision
+
+bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
+{ 
+	return false;
+}
+
+void Hero::CollisionResponse(GameObject* other, TileMap *tilemap)
+{
+
+}
+
+

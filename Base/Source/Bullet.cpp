@@ -27,15 +27,15 @@ void Bullet::set(Vector2 position, Vector2 direction, int damage, int speed, GEO
 	defaultPosition = position;
 	type = Geo_Type;
 }
-bool Bullet::CheckCollision(GameObject* go)
+bool Bullet::CheckCollision(GameObject* other, TileMap*tilemap)
 {
-	if ((Position - go->GetPosition()).LengthSquare() <= size*size)
+	if ((Position - other->GetPosition()).LengthSquare() <= size*size)
 	{
 		return true;
 	}
 	return false;
 }
-void Bullet::CollisionResponse()
+void Bullet::CollisionResponse(GameObject* other, TileMap*tilemap)
 {
 	SetUnactive();
 }

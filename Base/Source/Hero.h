@@ -22,14 +22,14 @@ public:
 		float timeDiff);
 	void Constrain(TileMap* tilemap);
 	void Reset(TileMap* tilemap);
-	void Restart();
-	void CollisionContainer(GameObject* other, TileMap* tilemap);
-	void CollisionContainer(Avatar * other);
+	void Restart(); 
 	//movement
 	void MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap);
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
 	void HeroTakeDamage(int damage);
-	
+	//Collision
+	virtual bool CheckCollision(GameObject* other, TileMap*tilemap);
+	virtual void CollisionResponse(GameObject* other, TileMap*tilemap);
 
 	void NextPowerUp();
 	//debound for attacking so that spamming wont occur
@@ -37,7 +37,7 @@ public:
 	void NormalAttack();
 	void SkillAttack();
 	//bullet update
-	Bullet* BulletCollision(GameObject* other);
+	Bullet* BulletCollision(GameObject* other,TileMap * tilemap);
 	Bullet*FetchGO();
 	void BulletUpdate(double dt);
 	Bag* inventory;
@@ -53,8 +53,7 @@ private:
 	//buffed values
 	int heroShield;
 	int DamageBoost;
-	int moveX, moveY;
-	int initX, initY;
+	int moveX, moveY; 
 
 };
 

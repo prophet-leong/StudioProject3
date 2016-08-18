@@ -96,26 +96,26 @@ private:
 	
 	void Restart();
 
-	template<class Type>
-	Type* FetchGO(vector<Type*>&list)
-	{
-		for (std::vector<Type*>::iterator iter = list.begin(); iter != list.end(); ++iter)
-		{
-			Type *go = *iter;
-			if (!go->active)
-			{
-				go->active = true;
-				return go;
-			}
-		}
-		//Exercise 2b: increase object count every time an object is set to active
+	//template<class Type>
+	//Type* FetchGO(vector<Type*>&list)
+	//{
+	//	for (std::vector<Type*>::iterator iter = list.begin(); iter != list.end(); ++iter)
+	//	{
+	//		Type *go = *iter;
+	//		if (!go->active)
+	//		{
+	//			go->active = true;
+	//			return go;
+	//		}
+	//	}
+	//	//Exercise 2b: increase object count every time an object is set to active
 
-		list.push_back(new Type());
+	//	list.push_back(new Type());
 
-		Type *go = *(list.end() - 1);
-		go->active = true;
-		return go;
-	};
+	//	Type *go = *(list.end() - 1);
+	//	go->active = true;
+	//	return go;
+	//};
 
 	//private variabless
 	unsigned m_vertexArrayID;
