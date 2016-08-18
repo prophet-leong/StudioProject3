@@ -219,6 +219,7 @@ void Assignment::Init()
 
 	bLightEnabled = true;
 	state_enter_seed_screen::seedentered(false);
+	ssss.str("");
 }
 
 void Assignment::ReadLevel()
@@ -348,6 +349,14 @@ void Assignment::Update(double dt)
 {
 	statemachine.FMSupdate();
 
+	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 10)
+	{
+		if (Application::IsKeyPressed('A'))
+		{
+			cout << 'a';
+			ssss << "a";
+		}
+	}
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{
 		// Update the hero
@@ -862,7 +871,6 @@ void Assignment::render_main_menu()
 		sss.str("");
 		sss << "Press 2 to go to options";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 20.f, 140);
-
 	}
 }
 void Assignment::render_achievement_screen()
@@ -959,6 +967,9 @@ void Assignment::render_enter_seed_screen()
 		sss.str("");
 		sss << "Press Enter to play";
 		RenderTextOnScreen(meshList[GEO_TEXT], sss.str(), Color(0, 1, 0), 30, 180, 180);
+
+		RenderTextOnScreen(meshList[GEO_TEXT], ssss.str(), Color(0, 1, 0), 30, 20.f, 260);
+
 	}
 	
 }

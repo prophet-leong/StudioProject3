@@ -22,7 +22,7 @@ public:
 	C_Traps(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken);
 	virtual ~C_Traps();
 	virtual bool checkdeath(){ return false; };
-	virtual void collisioncontainer(){};
+	virtual void collisioncCollisionContainerontainer(GameObject * other, TileMap* tilemap){};
 };
 
 
