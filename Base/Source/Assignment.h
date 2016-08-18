@@ -15,6 +15,8 @@
 #include "GeometryType.h"
 #include "MapGenerator.h"
 #include "FiniteStatemachine.h"
+#include "SpikeTrap.h"
+#include "PoisonBlock.h"
 #include "Gate.h"
 #include "Traps.h"
 #include "SharedData.h"
