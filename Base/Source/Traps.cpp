@@ -1,29 +1,33 @@
 #include "Traps.h"
 
 
-C_Traps::C_Traps()
+C_Traps::C_Traps() : Collideables(), Damage_taken(0), traptype(TRAP_START)
 {
 
 }
-C_Traps::C_Traps(Vector2 position, float damage_taken)
+
+C_Traps::C_Traps(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken) : Collideables(x, y, meshName, geotype)
 {
-	this->Position = position;
 	this->Damage_taken = damage_taken;
 }
+
 C_Traps::~C_Traps()
 {
 
 }
 
-C_SpikeTrap::C_SpikeTrap()
+void C_Traps::Init(int x, int y, string meshName, GEOMETRY_TYPE geotype)
 {
 
 }
-C_SpikeTrap::C_SpikeTrap(Vector2 position, float damage_taken, GEOMETRY_TYPE type, Trap_type traptype)
+
+C_SpikeTrap::C_SpikeTrap() : C_Traps()
 {
-	this->Position = position;
-	this->Damage_taken = damage_taken;
-	type = GEO_SPIKE_TRAP;
+
+}
+
+C_SpikeTrap::C_SpikeTrap(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken, Trap_type traptype) : C_Traps(x, y, meshName, geotype, damage_taken)
+{
 	traptype = SPIKE_TRAP;
 }
 C_SpikeTrap::~C_SpikeTrap()
@@ -32,7 +36,7 @@ C_SpikeTrap::~C_SpikeTrap()
 }
 bool C_SpikeTrap::CheckCollision(Avatar* other, TileMap *tilemap)
 {
-	if (other->meshName == "HERO")
+	if (other->meshName == "HERO" )
 	{
 			return (GetPosition() - other->GetPosition()).LengthSquare() <= tilemap->GetTileSize() * tilemap->GetTileSize();
 	}
@@ -49,15 +53,12 @@ bool C_SpikeTrap::checkdeath()
 	return true;
 }
 
-C_PoisonedBlock::C_PoisonedBlock()
+C_PoisonedBlock::C_PoisonedBlock() : C_Traps()
 {
 
 }
-C_PoisonedBlock::C_PoisonedBlock(Vector2 position, float damage_taken, GEOMETRY_TYPE type, Trap_type traptype)
+C_PoisonedBlock::C_PoisonedBlock(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken, Trap_type traptype) : C_Traps(x, y, meshName, geotype, damage_taken)
 {
-	this->Position = position;
-	this->Damage_taken = damage_taken;
-	type = GEO_SPIKE_TRAP;
 	traptype = POISONED_BLOCK;
 }
 C_PoisonedBlock::~C_PoisonedBlock()
@@ -67,11 +68,17 @@ C_PoisonedBlock::~C_PoisonedBlock()
 
 bool C_PoisonedBlock::CheckCollision(Avatar* other, TileMap *tilemap)
 {
-	return false;
+	if (other->meshName == "HERO")
+	{
+		return (GetPosition() - other->GetPosition()).LengthSquare() <= tilemap->GetTileSize() * tilemap->GetTileSize();
+	}
 }
 void C_PoisonedBlock::CollisionResponse(Avatar* other, TileMap *tilemap)
 {
-
+	if (other->meshName == "HERO")
+	{
+		other->health -= 1;
+	}
 }
 bool C_PoisonedBlock::checkdeath()
 {
