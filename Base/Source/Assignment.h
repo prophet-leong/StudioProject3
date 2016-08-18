@@ -16,12 +16,8 @@
 #include "MapGenerator.h"
 #include "FiniteStatemachine.h"
 #include "Gate.h"
-<<<<<<< HEAD
 #include "Traps.h"
-
-=======
 #include "SharedData.h"
->>>>>>> 031d0f414f570f5b0f536e3ba5e5b25e3832ae73
 
 class Assignment : public Scene
 {
