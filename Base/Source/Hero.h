@@ -38,6 +38,7 @@ public:
 	Bullet* BulletCollision(GameObject* other);
 	Bullet*FetchGO();
 	void BulletUpdate(double dt);
+	Bag* inventory;
 private:
 //hero info
 	//hero basic value
