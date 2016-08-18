@@ -366,6 +366,8 @@ void Assignment::Update(double dt)
 		if (Application::IsKeyPressed('D'))
 			currHero->MoveLeftRight(false, 1.0f, &tilemap);
 		//attacks
+		if (Application::IsKeyPressed('E'))
+			currHero->NextPowerUp();
 		if (Application::IsKeyPressed(' '))
 			currHero->NormalAttack();
 		if (Application::IsKeyPressed('F'))
@@ -547,7 +549,7 @@ void Assignment::RenderMeshIn2D(Mesh *mesh, const bool enableLight, const float 
 
 }
 
-void Assignment::Render2DMesh(Mesh *mesh, bool enableLight, float sizeX, float sizeY , float x, float y, bool rotate, bool invert)
+void Assignment::Render2DMesh(Mesh *mesh, bool enableLight, float sizeX, float sizeY , float x, float y,float rotation, bool rotate, bool invert)
 {
 	Mtx44 ortho;
 	ortho.SetToOrtho(0, 1024, 0, 800, -10, 10);
@@ -557,19 +559,32 @@ void Assignment::Render2DMesh(Mesh *mesh, bool enableLight, float sizeX, float s
 			viewStack.LoadIdentity();
 			modelStack.PushMatrix();
 				modelStack.LoadIdentity();
-				if (invert)
-				{
-					glFrontFace(GL_CW);
-					modelStack.Translate(x + tilemap.GetTileSize(), y, 0);
-					modelStack.Rotate(180, 0, 1, 0);
-					modelStack.Scale(sizeX, sizeY, 1);
-				}
-				else
+
+				if (rotation == 0.0f)
 				{
 					modelStack.Translate(x, y, 0);
 					modelStack.Scale(sizeX, sizeY, 1);
 				}
-       
+				else if (rotation == 90.0f)
+				{
+					modelStack.Translate(x + tilemap.GetTileSize(), y, 0);
+					modelStack.Rotate(rotation, 0, 0, 1);
+					modelStack.Scale(sizeX, sizeY, 1);
+				}
+				else if (rotation == 180.0f)
+				{
+					modelStack.Translate(x + tilemap.GetTileSize(), y + tilemap.GetTileSize(), 0);
+					modelStack.Rotate(rotation, 0, 0, 1);
+					modelStack.Scale(sizeX, sizeY, 1);
+				}
+				else if (rotation == -90)
+				{
+					modelStack.Translate(x, y + tilemap.GetTileSize(), 0);
+					modelStack.Rotate(rotation, 0, 0, 1);
+					modelStack.Scale(sizeX, sizeY, 1);
+				}
+
+
 				Mtx44 MVP, modelView, modelView_inverse_transpose;
 	
 				MVP = projectionStack.Top() * viewStack.Top() * modelStack.Top();
@@ -587,10 +602,6 @@ void Assignment::Render2DMesh(Mesh *mesh, bool enableLight, float sizeX, float s
 				}
 				mesh->Render();
 
-				if (invert)
-				{
-					glFrontFace(GL_CCW);
-				}
 				if(mesh->textureID > 0)
 				{
 					glBindTexture(GL_TEXTURE_2D, 0);
@@ -740,7 +751,10 @@ void Assignment::LoadLevel()
 			continue;
 
 		if (go->meshName == "HERO")
-		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, false, currHero->GetAnimationInvert());
+		{
+			float rotation = Math::RadianToDegree(atan2(go->direction.y, go->direction.x));
+			Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, rotation,false, currHero->GetAnimationInvert());
+		}
 	}
 
 	//renderGate

@@ -110,6 +110,13 @@ Bullet* Hero::FetchGO()
 	Projectile.push_back(newBullet);
 	return newBullet;
 }
+void Hero::NextPowerUp()
+{
+	if (currentPowerUp < inventory->powerUpList.size())
+		currentPowerUp++;
+	else
+		currentPowerUp = 0;
+}
 void Hero::AttackCooldown(double dt)
 {
 	if (allowAttack == false)

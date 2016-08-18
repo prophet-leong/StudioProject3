@@ -73,10 +73,10 @@ public:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderTextOnScreen2(Mesh* mesh, std::string text, Color color, float size, float x, float y);
-	void RenderMeshIn2D(Mesh *mesh, bool enableLight, const float size = 1.f, float x = 0.0f, float y = 0.0f, bool rotate = false);
+	void RenderMeshIn2D(Mesh *mesh, bool enableLight, const float size = 1.f, float x = 0.0f, float y = 0.0f,bool rotate = false);
 	void RenderMesh(Mesh *mesh, bool enableLight);
 	void RenderBackground();
-	void Render2DMesh(Mesh *mesh, const bool enableLight, const float sizeX = 1.0f, const float sizeY = 1.0f, const float x = 0.0f, const float y = 0.0f, const bool rotate = false, bool invert = false);
+	void Render2DMesh(Mesh *mesh, const bool enableLight, const float sizeX = 1.0f, const float sizeY = 1.0f, const float x = 0.0f, const float y = 0.0f,float rotation =0.0f, const bool rotate = false, bool invert = false);
 
 private:
 	
