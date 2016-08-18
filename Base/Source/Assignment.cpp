@@ -316,7 +316,7 @@ void Assignment::ReadLevel()
 			{
 				/*Tile *newTile = (Tile*)FetchGO(m_goList);
 				newTile->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);*/
-				C_Traps *newTrap = (C_Traps*)FetchGO(m_gotrapslist);
+				C_SpikeTrap *newTrap = (C_SpikeTrap*)FetchGO(m_gotrapslist);
 				newTrap->Init(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP);
 				break;
 			}

@@ -20,7 +20,7 @@ public:
 	C_Traps();
 	C_Traps(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken);
 	virtual ~C_Traps();
-	virtual bool CheckCollision(Avatar* go, TileMap *tilemap){ return false; };
+	virtual bool CheckCollision(Avatar* go, TileMap *tilemap){ return true; };
 	virtual void CollisionResponse(Avatar* other, TileMap *tilemap){};
 	virtual bool checkdeath(){ return false; };
 };
