@@ -141,7 +141,7 @@ void Assignment::Init()
 	//gates
 	for (int i = 0; i < 4; ++i)
 	{
-		Gate * newGate = new Gate(0, 0, "GEO_GATE", GEO_COIN, MapRandomizer);
+		Gate * newGate = new Gate(0, 0, "GEO_GATE", GEO_NORMAL_DOOR, MapRandomizer);
 		Gates.push_back(newGate);
 	}
 
@@ -168,6 +168,12 @@ void Assignment::Init()
 	// Load the ground mesh and texture
 	meshList[GEO_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
 	meshList[GEO_BACKGROUND] ->textureID = LoadTGA("Image//mariobackground.tga");
+	//in Game BackGround
+	meshList[GEO_INGAME_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_INGAME_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
+	meshList[GEO_INGAME_BACKGROUND]->textureID = LoadTGA("Image//Backgrounds//Background_1.tga");
+	//Doors
+	meshList[GEO_NORMAL_DOOR] = MeshBuilder::Generate2DMesh("GEO_NORMAL_DOOR", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_NORMAL_DOOR]->textureID = LoadTGA("Image//normal_door.tga");
 
 	meshList[GEO_MARIO] = MeshBuilder::Generate2DMesh("Hero_Pic", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_MARIO]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga");
@@ -238,8 +244,7 @@ void Assignment::ReadLevel()
 				m_goList.push_back(newTile); 
 				break;
 
-			}
-
+			} 
 			//Up door
 			case 3:
 			{
@@ -366,11 +371,6 @@ void Assignment::Update(double dt)
 			currHero->SkillAttack();
 
 		currHero->Update(&tilemap, dt);
-
-		if (currHero->GetPosition().y <= 20)
-		{
-			Restart();
-		}
 
 		tilemap.Update();
 	
@@ -660,7 +660,7 @@ void Assignment::RenderMesh(Mesh *mesh, bool enableLight)
 void Assignment::RenderBackground()
 {
 	// Render the crosshair
-	Render2DMesh(meshList[GEO_BACKGROUND], false, 1.0f);
+	Render2DMesh(meshList[GEO_INGAME_BACKGROUND], false);
 }
 
 void Assignment::Render()
@@ -687,20 +687,7 @@ void Assignment::Render()
 	//loading/rendering of level
 	LoadLevel();
 
-	for (int i = 0; i < currHero->Projectile.size(); ++i)
-	{
-		if (currHero->Projectile[i]->active)
-		{
-			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
-			currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x, 
-			currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
-		}
-	}
-
-
 	//On screen text UI
-	
-	
 	render_main_menu();
 	render_achievement_screen();
 	render_options_screen();
@@ -745,7 +732,37 @@ void Assignment::LoadLevel()
 			continue;
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
+	
+	//renderGate
+	for (vector<Gate*>::iterator iter = Gates.begin(); iter != Gates.end(); iter++)
+	{
+		Gate*go = (Gate*)*iter;
+		if (!go->active)
+			continue;
 
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
+	}
+	
+	//render Traps
+	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
+	{
+		C_Traps* go = (C_Traps*)*iter;
+		if (!go->active)
+		{
+			continue;
+		}
+		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
+	}
+	//render bullets
+	for (int i = 0; i < currHero->Projectile.size(); ++i)
+	{
+		if (currHero->Projectile[i]->active)
+		{
+			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
+				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
+				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
+		}
+	}
 	//render avatars
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
 	{
@@ -764,24 +781,7 @@ void Assignment::LoadLevel()
 		}
 	}
 
-	//renderGate
-	for (vector<Gate*>::iterator iter = Gates.begin(); iter != Gates.end(); iter++)
-	{
-		Gate*go = (Gate*)*iter;
-		if (!go->active)
-			continue;
-
-		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
-	}
-	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
-	{
-		C_Traps* go = (C_Traps*)*iter;
-		if (!go->active)
-		{
-			continue;
-		}
-		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
-	}
+	
 	 
 }
 
@@ -805,16 +805,11 @@ void Assignment::ClearLevel()
 		delete go;
 		m_gotrapslist.pop_back();
 	}
-
-	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
+	for (int i = 0; i < currHero->Projectile.size(); ++i)
 	{
-		Avatar *go = (Avatar *)*iter;
-		if (go->meshName == "HERO")
-			continue;
-		go->health = 0;
-		go->active = false; 
+		if (currHero->Projectile[i]->active)
+			currHero->Projectile[i]->active = false;
 	}
-
 	for (vector<Gate*>::iterator iter = Gates.begin(); iter != Gates.end(); iter++)
 	{
 		Gate *go = (Gate *)*iter;
@@ -824,15 +819,6 @@ void Assignment::ClearLevel()
 		go->left = false;
 		go->right = false; 
 	}
-
-	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
-	{
-		C_Traps *go = (C_Traps *)*iter;
-		go->active = false;
-		
-		go->meshName = ""; 
-	}
-
 }
 
 /*Individual functions to render what when the state happens*/

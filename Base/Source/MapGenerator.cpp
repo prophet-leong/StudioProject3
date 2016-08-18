@@ -1,6 +1,11 @@
 #include "MapGenerator.h"
 #include <time.h>
-
+/***********************************************/
+/*!
+\brief
+default constructor
+*/
+/***********************************************/
 Generator::Generator()
 	: CurRooms(0)
 	, level(LEVEL1)
@@ -11,11 +16,23 @@ Generator::Generator()
 	, right(1, 0)
 {
 }
-
+/***********************************************/
+/*!
+\brief
+default destructor
+*/
+/***********************************************/
 Generator::~Generator()
 {
 }
-
+/***********************************************/
+/*!
+\brief
+Generates the Structure of the rooms randomly
+\param
+seed : the seed used to randomise the level inputed by the player
+*/
+/***********************************************/
 void Generator::GenerateStructure(/*string seed*/)
 {
 	srand(time(NULL));
@@ -43,7 +60,14 @@ void Generator::GenerateStructure(/*string seed*/)
 		
 	}
 }
-
+/***********************************************/
+/*!
+\brief
+returns a Vector2 random direction
+\return
+returns a random direction 
+*/
+/***********************************************/
 Vector2 Generator::RandomDirection()
 {
 	int direction = rand() % 4 + 1;
@@ -59,7 +83,16 @@ Vector2 Generator::RandomDirection()
 		return right; 
 	}
 }
-
+/***********************************************/
+/*!
+\brief
+check if the next room is empty or not
+\param	newRoom
+the coordinates of the new room
+\returns
+returns whether or not the room that is going to be created already have an exsisting room
+*/
+/***********************************************/
 bool Generator::CheckRoom(Vector2 newRoom)
 {
 	for (vector<Node*>::iterator iter = Rooms.begin();iter != Rooms.end();++iter)
@@ -70,7 +103,12 @@ bool Generator::CheckRoom(Vector2 newRoom)
 	}
 	return false;
 }
-
+/***********************************************/
+/*!
+\brief
+connect the individual room nodes together 
+*/
+/***********************************************/
 void Generator::ConnectRooms()
 {
 	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
@@ -103,27 +141,38 @@ void Generator::ConnectRooms()
 		}
 	}
 }
-
+/***********************************************/
+/*!
+\brief
+generate the level of a room
+\param number: the Type of the Room
+		position: position of the new room 
+/***********************************************/
 void Generator::GenerateLevel(int number,Vector2 position)
 {
-	Node*startRoom = new Node(rand() % number, position);
+	int randNo = rand() % number;
+	while (randNo + 1 >= MaxRooms)
+	{
+		randNo = rand() % number;
+	}
+	Node*startRoom = new Node(randNo, position);
 	Rooms.push_back(startRoom);
 	CurRooms++;
 }
-#include<iostream>
+/***********************************************/
+/*!
+\brief
+read and change the map according to the room player is in
+\param tilemap : to edit tilemap and change to its respective level
+*/
+/***********************************************/
 void Generator::Read(TileMap * tilemap)
 {
 	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
 	{
 		Node *curr = (Node *)*iter;
-		std::cout << curr->RoomPosition << endl;
-	}
-	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
-	{
-		Node *curr = (Node *)*iter;
 		if (curr->RoomPosition == playerRoomPosition)
-		{
-			curr->contentType = 0;
+		{ 
 			switch (curr->contentType)
 			{
 		case LEVEL1:
@@ -161,24 +210,26 @@ void Generator::Read(TileMap * tilemap)
 	
 	}
 }
-
+/***********************************************/
+/*!
+\brief
+move to next room
+\param addToCurrent:used to add to players curr pos
+and transfer the map
+*/
+/***********************************************/
 void Generator::GoToNextLevel(Vector2 AddToCurrent)
 {
 	playerRoomPosition = playerRoomPosition + AddToCurrent;
 }
-
-bool Generator::Check(Vector2 AddToNext)
-{
-	Vector2 tempPos = playerRoomPosition + AddToNext;
-	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)
-	{
-		Node *curr = (Node *)*iter;
-		if (curr->RoomPosition == tempPos)
-			return true;
-	}
-	return false;
-}
-
+/***********************************************/
+/*!
+\brief
+Get the Pointer that points to current room
+\return
+returns a Node pointer that is pointing to curr room
+*/
+/***********************************************/
 Node* Generator::GetCurrentRoom()
 {
 	for (vector<Node*>::iterator iter = Rooms.begin(); iter != Rooms.end(); ++iter)

@@ -109,9 +109,7 @@ private:
 	//		}
 	//	}
 	//	//Exercise 2b: increase object count every time an object is set to active
-
 	//	list.push_back(new Type());
-
 	//	Type *go = *(list.end() - 1);
 	//	go->active = true;
 	//	return go;
@@ -138,13 +136,12 @@ private:
 	// Hero's information
 	Hero* currHero;
 
-	//Gates
-
 	//The maps
 	TileMap tilemap;
 
 	//All Objects
 
+	//Gates
 	vector<Gate*>Gates;
 	vector<Avatar*> m_avatarList;
 	vector<GameObject*> m_goList;

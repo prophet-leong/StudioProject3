@@ -5,6 +5,22 @@
 #include "MapGenerator.h"
 #include "SharedData.h"
 
+/**************************************************/
+/*!
+\file		Gate.h
+\author		Chua Teck Lee
+\par		Email:C_tecklee@hotmail.com
+\brief		Class to define a Gate
+*/
+/**************************************************/
+
+/**************************************************/
+/*!
+			Class Gate:
+\brief		Defines a Gate Object and its methods
+*/
+/**************************************************/
+
 class Gate : public Collideables
 {
 public:
@@ -17,8 +33,7 @@ public:
 
 	Vector2 GetLocation();
 	void SetLocation(Vector2 newLocation);
-	bool Check(Vector2 Check);
-	  
+	
 	//public direction
 	bool up, down, left, right;
 private:

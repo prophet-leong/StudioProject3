@@ -1,22 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Source\Application.cpp" />
-    <ClCompile Include="Source\Avatar.cpp" />
-    <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\Camera2.cpp" />
-    <ClCompile Include="Source\Camera3.cpp" />
-    <ClCompile Include="Source\GameObject.cpp" />
-    <ClCompile Include="Source\LoadOBJ.cpp" />
-    <ClCompile Include="Source\LoadTGA.cpp" />
-    <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\Mesh.cpp" />
-    <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\Assignment.cpp" />
-    <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\Tile.cpp" />
     <ClCompile Include="Source\TileMap.cpp" />
-    <ClCompile Include="Source\Utility.cpp" />
     <ClCompile Include="Source\Bag.cpp">
       <Filter>Junxiang</Filter>
     </ClCompile>
@@ -56,7 +43,6 @@
     <ClCompile Include="Source\Gate.cpp">
       <Filter>TeckLee</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Collideables.cpp" />
     <ClCompile Include="Source\AI_State.cpp">
       <Filter>Shuyu</Filter>
     </ClCompile>
@@ -84,28 +70,54 @@
     <ClCompile Include="Source\SpikeTrap.cpp">
       <Filter>Nathan</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Avatar.cpp">
+      <Filter>GameObject Hierachy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Collideables.cpp">
+      <Filter>GameObject Hierachy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject.cpp">
+      <Filter>GameObject Hierachy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera2.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera3.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadTGA.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\shader.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility.cpp">
+      <Filter>Essentials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\avatar.h" />
-    <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\Camera2.h" />
-    <ClInclude Include="Source\Camera3.h" />
-    <ClInclude Include="Source\GameObject.h" />
     <ClInclude Include="Source\GeometryType.h" />
-    <ClInclude Include="Source\Light.h" />
-    <ClInclude Include="Source\LoadOBJ.h" />
-    <ClInclude Include="Source\LoadTGA.h" />
-    <ClInclude Include="Source\Material.h" />
-    <ClInclude Include="Source\Mesh.h" />
-    <ClInclude Include="Source\MeshBuilder.h" />
-    <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Assignment.h" />
-    <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\Tile.h" />
     <ClInclude Include="Source\TileMap.h" />
-    <ClInclude Include="Source\Utility.h" />
-    <ClInclude Include="Source\Vertex.h" />
     <ClInclude Include="Source\Bag.h">
       <Filter>Junxiang</Filter>
     </ClInclude>
@@ -148,7 +160,6 @@
     <ClInclude Include="Source\Gate.h">
       <Filter>TeckLee</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Collideables.h" />
     <ClInclude Include="Source\AI_State.h">
       <Filter>Shuyu</Filter>
     </ClInclude>
@@ -176,6 +187,57 @@
     <ClInclude Include="Source\SpikeTrap.h">
       <Filter>Nathan</Filter>
     </ClInclude>
+    <ClInclude Include="Source\avatar.h">
+      <Filter>GameObject Hierachy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Collideables.h">
+      <Filter>GameObject Hierachy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject.h">
+      <Filter>GameObject Hierachy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Application.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera2.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera3.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadTGA.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\shader.hpp">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vertex.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility.h">
+      <Filter>Essentials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Junxiang">
@@ -189,6 +251,12 @@
     </Filter>
     <Filter Include="Shuyu">
       <UniqueIdentifier>{d87b042e-17c1-4128-bd96-f96337abd16d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject Hierachy">
+      <UniqueIdentifier>{9b52f619-2da2-4499-9de2-908011487148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Essentials">
+      <UniqueIdentifier>{8175dc9e-760e-444b-81a8-a83409bd350c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

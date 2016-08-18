@@ -271,6 +271,7 @@ void Hero::HeroTakeDamage(int damage)
 
 bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
 { 
+
 	return false;
 }
 

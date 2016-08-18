@@ -2,7 +2,21 @@
 #define GENERATOR_H
 #include "TileMap.h"
 #include "MapNode.h"
+/**************************************************/
+/*!
+\file		MapGenerator.h
+\author		Chua Teck Lee
+\par		Email:C_tecklee@hotmail.com
+\brief		Class to define a Generator
+*/
+/**************************************************/
 
+/**************************************************/
+/*!
+			Class Generator:
+\brief		Defines a Generator and its methods
+*/
+/**************************************************/
 class Generator
 {
 public:
@@ -27,7 +41,6 @@ public:
 
 	void GenerateStructure(/*string seed*/);
 	void Read(TileMap * tilemap);
-	bool Check(Vector2 AddtoNext);
 	void GoToNextLevel(Vector2 AddToCurrent);
 	void ConnectRooms();
 
