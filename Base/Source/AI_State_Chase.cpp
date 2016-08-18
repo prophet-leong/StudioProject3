@@ -13,8 +13,8 @@ AI_state_chase::~AI_state_chase()
 
 void AI_state_chase::Update(double dt)
 {
-
-
+	cout << "void AI_state_chase::Update()" << endl;
+	// run toward hero
 }
 
 void AI_state_chase::SetDestination(const float x, const float y)

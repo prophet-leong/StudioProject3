@@ -13,8 +13,8 @@ AI_state_partol::~AI_state_partol()
 
 void AI_state_partol::Update(double dt)
 {
-
-
+	cout << "void AI_state_patrol::Update()" << endl;
+	// patrol the destination again
 }
 
 void AI_state_partol::SetDestination(const float x, const float y)

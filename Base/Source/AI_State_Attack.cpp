@@ -12,8 +12,8 @@ AI_state_attack::~AI_state_attack()
 
 void AI_state_attack::Update(double dt)
 {
-
-
+	cout << "void AI_state_attack::Update()" << endl;
+	// attack the hero
 }
 
 void AI_state_attack::SetDestination(const float x, const float y)

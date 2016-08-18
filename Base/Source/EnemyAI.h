@@ -18,7 +18,6 @@ class EnemyAI : public Avatar
 		ATTACK,
 		CHASE,
 		PATROL,
-		ESPA,
 
 		NUM_STATE
 	};
@@ -36,60 +35,60 @@ class EnemyAI : public Avatar
 public:
 	
 	EnemyAI(int x, int y, string meshName, GEOMETRY_TYPE tileOfTile[], int numberOfTextures);
-	~EnemyAI();
+	virtual~EnemyAI();
 
 	// SET
-	void SetPosition(float, float);
-	void SetEnemyPosition(float, float);
-	void SetDestination(float, float);
-	void SetWayPoint(Vector2);
+	void SetPosition(float x, float y){ this->Position.x = x; this->Position.y = y; }
+	void SetEnemyPosition(float x, float y){ this->theEnemyPosition.x = x; this->theEnemyPosition.y = y; }
+	void SetDestination(float x, float y){ this->Destination.x = x; this->Destination.y = y; }
+	void SetWayPoint(Vector2 point){ this->wayPoint.push_back(point); }
 
-	void SetPatrolTimer(float);
-	void SetChaseTimer(float);
-	void SetAttackTimer(float);
+	void SetPatrolTimer(float timer){ this->patrolTimer = timer; }
+	void SetChaseTimer(float timer){ this->chaseTimer = timer; }
+	void SetAttackTimer(float timer){ this->attackTimer = timer; }
+	void SetTime(float time){ this->Time = time; }
 
-	void SetPatrolWaitTime(float);
-	void SetChaseWaitTime(float);
-	void SetAttackWaitTime(float);
+	void SetPatrolWaitTime(float time){ this->patrolWaitTime = time; }
+	void SetChaseWaitTime(float time){ this->chaseWaitTime = time; }
+	void SetAttackWaitTime(float time){ this->attackWaitTime = time; }
 
-	void SetSearchRadius(float);
-	void SetAttackRadius(float);
+	void SetSearchRadius(float distance){ this->SearchRadius = distance; }
+	void SetAttackRadius(float distance){ this->AttackRadius = distance; }
 
-	void SetDamage(int);
-	void SetWayPointIndex(int);
+	void SetDamage(int damage){ this->damage = damage; }
+	void SetWayPointIndex(int point){ this->wayPointIndex = point; }
 
-	void SetPatrol(bool);
-	void SetChase(bool);
-	void SetAttack(bool);
-	void SetTimer(bool);
+	void SetPatrol(bool state){ this->patrol = state; }
+	void SetChase(bool state){ this->chase = state; }
+	void SetAttack(bool state){ this->attack = state; }
 
 	//Get
-	float GetPosition_x();
-	float GetPosition_y();
-	float GetEnemyPosition_x();
-	float GetEnemyPosition_y();
-	float GetDestination_x();
-	float GetDestination_y();
-	int GetwayPointIndex();
-	int GetWaypointSize();
+	float GetPosition_x(){ return Position.x; }
+	float GetPosition_y(){ return Position.y; }
+	float GetEnemyPosition_x(){ return theEnemyPosition.x; }
+	float GetEnemyPosition_y(){ return theEnemyPosition.y; }
+	float GetDestination_x(){ return Destination.x; }
+	float GetDestination_y(){ return Destination.y; }
+	int GetwayPointIndex(){ return wayPointIndex; }
+	int GetWaypointSize(){ return wayPoint.size(); }
 
-	float GetPatrolTimer();
-	float GetChaseTimer();
-	float GetAttackTimer();
+	float GetPatrolTimer(){ return patrolTimer; }
+	float GetChaseTimer(){ return chaseTimer; }
+	float GetAttackTimer(){ return attackTimer; }
+	float GetTime(){ return Time; }
 
-	float GetPatrolWaitTime();
-	float GetChaseWaitTime();
-	float GetAttackWaitTime();
+	float GetPatrolWaitTime(){ return patrolWaitTime; }
+	float GetChaseWaitTime(){ return chaseWaitTime; }
+	float GetAttackWaitTime(){ return attackWaitTime; }
 	
-	float GetAttackRadius();
-	float GetSearchRadius();
+	float GetAttackRadius(){ return AttackRadius; }
+	float GetSearchRadius(){ return SearchRadius; }
 
-	int GetDamage();
+	int GetDamage(){ return damage; }
 
-	bool GetPatrol();
-	bool GetChase();
-	bool GetAttack();
-	bool GetTimer();
+	bool GetPatrol(){ return patrol; }
+	bool GetChase(){ return chase; }
+	bool GetAttack(){ return attack; }
 	
 	void CheckAI_State(GameObject* other, TileMap* tilemap);
 	void ChangeStrategy(AI_state* theNewAI_State, bool bDelete = true);
@@ -99,8 +98,8 @@ public:
 	
 	void UpdataTimer(double);
 
-	void init();
-	void Update(double);
+	virtual void init();
+	virtual void Update(double);
 	
 private:
 	Vector2 Position;
@@ -113,6 +112,10 @@ private:
 	float patrolTimer;
 	float chaseTimer;
 	float attackTimer;
+	
+	float Time; // can remove the top 3 timer 
+
+
 
 	float patrolWaitTime;
 	float chaseWaitTime;
@@ -125,10 +128,10 @@ private:
 	int wayPointIndex;
 
 	bool reachWayPoint;
+
 	bool patrol;
-	bool chase;
+	bool chase; // chase = chase is over!!!!!!!!
 	bool attack;
-	bool timer;
 };
 
 
