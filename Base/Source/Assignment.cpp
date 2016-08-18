@@ -441,7 +441,7 @@ void Assignment::UpdateAllObjects()
 		}
 		for (vector<C_Traps*>::iterator iter2 = m_gotrapslist.begin(); iter2 != m_gotrapslist.end(); iter2++)
 		{
-			C_Traps *other = (C_Traps *)*iter2;
+			C_SpikeTrap *other = (C_SpikeTrap *)*iter2;
 			if (!other->active)
 				continue;
 			if (other->CheckCollision(go, &tilemap))

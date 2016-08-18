@@ -10,9 +10,9 @@ public:
 	C_PoisonedBlock(int x, int y, string meshName, GEOMETRY_TYPE geotype, float damage_taken, Trap_type traptype);
 	~C_PoisonedBlock();
 
-	virtual bool CheckCollision(Avatar* other, TileMap *tilemap);
-	virtual void CollisionResponse(Avatar* other, TileMap *tilemap);
-	virtual bool checkdeath();
+	bool CheckCollision(Avatar* other, TileMap *tilemap);
+	void CollisionResponse(Avatar* other, TileMap *tilemap);
+	bool checkdeath();
 
 };
 
