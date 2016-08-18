@@ -429,6 +429,16 @@ void Assignment::UpdateAllObjects()
 			other->CollisionContainer(go);//bullet
 			other->CollisionContainer(go, &tilemap);//enemy to hero collision
 		}
+		for (vector<C_Traps*>::iterator iter2 = m_gotrapslist.begin(); iter2 != m_gotrapslist.end(); iter2++)
+		{
+			C_Traps *other = (C_Traps *)*iter2;
+			if (!other->active)
+				continue;
+			if (other->CheckCollision(go, &tilemap))
+			{
+				other->CollisionResponse(go, &tilemap);
+			}
+		}
 	}
 }
 

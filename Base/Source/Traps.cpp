@@ -33,10 +33,7 @@ C_SpikeTrap::~C_SpikeTrap()
 }
 bool C_SpikeTrap::CheckCollision(Avatar* other, TileMap *tilemap)
 {
-	if (other->meshName == "HERO" )
-	{
-			return (GetPosition() - other->GetPosition()).LengthSquare() <= tilemap->GetTileSize() * tilemap->GetTileSize();
-	}
+		return (GetPosition() - other->GetPosition()).LengthSquare() <= tilemap->GetTileSize() * tilemap->GetTileSize();
 }
 void C_SpikeTrap::CollisionResponse(Avatar* other, TileMap *tilemap)
 {

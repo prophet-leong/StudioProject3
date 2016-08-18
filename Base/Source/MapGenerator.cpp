@@ -113,6 +113,7 @@ void Generator::Read(TileMap * tilemap)
 		Node *curr = (Node *)*iter;
 		if (curr->RoomPosition == playerRoomPosition)
 		{
+			curr->contentType = 0;
 			switch (curr->contentType)
 			{
 		case LEVEL1:
