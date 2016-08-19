@@ -99,7 +99,9 @@ void Hero::NormalAttack()
 	{
 		attackTimer = attackTime;
 		allowAttack = false;
-		FetchGO()->set(Position, direction, heroDamage);
+		Bullet* newBullet = FetchGO();
+		newBullet->set(Position, direction, heroDamage);
+		newBullet->SetScale(Vector2(0.5f, 0.5f));
 	}
 }
 
@@ -110,7 +112,9 @@ void Hero::SkillAttack()
 		attackTimer = attackTime;
 		allowAttack = false;
 		inventory->powerUpList[currentPowerUp];
-		FetchGO()->set(Position, direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE);
+		Bullet* newBullet = FetchGO();
+		newBullet->set(Position, direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE);
+		newBullet->SetScale(Vector2(0.5f, 0.5f));
 	}
 }
 

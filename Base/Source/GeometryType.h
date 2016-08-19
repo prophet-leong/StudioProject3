@@ -39,6 +39,8 @@ enum GEOMETRY_TYPE
 	GEO_PLACEHOLDER,
 	//element effects
 	GEO_FIRE,
+	//powerup icon
+	GEO_FIRESALT_ICON,
 	//bullet for hero
 	GEO_SALT,
 	GEO_FIRESALT,

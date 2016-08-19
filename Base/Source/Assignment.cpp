@@ -217,14 +217,18 @@ void Assignment::Init()
 	meshList[GEO_POISONED_BLOCK] = MeshBuilder::Generate2DMesh("spiked block", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_POISONED_BLOCK]->textureID = LoadTGA("Image//Traps//Spike_Block.tga");
 
-	meshList[GEO_SALT] = MeshBuilder::Generate2DMesh("treeSalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
-	meshList[GEO_SALT]->textureID = LoadTGA("Image//tree.tga");
+	meshList[GEO_SALT] = MeshBuilder::Generate2DMesh("saltball", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_SALT]->textureID = LoadTGA("Image//saltball.tga");
 
-	meshList[GEO_FIRE] = MeshBuilder::Generate2DMesh("treeSalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRE] = MeshBuilder::Generate2DMesh("fire", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_FIRE]->textureID = LoadTGA("Image//Fire.tga");
 
-	meshList[GEO_FIRESALT] = MeshBuilder::Generate2DMesh("coinsalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
-	meshList[GEO_FIRESALT]->textureID = LoadTGA("Image//coin.tga");
+	meshList[GEO_FIRESALT] = MeshBuilder::Generate2DMesh("firesalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRESALT]->textureID = LoadTGA("Image//powerup//fireball.tga");
+
+	meshList[GEO_FIRESALT_ICON] = MeshBuilder::Generate2DMesh("firesalt_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRESALT_ICON]->textureID = LoadTGA("Image//powerup//firepowerup.tga");
+
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
 
@@ -358,7 +362,7 @@ void Assignment::Update(double dt)
 	statemachine.FMSupdate();
 
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 10)
-	{
+	{ 
 	}
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{
@@ -745,7 +749,9 @@ void Assignment::LoadLevel()
 	{
 		if (currHero->Projectile[i]->active)
 		{
-			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
+			Render2DMesh(meshList[currHero->Projectile[i]->type], false,
+				currHero->Projectile[i]->scale.x,
+				currHero->Projectile[i]->scale.y,
 				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
 				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
 		}
