@@ -455,9 +455,9 @@ void Assignment::UpdateAllObjects()
 			}
 		}
 
-		for (vector<GameObject*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
+		for (vector<Tile*>::iterator iter2 = m_goList.begin(); iter2 != m_goList.end(); iter2++)
 		{
-			GameObject *other = (GameObject *)*iter2;
+			Tile *other = (Tile *)*iter2;
 			if (!other->active)
 				continue;
 			if (go->CheckCollision(other, &tilemap))
@@ -780,9 +780,9 @@ void Assignment::LoadLevel()
 	}
 
 	//load actual
-	for (vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
+	for (vector<Tile*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
 	{
-		GameObject *go = (GameObject *)*iter;
+		Tile *go = (Tile *)*iter;
 		if (!go->active)
 			continue;
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);

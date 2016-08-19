@@ -144,9 +144,9 @@ private:
 	//Gates
 	vector<Gate*>Gates;
 	vector<Avatar*> m_avatarList;
-	vector<GameObject*> m_goList;
+	vector<Tile*> m_goList;
 	vector<C_Traps*>m_gotrapslist;
-	 
+
 	//Map RNG
 	Generator* MapRandomizer;
 

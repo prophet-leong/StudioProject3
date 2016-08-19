@@ -9,15 +9,17 @@ public:
 	{
 		NORMAL,
 		ROCK,
+		POWERUP_FIRE,
+		POWERUP_SHIELD,
 		TILE_END,
 	};
-	Tile(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, TILE_TYPE type = NORMAL);
+	Tile(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, TILE_TYPE tiletype = NORMAL);
 	~Tile();
 
 	TILE_TYPE GetType();
 
 private:
-	TILE_TYPE type;
+	TILE_TYPE tiletype;
 
 
 };
