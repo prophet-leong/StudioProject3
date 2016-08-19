@@ -1,6 +1,7 @@
 #include "Assignment.h"
 #include "GL\glew.h"
 
+#include <GLFW\glfw3.h>
 #include "shader.hpp"
 #include "MeshBuilder.h"
 #include "Application.h"
@@ -11,7 +12,7 @@
 #include "Strategy_Escape.h"
 
 Assignment::Assignment()
-	: goToNextLevel(false)
+	: goToNextLevel(false), ssss ("")
 {
 
 }
@@ -135,7 +136,7 @@ void Assignment::Init()
 	SharedData::GetInstance()->SD_CurrDoor = CENTER;
 
 	MapRandomizer = new Generator();
-	MapRandomizer->GenerateStructure(); 
+	//MapRandomizer->GenerateStructure(); 
 	MapRandomizer->ConnectRooms();
 
 	//gates
@@ -365,7 +366,15 @@ void Assignment::Update(double dt)
 	statemachine.FMSupdate();
 
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 10)
-	{ 
+	{
+		inputtyping();
+		if (Application::IsKeyPressed(VK_RETURN))
+		{
+			MapRandomizer->GenerateStructure(ssss.str());
+			MapRandomizer->ConnectRooms();
+			ReadLevel();
+			statemachine.the_current_state_of_state_machine->change_state(2);
+		}
 	}
 	if (statemachine.the_current_state_of_state_machine->getcurrent_state() == 2)
 	{
@@ -786,11 +795,12 @@ void Assignment::LoadLevel()
 		if (!go->active) 
 			continue; 
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
-	}
-	 
+	} 
+
 	//render Skill effect
 	if (currHero->activeSkillEffect)
 	{
+		cout << "skill" << endl;
 		Render2DMesh(meshList[currHero->skillEffect], false, 1, 1,
 			currHero->GetPosition().x - tilemap.offSet_x,
 			currHero->GetPosition().y - tilemap.offSet_y);
@@ -972,4 +982,34 @@ void Assignment::render_enter_seed_screen()
 
 	}
 	
+}
+void Assignment::setcharacter(int character)
+{
+	this->character1 = character;
+}
+char Assignment::getchar()
+{
+	return character1;
+}
+void Assignment::inputtyping()
+{
+		static bool Buttonstate = false;
+		bool thisisabool;
+		for (int i = 48; i <= 57; i++)
+		{
+			if (Application::IsKeyPressed(i))
+			{
+				setcharacter(i);
+			}
+		}
+		if (Buttonstate==false && Application::IsKeyPressed(character1))
+		{
+			Buttonstate = true;
+			ssss << character1;
+		}
+		if (Buttonstate && !Application::IsKeyPressed(character1))
+		{
+			Buttonstate = false;
+
+		}
 }

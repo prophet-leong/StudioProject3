@@ -39,7 +39,7 @@ public:
 	};
 	LEVELS level;
 
-	void GenerateStructure(/*string seed*/);
+	void GenerateStructure(string seed);
 	void Read(TileMap * tilemap);
 	void GoToNextLevel(Vector2 AddToCurrent);
 	void ConnectRooms();
