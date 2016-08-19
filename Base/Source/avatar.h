@@ -25,7 +25,7 @@ public:
 	void SetAnimationCounterLR(int AnimationCounterLR);
 	void SetAnimationCounterUD(int AnimationCounterUD);
 	void SetAnimationInvert(bool AnimationInvert);
-
+	virtual void TakeDamage(int damage);
 	//getters
 	int GetAnimationCounterUD();
 	int GetAnimationCounterLR();
@@ -46,6 +46,10 @@ public:
 	virtual BULLET_ELEMENT GetElement();
 	//for different powerups
 	Vector2 direction;
+	//Movespeed modifier
+	int MoveSpeed;
+	int MoveSpeedPre_Status;
+
 protected:
 	BULLET_ELEMENT element;
 	float element_Status;

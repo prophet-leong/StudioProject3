@@ -4,9 +4,11 @@
 PowerUp_Shield::PowerUp_Shield(int x, int y, GEOMETRY_TYPE typeOfTile, string powerUpName, int damageMitigation, float maxDuration)
 :PowerUp(x, y, typeOfTile, powerUpName)
 {
+	this->active = false;
 	this->damageMitigation = damageMitigation;
 	this->maxDuration = maxDuration;
 	this->duration = maxDuration;
+	SetIncrementStat(INCREMENT_STAT::SHIELD);
 }
 void PowerUp_Shield::Update(double dt)
 {
@@ -23,6 +25,10 @@ void PowerUp_Shield::Update(double dt)
 			active = false;
 			duration = maxDuration;
 		}
+	}
+	else
+	{
+		SetActivated(false);
 	}
 }
 void PowerUp_Shield::activate()

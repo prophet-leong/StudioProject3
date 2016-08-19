@@ -169,9 +169,15 @@ void Assignment::Init()
 	// Load the ground mesh and texture
 	meshList[GEO_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
 	meshList[GEO_BACKGROUND] ->textureID = LoadTGA("Image//mariobackground.tga");
+	
 	//in Game BackGround
-	meshList[GEO_INGAME_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_INGAME_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
+	meshList[GEO_INGAME_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_INGAME_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, 1,1);
 	meshList[GEO_INGAME_BACKGROUND]->textureID = LoadTGA("Image//Backgrounds//Background_1.tga");
+
+	//black Background
+	meshList[GEO_BLACK_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_BLACK_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, 1,1);
+	meshList[GEO_BLACK_BACKGROUND]->textureID = LoadTGA("Image//Backgrounds//Black_background.tga");
+
 	//Doors
 	meshList[GEO_NORMAL_DOOR] = MeshBuilder::Generate2DMesh("GEO_NORMAL_DOOR", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_NORMAL_DOOR]->textureID = LoadTGA("Image//normal_door.tga");
@@ -192,7 +198,7 @@ void Assignment::Init()
 	meshList[GEO_TILESTRUCTURE]->textureID = LoadTGA("Image//step4b.tga");
 
 	meshList[GEO_TILEHERO_FRAME0] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME0", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
-	meshList[GEO_TILEHERO_FRAME0]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga");
+	meshList[GEO_TILEHERO_FRAME0]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga"); 
 
 	meshList[GEO_TILEHERO_FRAME1] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME1", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME1]->textureID = LoadTGA("Image//tile2_hero_frame_1.tga");
@@ -212,14 +218,18 @@ void Assignment::Init()
 	meshList[GEO_POISONED_BLOCK] = MeshBuilder::Generate2DMesh("spiked block", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_POISONED_BLOCK]->textureID = LoadTGA("Image//Traps//Spike_Block.tga");
 
-	meshList[GEO_SALT] = MeshBuilder::Generate2DMesh("treeSalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
-	meshList[GEO_SALT]->textureID = LoadTGA("Image//tree.tga");
+	meshList[GEO_SALT] = MeshBuilder::Generate2DMesh("saltball", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_SALT]->textureID = LoadTGA("Image//saltball.tga");
 
-	meshList[GEO_FIRE] = MeshBuilder::Generate2DMesh("treeSalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRE] = MeshBuilder::Generate2DMesh("fire", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_FIRE]->textureID = LoadTGA("Image//Fire.tga");
 
-	meshList[GEO_FIRESALT] = MeshBuilder::Generate2DMesh("coinsalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
-	meshList[GEO_FIRESALT]->textureID = LoadTGA("Image//coin.tga");
+	meshList[GEO_FIRESALT] = MeshBuilder::Generate2DMesh("firesalt", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRESALT]->textureID = LoadTGA("Image//powerup//fireball.tga");
+
+	meshList[GEO_FIRESALT_ICON] = MeshBuilder::Generate2DMesh("firesalt_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FIRESALT_ICON]->textureID = LoadTGA("Image//powerup//firepowerup.tga");
+
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
 
@@ -236,6 +246,10 @@ void Assignment::ReadLevel()
 {
 	MapRandomizer->Read(&tilemap);
 
+	if (goToNextLevel)
+	{
+		currHero->Reset(&tilemap);
+	}
 	// Actual Map
 	for (int i = 0; i < tilemap.GetNumRows(); i++)
 	{
@@ -252,69 +266,64 @@ void Assignment::ReadLevel()
 			} 
 			//Up door
 			case 3:
-			{
-				//if there is a room next door, create door
-				if (SharedData::GetInstance()->SD_CurrDoor == DOWN)
-				{
-					currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() - tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, 1));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-				if (MapRandomizer->GetCurrentRoom()->up != nullptr)
-					Gates[tilemap.map[i][k] - 3]->active = true;
-
-				break;
-			}
-
-			//Right door
 			case 4:
-			{
-				if (SharedData::GetInstance()->SD_CurrDoor == LEFT)
-				{
-					currHero->SetPos(k*tilemap.GetTileSize() - tilemap.GetTileSize(), i*tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1, 0));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-
-				if (MapRandomizer->GetCurrentRoom()->right != nullptr)
-					Gates[tilemap.map[i][k] - 3]->active = true;
-
-				break;
-			}
-
-			//Down door
 			case 5:
-			{
-				if (SharedData::GetInstance()->SD_CurrDoor == UP)
-				{
-					currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() + tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, -1));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-
-				if (MapRandomizer->GetCurrentRoom()->down != nullptr)
-					Gates[tilemap.map[i][k] - 3]->active = true;
-				break;
-			}
-
-			//Left Door
 			case 6:
 			{
-				if (SharedData::GetInstance()->SD_CurrDoor == RIGHT)
+				//if there is a room next door, create door
+				if (MapRandomizer->GetCurrentRoom()->up != nullptr &&  tilemap.map[i][k] == 3)
 				{
-					currHero->SetPos(k*tilemap.GetTileSize() + tilemap.GetTileSize(), i*tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(-1, 0));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-
-				if (MapRandomizer->GetCurrentRoom()->left != nullptr)
+					if (SharedData::GetInstance()->SD_CurrDoor == DOWN)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() - tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, 1));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else if (MapRandomizer->GetCurrentRoom()->right != nullptr &&  tilemap.map[i][k] == 4)
+				{
+					if (SharedData::GetInstance()->SD_CurrDoor == LEFT)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize() - tilemap.GetTileSize(), i*tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1, 0));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else if (MapRandomizer->GetCurrentRoom()->down != nullptr &&  tilemap.map[i][k] == 5)
+				{
+					if (SharedData::GetInstance()->SD_CurrDoor == UP)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() + tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, -1));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else if (MapRandomizer->GetCurrentRoom()->left != nullptr &&  tilemap.map[i][k] == 6)
+				{
+					if (SharedData::GetInstance()->SD_CurrDoor == RIGHT)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize() + tilemap.GetTileSize(), i*tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(-1, 0));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else
+				{
+					Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
+					m_goList.push_back(newTile);
+				}
+
 				break;
-			}
+			} 
+
 			case 15: 
 			{
 				C_SpikeTrap *newTrap = new C_SpikeTrap(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP,1);
@@ -405,7 +414,6 @@ void Assignment::Update(double dt)
 		{
 			ClearLevel();
 			ReadLevel();
-			//currHero->Reset(&tilemap);
 			goToNextLevel = false;
 		}
 
@@ -442,20 +450,6 @@ void Assignment::UpdateAllObjects()
 			if (go->CheckCollision(other, &tilemap))
 				go->CollisionResponse(other, &tilemap);	
 		}
-		for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
-		{
-			Avatar *other = (Avatar *)*iter3;
-			if (!other->active)
-				continue;
-			if (go->CheckCollision(other, &tilemap))
-			{
-				go->CollisionResponse(other, &tilemap);
-			}
-			//go->CollisionContainer(other);//bullet
-			//go->CollisionContainer(other, &tilemap);//hero to enemy collision
-			//other->CollisionContainer(go);//bullet
-			//other->CollisionContainer(go, &tilemap);//enemy to hero collision
-		}
 		for (vector<C_Traps*>::iterator iter2 = m_gotrapslist.begin(); iter2 != m_gotrapslist.end(); iter2++)
 		{
 			C_SpikeTrap *other = (C_SpikeTrap *)*iter2;
@@ -464,6 +458,16 @@ void Assignment::UpdateAllObjects()
 			if (other->CheckCollision(go, &tilemap))
 			{
 				other->CollisionResponse(go, &tilemap);
+			}
+		}
+		for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
+		{
+			Avatar *other = (Avatar *)*iter3;
+			if (!other->active)
+				continue;
+			if (go->CheckCollision(other, &tilemap))
+			{
+				go->CollisionResponse(other, &tilemap);
 			}
 		}
 	}
@@ -683,8 +687,9 @@ void Assignment::RenderMesh(Mesh *mesh, bool enableLight)
 
 void Assignment::RenderBackground()
 {
-	// Render the crosshair
-	Render2DMesh(meshList[GEO_INGAME_BACKGROUND], false);
+	Render2DMesh(meshList[GEO_BLACK_BACKGROUND], false, tilemap.GetMapWidth(), tilemap.GetMapHeight(), 0 - tilemap.offSet_x, 0 - tilemap.offSet_y);
+		// Render the crosshair							 
+	Render2DMesh(meshList[GEO_INGAME_BACKGROUND], false, tilemap.GetMapWidth(), tilemap.GetMapHeight(), 0 - tilemap.offSet_x, 0 - tilemap.offSet_y);
 }
 
 void Assignment::Render()
@@ -748,6 +753,19 @@ void Assignment::Exit()
  ********************************************************************************/
 void Assignment::LoadLevel()
 {
+	//render bullets
+	for (int i = 0; i < currHero->Projectile.size(); ++i)
+	{
+		if (currHero->Projectile[i]->active)
+		{
+			Render2DMesh(meshList[currHero->Projectile[i]->type], false,
+				currHero->Projectile[i]->scale.x,
+				currHero->Projectile[i]->scale.y,
+				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
+				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
+		}
+	}
+
 	//load actual
 	for (vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
 	{
@@ -777,15 +795,14 @@ void Assignment::LoadLevel()
 		}
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
-	//render bullets
-	for (int i = 0; i < currHero->Projectile.size(); ++i)
+
+	//render Skill effect
+	if (currHero->activeSkillEffect)
 	{
-		if (currHero->Projectile[i]->active)
-		{
-			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
-				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
-				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
-		}
+		cout << "skill" << endl;
+		Render2DMesh(meshList[currHero->skillEffect], false, 1, 1,
+			currHero->GetPosition().x - tilemap.offSet_x,
+			currHero->GetPosition().y - tilemap.offSet_y);
 	}
 	//render avatars
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)

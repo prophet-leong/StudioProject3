@@ -56,3 +56,8 @@ Vector2 GameObject::GetPosition()
 {
 	return Position;
 }
+
+void GameObject::SetScale(Vector2 newScale)
+{
+	scale = newScale;
+}

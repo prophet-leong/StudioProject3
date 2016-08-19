@@ -17,7 +17,7 @@ public:
 	void SetPos(int x,int y);
 	void SetPos(Vector2 newPos);
 	void SetTexture(GEOMETRY_TYPE newTexture);
-
+	void SetScale(Vector2 newScale);
 	Vector2 GetPosition();
 
 	//public variables
@@ -29,7 +29,7 @@ public:
 	GEOMETRY_TYPE type;
 protected:
 	Vector2 Position;
-	const int size = 32;
+	const int size = 48;
 
 };
 
