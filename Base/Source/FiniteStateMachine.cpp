@@ -272,13 +272,13 @@ void the_state_machine::FMSupdate()
 				the_current_state_of_state_machine->change_state(6);
 			}
 		}
-		else if (the_current_state_of_state_machine->getcurrent_state() == 10)
-		{
-			if (Application::IsKeyPressed(VK_RETURN))
-			{
-				state_enter_seed_screen::seedentered(true);
-				if (state_enter_seed_screen::seedentered(true));
-				the_current_state_of_state_machine->change_state(2);
-			}
-		}
+		//else if (the_current_state_of_state_machine->getcurrent_state() == 10)
+		//{
+		//	/*if (Application::IsKeyPressed(VK_RETURN))
+		//	{
+		//		state_enter_seed_screen::seedentered(true);
+		//		if (state_enter_seed_screen::seedentered(true));
+		//		the_current_state_of_state_machine->change_state(2);
+		//	}*/
+		//}
 }

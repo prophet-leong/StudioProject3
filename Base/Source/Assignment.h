@@ -161,6 +161,11 @@ private:
 	void render_in_game_option_screen();
 	void render_enter_seed_screen();
 	stringstream ssss;
+
+	void inputtyping();
+	char character1;
+	void setcharacter(int characternumber);
+	char getchar();
 	
 };
 

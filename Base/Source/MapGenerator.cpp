@@ -33,10 +33,11 @@ Generates the Structure of the rooms randomly
 seed : the seed used to randomise the level inputed by the player
 */
 /***********************************************/
-void Generator::GenerateStructure(/*string seed*/)
+void Generator::GenerateStructure(string seed)
 {
-	srand(time(NULL));
-	//srand (stoi(seed));
+	//srand(time(NULL));
+	unsigned int i = stoi(seed);
+	srand (i);
 	if (CurRooms == 0)
 		GenerateLevel(MaxRooms,Vector2(0,0));
 
