@@ -29,7 +29,7 @@ public:
 	GEOMETRY_TYPE type;
 protected:
 	Vector2 Position;
-	const int size = 32;
+	const int size = 48;
 
 };
 

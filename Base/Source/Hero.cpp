@@ -54,7 +54,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 	moveX = (tilemap->GetScreenWidth() * 0.5f) + tilemap->offSet_x;
 	moveY = (tilemap->GetScreenHeight() * 0.7f) + tilemap->offSet_y;
 
-	Scrolling(tilemap, tilemap->offSet_x , moveX , moveY , tilemap->offSet_y + 160, 60.f * dt);
+	Scrolling(tilemap, tilemap->offSet_x + 200, moveX , moveY , tilemap->offSet_y + 200, 60.f * dt);
 	
 	Constrain(tilemap);
 }
@@ -138,12 +138,10 @@ void Hero::Constrain(TileMap* tilemap)
 //Soft-Reset
 void Hero::Reset(TileMap* tilemap)
 {
-	active = true; 
 	SetAnimationCounterLR(0);
-	SetAnimationInvert(false); 
-	scale.y = 1.f;
+	SetAnimationInvert(false);
 	tilemap->offSet_x = 0;
-	tilemap->fineOffSet_y = 0;
+	tilemap->offSet_y = 0;
 }
 
 //Full-Reset

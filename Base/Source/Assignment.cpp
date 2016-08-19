@@ -168,9 +168,15 @@ void Assignment::Init()
 	// Load the ground mesh and texture
 	meshList[GEO_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
 	meshList[GEO_BACKGROUND] ->textureID = LoadTGA("Image//mariobackground.tga");
+	
 	//in Game BackGround
-	meshList[GEO_INGAME_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_INGAME_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetMapWidth(), tilemap.GetMapHeight());
+	meshList[GEO_INGAME_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_INGAME_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, 1,1);
 	meshList[GEO_INGAME_BACKGROUND]->textureID = LoadTGA("Image//Backgrounds//Background_1.tga");
+
+	//black Background
+	meshList[GEO_BLACK_BACKGROUND] = MeshBuilder::Generate2DMesh("GEO_BLACK_BACKGROUND", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, 1,1);
+	meshList[GEO_BLACK_BACKGROUND]->textureID = LoadTGA("Image//Backgrounds//Black_background.tga");
+
 	//Doors
 	meshList[GEO_NORMAL_DOOR] = MeshBuilder::Generate2DMesh("GEO_NORMAL_DOOR", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_NORMAL_DOOR]->textureID = LoadTGA("Image//normal_door.tga");
@@ -191,7 +197,7 @@ void Assignment::Init()
 	meshList[GEO_TILESTRUCTURE]->textureID = LoadTGA("Image//step4b.tga");
 
 	meshList[GEO_TILEHERO_FRAME0] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME0", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
-	meshList[GEO_TILEHERO_FRAME0]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga");
+	meshList[GEO_TILEHERO_FRAME0]->textureID = LoadTGA("Image//tile2_hero_frame_0.tga"); 
 
 	meshList[GEO_TILEHERO_FRAME1] = MeshBuilder::Generate2DMesh("GEO_TILEHERO_FRAME1", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_TILEHERO_FRAME1]->textureID = LoadTGA("Image//tile2_hero_frame_1.tga");
@@ -235,6 +241,10 @@ void Assignment::ReadLevel()
 {
 	MapRandomizer->Read(&tilemap);
 
+	if (goToNextLevel)
+	{
+		currHero->Reset(&tilemap);
+	}
 	// Actual Map
 	for (int i = 0; i < tilemap.GetNumRows(); i++)
 	{
@@ -396,7 +406,6 @@ void Assignment::Update(double dt)
 		{
 			ClearLevel();
 			ReadLevel();
-			//currHero->Reset(&tilemap);
 			goToNextLevel = false;
 		}
 
@@ -433,20 +442,6 @@ void Assignment::UpdateAllObjects()
 			if (go->CheckCollision(other, &tilemap))
 				go->CollisionResponse(other, &tilemap);	
 		}
-		for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
-		{
-			Avatar *other = (Avatar *)*iter3;
-			if (!other->active)
-				continue;
-			if (go->CheckCollision(other, &tilemap))
-			{
-				go->CollisionResponse(other, &tilemap);
-			}
-			//go->CollisionContainer(other);//bullet
-			//go->CollisionContainer(other, &tilemap);//hero to enemy collision
-			//other->CollisionContainer(go);//bullet
-			//other->CollisionContainer(go, &tilemap);//enemy to hero collision
-		}
 		for (vector<C_Traps*>::iterator iter2 = m_gotrapslist.begin(); iter2 != m_gotrapslist.end(); iter2++)
 		{
 			C_SpikeTrap *other = (C_SpikeTrap *)*iter2;
@@ -455,6 +450,16 @@ void Assignment::UpdateAllObjects()
 			if (other->CheckCollision(go, &tilemap))
 			{
 				other->CollisionResponse(go, &tilemap);
+			}
+		}
+		for (vector<Avatar*>::iterator iter3 = iter + 1; iter3 != m_avatarList.end(); iter3++)
+		{
+			Avatar *other = (Avatar *)*iter3;
+			if (!other->active)
+				continue;
+			if (go->CheckCollision(other, &tilemap))
+			{
+				go->CollisionResponse(other, &tilemap);
 			}
 		}
 	}
@@ -674,8 +679,9 @@ void Assignment::RenderMesh(Mesh *mesh, bool enableLight)
 
 void Assignment::RenderBackground()
 {
-	// Render the crosshair
-	Render2DMesh(meshList[GEO_INGAME_BACKGROUND], false);
+	Render2DMesh(meshList[GEO_BLACK_BACKGROUND], false, tilemap.GetMapWidth(), tilemap.GetMapHeight(), 0 - tilemap.offSet_x, 0 - tilemap.offSet_y);
+		// Render the crosshair							 
+	Render2DMesh(meshList[GEO_INGAME_BACKGROUND], false, tilemap.GetMapWidth(), tilemap.GetMapHeight(), 0 - tilemap.offSet_x, 0 - tilemap.offSet_y);
 }
 
 void Assignment::Render()
@@ -739,6 +745,17 @@ void Assignment::Exit()
  ********************************************************************************/
 void Assignment::LoadLevel()
 {
+	//render bullets
+	for (int i = 0; i < currHero->Projectile.size(); ++i)
+	{
+		if (currHero->Projectile[i]->active)
+		{
+			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
+				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
+				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
+		}
+	}
+
 	//load actual
 	for (vector<GameObject*>::iterator iter = m_goList.begin(); iter != m_goList.end(); iter++)
 	{
@@ -768,16 +785,9 @@ void Assignment::LoadLevel()
 		}
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
-	//render bullets
-	for (int i = 0; i < currHero->Projectile.size(); ++i)
-	{
-		if (currHero->Projectile[i]->active)
-		{
-			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
-				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
-				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
-		}
-	}
+
+	
+
 	//render avatars
 	for (vector<Avatar*>::iterator iter = m_avatarList.begin(); iter != m_avatarList.end(); iter++)
 	{

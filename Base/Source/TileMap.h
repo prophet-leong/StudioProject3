@@ -15,7 +15,7 @@ private:
 
 	bool LoadFile(const string& mapName,const int screenWidth,const int screenHeight);
 
-	const int tilesize = 32;
+	const int tilesize = 48;
 	int mapWidth, mapHeight, mapTileWidth, mapTileHeight, screenWidth, screenHeight;
 
 public:
