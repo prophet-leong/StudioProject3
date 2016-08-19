@@ -21,6 +21,8 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	inventory = new Bag();
 	activeSkillEffect = false;
 	MoveSpeed = 8.0f;
+	immuneCurrentTime = 0;
+	immuneTime = 1.0f;
 }
 
 Hero::~Hero()
@@ -60,8 +62,6 @@ void Hero::Update(TileMap* tilemap , double dt)
 	BulletUpdate(dt);
 	moveLeft = moveRight = moveUp = moveDown = true;
 
-	inventory->Update(dt);
-
 	moveX = (tilemap->GetScreenWidth() * 0.5f) + tilemap->offSet_x;
 	moveY = (tilemap->GetScreenHeight() * 0.7f) + tilemap->offSet_y;
 
@@ -69,6 +69,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 	
 	Constrain(tilemap);
 	isDead(tilemap);
+	ImmuneTimeUpdate(dt);
 }
 
 Bullet* Hero::FetchGO()
@@ -279,11 +280,15 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 
 void Hero::TakeDamage(int damage)
 {
-
-	if (heroShield <= 0)
-		health -= damage;
-	else
-		heroShield -= damage;
+	if (immuneCurrentTime <= 0)
+	{
+		cout << heroShield << endl;
+		if (heroShield <= 0)
+			health -= damage;
+		else
+			heroShield -= damage;
+		immuneCurrentTime = immuneTime;
+	}
 		
 }
 
@@ -328,6 +333,11 @@ bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
 void Hero::CollisionResponse(GameObject* other, TileMap *tilemap)
 {
 	BasicCollisionResponse(other, tilemap);
+}
+void Hero::ImmuneTimeUpdate(double dt)
+{
+	if (immuneCurrentTime >=0)
+		immuneCurrentTime -= dt;
 }
 
 

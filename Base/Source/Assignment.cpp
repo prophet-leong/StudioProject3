@@ -800,6 +800,7 @@ void Assignment::LoadLevel()
 	//render Skill effect
 	if (currHero->activeSkillEffect)
 	{
+		cout << "skill" << endl;
 		Render2DMesh(meshList[currHero->skillEffect], false, 1, 1,
 			currHero->GetPosition().x - tilemap.offSet_x,
 			currHero->GetPosition().y - tilemap.offSet_y);
