@@ -5,24 +5,19 @@
 class Tile : public GameObject
 {
 public:
-	Tile(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile);
-	~Tile();
-
 	enum TILE_TYPE
 	{
 		NORMAL,
-		VICTORY,
-		INVISIBLE,
-		POINTS,
-		POWERUP,
-		MUSHROOM,
-		COIN,
+		ROCK,
 		TILE_END,
 	};
-	TILE_TYPE type;
+	Tile(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile, TILE_TYPE type = NORMAL);
+	~Tile();
 
+	TILE_TYPE GetType();
 
 private:
+	TILE_TYPE type;
 
 
 };

@@ -20,6 +20,9 @@ enum GEOMETRY_TYPE
 	GEO_COIN,
 	// ground tile
 	GEO_TILEGROUND,
+	//ROCKS
+	GEO_ROCK,
+
 	//tree tile
 	GEO_TILETREE,
 	//rear map
@@ -50,7 +53,6 @@ enum GEOMETRY_TYPE
 	//Trap Section
 	GEO_SPIKE_TRAP,
 	GEO_POISONED_BLOCK,
-	
 	//BACKGROUND
 	GEO_INGAME_BACKGROUND,
 	GEO_BLACK_BACKGROUND,

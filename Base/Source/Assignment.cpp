@@ -233,6 +233,9 @@ void Assignment::Init()
 	meshList[GEO_SHIELD] = MeshBuilder::Generate2DMesh("shield_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_SHIELD]->textureID = LoadTGA("Image//powerup//shieldpowerup.tga");
 
+	meshList[GEO_ROCK] = MeshBuilder::Generate2DMesh("shield_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_ROCK]->textureID = LoadTGA("Image//Rock.tga");
+
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
 
@@ -267,6 +270,13 @@ void Assignment::ReadLevel()
 				break;
 
 			} 
+
+			case 2:
+			{
+				Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEROCK", GEO_ROCK,Tile::ROCK);
+				m_goList.push_back(newTile);
+				break;
+			}
 			//Up door
 			case 3:
 			case 4:
@@ -326,6 +336,15 @@ void Assignment::ReadLevel()
 
 				break;
 			} 
+			//dumb enemy
+			case 10:
+			{
+				GEOMETRY_TYPE heroTexture[] = { GEO_TILEHERO_FRAME0, GEO_TILEHERO_FRAME1, GEO_TILEHERO_FRAME2, GEO_TILEHERO_FRAME3 };
+				EnemyAI* newEnemy = new EnemyAI(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_ENEMY", heroTexture, 4);
+				newEnemy->health = 10;
+				m_avatarList.push_back(newEnemy);
+				break;
+			}
 
 			case 15: 
 			{
@@ -334,15 +353,6 @@ void Assignment::ReadLevel()
 				break;
 			}
 
-			//dumb enemy
-			case 10:
-			{
-				GEOMETRY_TYPE heroTexture[] = { GEO_TILEHERO_FRAME0, GEO_TILEHERO_FRAME1, GEO_TILEHERO_FRAME2, GEO_TILEHERO_FRAME3 };
-				EnemyAI* newEnemy = new EnemyAI(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_ENEMY",heroTexture, 4);
-				newEnemy->health = 10;
-				m_avatarList.push_back(newEnemy); 
-				break;
-			}
 
 			}
 		}
@@ -818,8 +828,6 @@ void Assignment::LoadLevel()
 			Render2DMesh(meshList[GEO_FIRE], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y, rotation, false, currHero->GetAnimationInvert());
 	}
 
-	
-	 
 }
 
 void Assignment::ClearLevel()
