@@ -23,7 +23,7 @@ void C_SpikeTrap::CollisionResponse(GameObject* other, TileMap *tilemap)
 	Avatar* Other = (Avatar*)other;
 	if (Other->meshName == "HERO")
 	{
-		Other->health -= 1;
+		Other->TakeDamage(1);
 	}
 }
 bool C_SpikeTrap::checkdeath()

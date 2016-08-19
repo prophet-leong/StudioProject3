@@ -24,6 +24,10 @@ void PowerUp_Shield::Update(double dt)
 			duration = maxDuration;
 		}
 	}
+	else
+	{
+		SetActivated(false);
+	}
 }
 void PowerUp_Shield::activate()
 {

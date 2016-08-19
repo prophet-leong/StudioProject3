@@ -19,6 +19,8 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	direction.Set(1, 0);
 	currentPowerUp = 0;
 	inventory = new Bag();
+	activeSkillEffect = false;
+	MoveSpeed = 8.0f;
 }
 
 Hero::~Hero()
@@ -37,10 +39,19 @@ void Hero::Update(TileMap* tilemap , double dt)
 		{
 			case SHIELD:
 			{
-				if (go->active && go->GetActivated() == false)
+				if (go->active)
 				{
-					heroShield = go->GetIncrement();
-					go->SetActivated(true);
+					if (go->GetActivated() == false)
+					{
+						heroShield = go->GetIncrement();
+						go->SetActivated(true);
+					}
+					if (heroShield <= 0)
+						go->active = false;
+				}
+				else if (go->active == false)
+				{
+					activeSkillEffect = false;
 				}
 			}
 		}
@@ -57,6 +68,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 	Scrolling(tilemap, moveX, moveX , moveY , moveY, 60.f * dt);
 	
 	Constrain(tilemap);
+	isDead(tilemap);
 }
 
 Bullet* Hero::FetchGO()
@@ -77,10 +89,14 @@ Bullet* Hero::FetchGO()
 
 void Hero::NextPowerUp()
 {
-	if (currentPowerUp < inventory->powerUpList.size())
-		currentPowerUp++;
-	else
+	currentPowerUp++;
+	
+	if (currentPowerUp == inventory->powerUpList.size())
 		currentPowerUp = 0;
+	
+	activeSkillEffect = false;
+
+	cout << currentPowerUp << endl;
 }
 
 void Hero::AttackCooldown(double dt)
@@ -107,7 +123,13 @@ void Hero::NormalAttack()
 
 void Hero::SkillAttack()
 {
-	if (allowAttack == true && !inventory->powerUpList.empty() && inventory->powerUpList[currentPowerUp]->GetIncrementStat() == ATTACK)
+	if (inventory->powerUpList[currentPowerUp]->GetIncrementStat() == SHIELD)
+	{
+		inventory->powerUpList[currentPowerUp]->active = true;
+		activeSkillEffect = true;
+		skillEffect = GEOMETRY_TYPE::GEO_COIN;
+	}
+	else if (allowAttack == true && !inventory->powerUpList.empty() && inventory->powerUpList[currentPowerUp]->GetIncrementStat() == ATTACK)
 	{
 		attackTimer = attackTime;
 		allowAttack = false;
@@ -153,6 +175,14 @@ void Hero::Restart()
 {
 	health = 3;
 }
+void Hero::isDead(TileMap*tilemap)
+{
+	if (health <= 0)
+	{
+		Reset(tilemap);
+		cout << "dead" << endl;
+	}
+}
 
 // status:done
 void Hero::Scrolling(TileMap* tilemap,const int leftBorder, const int rightBorder,
@@ -192,7 +222,7 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		//move left
 		if (moveLeft)
 		{
-			Position.x -= (int)(8.0f * timeDiff);
+			Position.x -= (int)(MoveSpeed * timeDiff);
 		}
 		direction.Set(-1, 0);
 		AnimationInvert = true;
@@ -205,7 +235,7 @@ void Hero::MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap)
 		//move right
 		if (moveRight)
 		{
-			Position.x += (int)(8.0f * timeDiff);
+			Position.x += (int)(MoveSpeed * timeDiff);
 		}
 		direction.Set(1, 0);
 		AnimationInvert = false;
@@ -223,7 +253,7 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 	{
 		if (moveUp)
 		{
-			Position.y += (int)(8.0f * timeDiff);
+			Position.y += (int)(MoveSpeed * timeDiff);
 		}
 		direction.Set(0, 1);
 		AnimationInvert = true;
@@ -235,7 +265,7 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 	{
 		if (moveDown)
 		{
-			Position.y -= (int)(8.0f * timeDiff);
+			Position.y -= (int)(MoveSpeed * timeDiff);
 		}
 		direction.Set(0, -1);
 		AnimationInvert = false;
@@ -247,8 +277,9 @@ void Hero::MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap)
 	SetTexture(texture[AnimationCounterLR]);
 }
 
-void Hero::HeroTakeDamage(int damage)
+void Hero::TakeDamage(int damage)
 {
+
 	if (heroShield <= 0)
 		health -= damage;
 	else
@@ -281,14 +312,13 @@ bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
 		if (other->meshName == "GEO_ENEMY")
 		{
 			Avatar* enemy = (Avatar*)other;
-			enemy->health -= bullet->GetDamage();
+			enemy->TakeDamage(bullet->GetDamage());
 			enemy->SetElementState(bullet->GetElementType());
 			//temp isdead
 			if (enemy->health <= 0)
 			{
 				enemy->active = false;
 			}
-			cout << enemy->health << endl;
 		}
 	}
 
