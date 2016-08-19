@@ -127,7 +127,7 @@ void Hero::SkillAttack()
 	{
 		inventory->powerUpList[currentPowerUp]->active = true;
 		activeSkillEffect = true;
-		skillEffect = GEOMETRY_TYPE::GEO_COIN;
+		skillEffect = GEOMETRY_TYPE::GEO_SHIELD;
 	}
 	else if (allowAttack == true && !inventory->powerUpList.empty() && inventory->powerUpList[currentPowerUp]->GetIncrementStat() == ATTACK)
 	{
@@ -175,11 +175,12 @@ void Hero::Restart()
 {
 	health = 3;
 }
+
 void Hero::isDead(TileMap*tilemap)
 {
 	if (health <= 0)
 	{
-		Reset(tilemap);
+		Restart();
 		cout << "dead" << endl;
 	}
 }

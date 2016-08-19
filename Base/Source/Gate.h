@@ -37,7 +37,7 @@ public:
 	//public direction
 	bool up, down, left, right;
 private:
-
+	
 	Vector2 nextLocation;
 	Generator* generator;
 };

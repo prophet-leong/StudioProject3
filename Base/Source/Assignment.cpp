@@ -229,6 +229,9 @@ void Assignment::Init()
 	meshList[GEO_FIRESALT_ICON] = MeshBuilder::Generate2DMesh("firesalt_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_FIRESALT_ICON]->textureID = LoadTGA("Image//powerup//firepowerup.tga");
 
+	meshList[GEO_SHIELD] = MeshBuilder::Generate2DMesh("shield_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_SHIELD]->textureID = LoadTGA("Image//powerup//shieldpowerup.tga");
+
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
 
@@ -780,23 +783,11 @@ void Assignment::LoadLevel()
 	for (vector<C_Traps*>::iterator iter = m_gotrapslist.begin(); iter != m_gotrapslist.end(); iter++)
 	{
 		C_Traps* go = (C_Traps*)*iter;
-		if (!go->active)
-		{
-			continue;
-		}
+		if (!go->active) 
+			continue; 
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
-
-	//render bullets
-	for (int i = 0; i < currHero->Projectile.size(); ++i)
-	{
-		if (currHero->Projectile[i]->active)
-		{
-			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
-				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
-				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
-		}
-	}
+	 
 	//render Skill effect
 	if (currHero->activeSkillEffect)
 	{

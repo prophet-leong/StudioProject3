@@ -41,6 +41,8 @@ enum GEOMETRY_TYPE
 	GEO_FIRE,
 	//powerup icon
 	GEO_FIRESALT_ICON,
+	//sheild power up
+	GEO_SHIELD,
 	//bullet for hero
 	GEO_SALT,
 	GEO_FIRESALT,
