@@ -53,6 +53,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 				}
 				else if (go->active == false)
 				{
+					heroShield = 0;
 					activeSkillEffect = false;
 				}
 			}
@@ -118,7 +119,7 @@ void Hero::NormalAttack()
 		allowAttack = false;
 		Bullet* newBullet = FetchGO();
 		newBullet->set(Position, direction, heroDamage);
-		newBullet->SetScale(Vector2(0.5f, 0.5f));
+		newBullet->SetScale(Vector2(0.3f, 0.3f));
 	}
 }
 
@@ -137,7 +138,7 @@ void Hero::SkillAttack()
 		inventory->powerUpList[currentPowerUp];
 		Bullet* newBullet = FetchGO();
 		newBullet->set(Position, direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE);
-		newBullet->SetScale(Vector2(0.5f, 0.5f));
+		newBullet->SetScale(Vector2(0.3f, 0.3f));
 	}
 }
 

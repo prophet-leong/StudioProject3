@@ -787,16 +787,6 @@ void Assignment::LoadLevel()
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	}
 
-	//render bullets
-	for (int i = 0; i < currHero->Projectile.size(); ++i)
-	{
-		if (currHero->Projectile[i]->active)
-		{
-			Render2DMesh(meshList[currHero->Projectile[i]->type], false, 1, 1,
-				currHero->Projectile[i]->GetPosition().x - tilemap.offSet_x,
-				currHero->Projectile[i]->GetPosition().y - tilemap.offSet_y);
-		}
-	}
 	//render Skill effect
 	if (currHero->activeSkillEffect)
 	{
