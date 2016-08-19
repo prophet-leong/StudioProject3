@@ -17,7 +17,7 @@ enum INCREMENT_STAT
 class PowerUp:public GameObject
 {
 public:
-	PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUp);
+	PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUp = "PowerUp");
 	virtual ~PowerUp();
 
 	virtual void Update(double dt) = 0;

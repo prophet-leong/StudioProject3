@@ -42,7 +42,7 @@ public:
 	vector<Bullet *>Projectile;
 	//bullet element reaction
 	virtual void SetElementState(BULLET_ELEMENT element);
-	virtual void ElementStateUpdate(double dt);
+	void ElementStateUpdate(double dt);
 	virtual BULLET_ELEMENT GetElement();
 	//for different powerups
 	Vector2 direction;
