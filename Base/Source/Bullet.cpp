@@ -31,7 +31,7 @@ void Bullet::set(Vector2 position, Vector2 direction, int damage, int speed, GEO
 
 bool Bullet::CheckCollision(GameObject* other, TileMap*tilemap)
 {
-	if ((Position - other->GetPosition()).LengthSquare() <= scale.x*size*scale.y*size)
+	if ((Position - other->GetPosition()).LengthSquare() <= scale.x*size*size)
 	{
 		return true;
 	}
