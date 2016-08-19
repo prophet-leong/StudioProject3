@@ -261,69 +261,64 @@ void Assignment::ReadLevel()
 			} 
 			//Up door
 			case 3:
-			{
-				//if there is a room next door, create door
-				if (SharedData::GetInstance()->SD_CurrDoor == DOWN)
-				{
-					currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() - tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, 1));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-				if (MapRandomizer->GetCurrentRoom()->up != nullptr)
-					Gates[tilemap.map[i][k] - 3]->active = true;
-
-				break;
-			}
-
-			//Right door
 			case 4:
-			{
-				if (SharedData::GetInstance()->SD_CurrDoor == LEFT)
-				{
-					currHero->SetPos(k*tilemap.GetTileSize() - tilemap.GetTileSize(), i*tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1, 0));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-
-				if (MapRandomizer->GetCurrentRoom()->right != nullptr)
-					Gates[tilemap.map[i][k] - 3]->active = true;
-
-				break;
-			}
-
-			//Down door
 			case 5:
-			{
-				if (SharedData::GetInstance()->SD_CurrDoor == UP)
-				{
-					currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() + tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, -1));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-
-				if (MapRandomizer->GetCurrentRoom()->down != nullptr)
-					Gates[tilemap.map[i][k] - 3]->active = true;
-				break;
-			}
-
-			//Left Door
 			case 6:
 			{
-				if (SharedData::GetInstance()->SD_CurrDoor == RIGHT)
+				//if there is a room next door, create door
+				if (MapRandomizer->GetCurrentRoom()->up != nullptr &&  tilemap.map[i][k] == 3)
 				{
-					currHero->SetPos(k*tilemap.GetTileSize() + tilemap.GetTileSize(), i*tilemap.GetTileSize());
-					SharedData::GetInstance()->SD_CurrDoor = NONE;
-				}
-				Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(-1, 0));
-				Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
-
-				if (MapRandomizer->GetCurrentRoom()->left != nullptr)
+					if (SharedData::GetInstance()->SD_CurrDoor == DOWN)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() - tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, 1));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
 					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else if (MapRandomizer->GetCurrentRoom()->right != nullptr &&  tilemap.map[i][k] == 4)
+				{
+					if (SharedData::GetInstance()->SD_CurrDoor == LEFT)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize() - tilemap.GetTileSize(), i*tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(1, 0));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else if (MapRandomizer->GetCurrentRoom()->down != nullptr &&  tilemap.map[i][k] == 5)
+				{
+					if (SharedData::GetInstance()->SD_CurrDoor == UP)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize() + tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(0, -1));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else if (MapRandomizer->GetCurrentRoom()->left != nullptr &&  tilemap.map[i][k] == 6)
+				{
+					if (SharedData::GetInstance()->SD_CurrDoor == RIGHT)
+					{
+						currHero->SetPos(k*tilemap.GetTileSize() + tilemap.GetTileSize(), i*tilemap.GetTileSize());
+						SharedData::GetInstance()->SD_CurrDoor = NONE;
+					}
+					Gates[tilemap.map[i][k] - 3]->SetLocation(Vector2(-1, 0));
+					Gates[tilemap.map[i][k] - 3]->SetPos(k*tilemap.GetTileSize(), i*tilemap.GetTileSize());
+					Gates[tilemap.map[i][k] - 3]->active = true;
+				}
+				else
+				{
+					Tile *newTile = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_TILEGROUND", GEO_TILEGROUND);
+					m_goList.push_back(newTile);
+				}
+
 				break;
-			}
+			} 
+
 			case 15: 
 			{
 				C_SpikeTrap *newTrap = new C_SpikeTrap(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "GEO_SPIKED_TRAP", GEO_SPIKE_TRAP,1);

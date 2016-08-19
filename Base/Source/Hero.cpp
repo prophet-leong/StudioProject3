@@ -54,7 +54,7 @@ void Hero::Update(TileMap* tilemap , double dt)
 	moveX = (tilemap->GetScreenWidth() * 0.5f) + tilemap->offSet_x;
 	moveY = (tilemap->GetScreenHeight() * 0.7f) + tilemap->offSet_y;
 
-	Scrolling(tilemap, tilemap->offSet_x + 200, moveX , moveY , tilemap->offSet_y + 200, 60.f * dt);
+	Scrolling(tilemap, moveX, moveX , moveY , moveY, 60.f * dt);
 	
 	Constrain(tilemap);
 }
