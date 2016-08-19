@@ -4,6 +4,7 @@ PowerUp::PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUpName)
 :GameObject(x,y,PowerUpName,typeOfTile)
 {
 	this->inBag = false;
+	this->activated = false;
 }
 
 PowerUp::~PowerUp()

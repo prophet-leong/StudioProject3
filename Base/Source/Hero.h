@@ -22,7 +22,8 @@ public:
 		float timeDiff);
 	void Constrain(TileMap* tilemap);
 	void Reset(TileMap* tilemap);
-	void Restart(); 
+	void Restart();
+	void isDead(TileMap* tilemap);
 	//movement
 	void MoveLeftRight(const bool mode, const float timeDiff,TileMap* tilemap);
 	void MoveUpDown(const bool mode, const float timeDiff, TileMap* tilemap);
@@ -30,7 +31,7 @@ public:
 	//Collision
 	virtual bool CheckCollision(GameObject* other, TileMap*tilemap);
 	virtual void CollisionResponse(GameObject* other, TileMap*tilemap);
-
+	virtual void TakeDamage(int damage);
 	void NextPowerUp();
 	//debound for attacking so that spamming wont occur
 	void AttackCooldown(double dt);
@@ -40,9 +41,16 @@ public:
 	Bullet* BulletCollision(GameObject* other,TileMap * tilemap);
 	Bullet*FetchGO();
 	void BulletUpdate(double dt);
+	void ImmuneTimeUpdate(double dt);
+	//variables
 	Bag* inventory;
+	bool activeSkillEffect;
+	GEOMETRY_TYPE skillEffect;
 private:
 //hero info
+	//immune time
+	float immuneTime;
+	float immuneCurrentTime;
 	//hero basic value
 	bool allowAttack;
 	float attackTimer;

@@ -102,7 +102,10 @@ void Avatar::SetAnimationInvert(bool AnimationInvert)
 {
 	this->AnimationInvert = AnimationInvert;
 }
-
+void Avatar::TakeDamage(int damage)
+{
+	health -= damage;
+}
 //////////////////////GETTERS/////////////////////
 
 //Animation
@@ -166,7 +169,7 @@ BULLET_ELEMENT Avatar::GetElement()
 void Avatar::SetElementState(BULLET_ELEMENT element)
 {
 	this->element = element;
-	element_Status = 1.0f;
+	element_Status = 0.5f;
 	tick = 2;
 }
 void Avatar::ElementStateUpdate(double dt)
@@ -174,21 +177,34 @@ void Avatar::ElementStateUpdate(double dt)
 	if (element != BULLET_ELEMENT::NO_ELEMENT)
 	{
 		element_Status -= dt;
-		if (element_Status <= 0)
-		{
 			switch (element)
 			{
 			case FIRE:
 			{
-				if (tick == 0)
-					element = BULLET_ELEMENT::NO_ELEMENT;
+				 if (element_Status <= 0)
+				 {
+					 if (tick == 0)
+						 element = BULLET_ELEMENT::NO_ELEMENT;
+					 else
+					 {
+						 element_Status = 1.0f;
+						 --tick;
+						 --health;
+					 }
+				 }
+			}
+			case ICE:
+			{
+				if (element_Status > 0)
+				{
+					MoveSpeedPre_Status = MoveSpeed;
+					MoveSpeed =MoveSpeedPre_Status*0.5f;
+				}
 				else
 				{
-					element_Status = 1.0f;
-					--tick;
-					--health;
+					MoveSpeed = MoveSpeedPre_Status;
+					element = BULLET_ELEMENT::NO_ELEMENT;
 				}
-			}
 			}
 		}
 	}
