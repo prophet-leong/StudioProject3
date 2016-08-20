@@ -7,8 +7,7 @@ class PowerUp_Shield:public PowerUp
 public:
 	PowerUp_Shield(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUp , int damageMitigation , float maxDuration);
 	~PowerUp_Shield();
-	virtual void Update(double dt);
-	virtual void activate();
+	virtual void Update(GameObject *go,double dt);
 private:
 
 	int damageMitigation;

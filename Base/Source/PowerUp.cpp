@@ -3,22 +3,12 @@
 PowerUp::PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUpName)
 :GameObject(x,y,PowerUpName,typeOfTile)
 {
-	this->activated = false;
 }
 
 PowerUp::~PowerUp()
 {
 
 }
-
-//bool PowerUp::GetInBag()
-//{
-//	return inBag;
-//}
-//void PowerUp::SetInBag(bool isInBag)
-//{
-//	this->inBag = isInBag;
-//}
 string PowerUp::GetPowerUpName()
 {
 	return meshName;
@@ -26,14 +16,6 @@ string PowerUp::GetPowerUpName()
 void PowerUp::SetPowerUpName(string newName)
 {
 	this->meshName = newName;
-}
-void PowerUp::SetActivated(bool activated)
-{
-	this->activated = activated;
-}
-bool PowerUp::GetActivated()
-{
-	return activated;
 }
 INCREMENT_STAT PowerUp::GetIncrementStat()
 {

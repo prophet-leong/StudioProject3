@@ -9,17 +9,13 @@ PowerUp_Shield::PowerUp_Shield(int x, int y, GEOMETRY_TYPE typeOfTile, string po
 	this->maxDuration = maxDuration;
 	this->duration = maxDuration;
 	SetIncrementStat(INCREMENT_STAT::SHIELD);
+	SetIncrement(damageMitigation);
 	SetSPCost(50);
 }
-void PowerUp_Shield::Update(double dt)
+void PowerUp_Shield::Update(GameObject*go,double dt)
 {
 	if (active)
 	{
-		if (duration >= maxDuration)
-		{
-			SetIncrementStat(INCREMENT_STAT::SHIELD);
-			SetIncrement(damageMitigation);
-		}
 		duration -= dt;
 		if (duration <= 0)
 		{
@@ -27,15 +23,6 @@ void PowerUp_Shield::Update(double dt)
 			duration = maxDuration;
 		}
 	}
-	else
-	{
-		SetActivated(false);
-	}
-}
-void PowerUp_Shield::activate()
-{
-	if (active == false)
-		active = true;
 }
 
 PowerUp_Shield::~PowerUp_Shield()

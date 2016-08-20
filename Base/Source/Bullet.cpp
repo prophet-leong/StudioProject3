@@ -1,5 +1,5 @@
 #include "Bullet.h"
-
+#include "avatar.h"
 Bullet::Bullet()
 {
 	meshName = "Bullet";
@@ -41,6 +41,14 @@ bool Bullet::CheckCollision(GameObject* other, TileMap*tilemap)
 void Bullet::CollisionResponse(GameObject* other, TileMap*tilemap)
 {
 	SetUnactive();
+	if (other->meshName == "GEO_ENEMY")
+	{
+		Avatar* enemy = (Avatar*)other;
+		enemy->TakeDamage(damage);
+		enemy->SetElementState(element);
+	}
+	else if (other->type == GEO_ROCK && element == EARTH)
+		other->active = false;
 }
 
 void Bullet::Update(double dt)

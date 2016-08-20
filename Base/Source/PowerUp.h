@@ -13,6 +13,7 @@ enum INCREMENT_STAT
 	NO_SKILL,
 	SHIELD,
 	ATTACK,
+	PASSIVE_ATTACK,
 	NUM_INCREMENT_STAT
 };
 class PowerUp:public GameObject
@@ -21,7 +22,7 @@ public:
 	PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUp = "POWERUP");
 	virtual ~PowerUp();
 
-	virtual void Update(double dt) = 0;
+	virtual void Update(GameObject*go ,double dt){};
 	virtual void activate(){};
 	INCREMENT_STAT GetIncrementStat();
 	//limit for the sp
@@ -35,15 +36,12 @@ public:
 	void SetPowerUpName(string newName);
 	string GetPowerUpName();
 	//run once when activated
-	void SetActivated(bool activated);
-	bool GetActivated();
 	GEOMETRY_TYPE GetGeoType();
 	//element
 	BULLET_ELEMENT GetElementType();
 	void SetElementType(BULLET_ELEMENT elementType);
 private:
 	BULLET_ELEMENT elementType = NO_ELEMENT;
-	bool activated;
 	INCREMENT_STAT increment_type;
 	int increment;
 	int SP_Cost;
