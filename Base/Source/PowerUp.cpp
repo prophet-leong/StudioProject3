@@ -3,7 +3,6 @@
 PowerUp::PowerUp(int x, int y, GEOMETRY_TYPE typeOfTile, string PowerUpName)
 :GameObject(x,y,PowerUpName,typeOfTile)
 {
-	this->inBag = false;
 	this->activated = false;
 }
 
@@ -12,14 +11,14 @@ PowerUp::~PowerUp()
 
 }
 
-bool PowerUp::GetInBag()
-{
-	return inBag;
-}
-void PowerUp::SetInBag(bool isInBag)
-{
-	this->inBag = isInBag;
-}
+//bool PowerUp::GetInBag()
+//{
+//	return inBag;
+//}
+//void PowerUp::SetInBag(bool isInBag)
+//{
+//	this->inBag = isInBag;
+//}
 string PowerUp::GetPowerUpName()
 {
 	return meshName;
@@ -63,4 +62,12 @@ void PowerUp::SetSPCost(int SP)
 int PowerUp::GetSPCost()
 {
 	return SP_Cost;
+}
+BULLET_ELEMENT PowerUp::GetElementType()
+{
+	return elementType;
+}
+void PowerUp::SetElementType(BULLET_ELEMENT elementType)
+{
+	this->elementType = elementType;
 }

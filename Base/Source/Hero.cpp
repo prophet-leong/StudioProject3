@@ -1,5 +1,7 @@
 #include "Hero.h"
-
+#include "Tile.h"
+#include "PowerUp_Attack.h"
+#include "PowerUp_Shield.h"
 //'x' and 'y' is position , meshName = name of the mesh , typeoftile = geometry type , numberoftextures = amount of textures for 'typeOfTile' 1 texture = 1
 Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberOfTextures)
 	: moveX(0)
@@ -12,7 +14,6 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	}
 	heroShield = 0;
 	heroDamage = 1;
-	DamageBoost = 0;
 	attackTime = 0.2f;
 	attackTimer = 0.2f;
 	allowAttack = true;
@@ -23,6 +24,8 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	MoveSpeed = 8.0f;
 	immuneCurrentTime = 0;
 	immuneTime = 1.0f;
+	SpecialPower = 100;
+	SpRecoverTime = 1.0f;
 }
 
 Hero::~Hero()
@@ -31,7 +34,7 @@ Hero::~Hero()
 }
  
 //status::done
-void Hero::Update(TileMap* tilemap , double dt)
+void Hero::Update(TileMap* tilemap, double dt)
 {
 	if (!inventory->powerUpList.empty())
 	{
@@ -39,24 +42,24 @@ void Hero::Update(TileMap* tilemap , double dt)
 		go->Update(dt);
 		switch (go->GetIncrementStat())
 		{
-			case SHIELD:
-			{
-				if (go->active)
-				{
-					if (go->GetActivated() == false)
-					{
-						heroShield = go->GetIncrement();
-						go->SetActivated(true);
-					}
-					if (heroShield <= 0)
-						go->active = false;
-				}
-				else if (go->active == false)
-				{
-					heroShield = 0;
-					activeSkillEffect = false;
-				}
-			}
+		case SHIELD:
+		{
+					   if (go->active)
+					   {
+						   if (go->GetActivated() == false)
+						   {
+							   heroShield = go->GetIncrement();
+							   go->SetActivated(true);
+						   }
+						   if (heroShield <= 0)
+							   go->active = false;
+					   }
+					   else if (go->active == false)
+					   {
+						   heroShield = 0;
+						   activeSkillEffect = false;
+					   }
+		}
 		}
 	}
 	AttackCooldown(dt);
@@ -66,13 +69,13 @@ void Hero::Update(TileMap* tilemap , double dt)
 	moveX = (tilemap->GetScreenWidth() * 0.5f) + tilemap->offSet_x;
 	moveY = (tilemap->GetScreenHeight() * 0.7f) + tilemap->offSet_y;
 
-	Scrolling(tilemap, moveX, moveX , moveY , moveY, 60.f * dt);
-	
+	Scrolling(tilemap, moveX, moveX, moveY, moveY, 60.f * dt);
+
 	Constrain(tilemap);
 	isDead(tilemap);
 	ImmuneTimeUpdate(dt);
+	RecoverSP(dt);
 }
-
 Bullet* Hero::FetchGO()
 {
 	for (std::vector<Bullet*>::iterator iter = Projectile.begin(); iter != Projectile.end(); ++iter)
@@ -93,7 +96,7 @@ void Hero::NextPowerUp()
 {
 	currentPowerUp++;
 	
-	if (currentPowerUp == inventory->powerUpList.size())
+	if (currentPowerUp >= inventory->powerUpList.size())
 		currentPowerUp = 0;
 	
 	activeSkillEffect = false;
@@ -125,20 +128,24 @@ void Hero::NormalAttack()
 
 void Hero::SkillAttack()
 {
-	if (inventory->powerUpList[currentPowerUp]->GetIncrementStat() == SHIELD)
+	if (inventory->powerUpList.empty() == false)
 	{
-		inventory->powerUpList[currentPowerUp]->active = true;
-		activeSkillEffect = true;
-		skillEffect = GEOMETRY_TYPE::GEO_SHIELD;
-	}
-	else if (allowAttack == true && !inventory->powerUpList.empty() && inventory->powerUpList[currentPowerUp]->GetIncrementStat() == ATTACK)
-	{
-		attackTimer = attackTime;
-		allowAttack = false;
-		inventory->powerUpList[currentPowerUp];
-		Bullet* newBullet = FetchGO();
-		newBullet->set(Position, direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, FIRE);
-		newBullet->SetScale(Vector2(0.3f, 0.3f));
+		if (inventory->powerUpList[currentPowerUp]->GetIncrementStat() == SHIELD && SpecialPower >inventory->powerUpList[currentPowerUp]->GetSPCost())
+		{
+			SpecialPower -= inventory->powerUpList[currentPowerUp]->GetSPCost();
+			inventory->powerUpList[currentPowerUp]->active = true;
+			activeSkillEffect = true;
+			skillEffect = GEOMETRY_TYPE::GEO_SHIELD;
+		}
+		else if (allowAttack == true && SpecialPower >inventory->powerUpList[currentPowerUp]->GetSPCost() && inventory->powerUpList[currentPowerUp]->GetIncrementStat() == ATTACK)
+		{
+			attackTimer = attackTime;
+			allowAttack = false;
+			inventory->powerUpList[currentPowerUp];
+			Bullet* newBullet = FetchGO();
+			newBullet->set(Position, direction, heroDamage + inventory->powerUpList[currentPowerUp]->GetIncrement(), 5, GEO_FIRESALT, inventory->powerUpList[currentPowerUp]->GetElementType());
+			newBullet->SetScale(Vector2(0.3f, 0.3f));
+		}
 	}
 }
 
@@ -327,6 +334,8 @@ bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
 				enemy->active = false;
 			}
 		}
+		else if (other->type == GEO_ROCK && bullet->GetElementType() == EARTH)
+			other->active = false;
 	}
 
 	return BasicCheckCollision(other,tilemap);
@@ -334,12 +343,50 @@ bool Hero::CheckCollision(GameObject* other, TileMap *tilemap)
 
 void Hero::CollisionResponse(GameObject* other, TileMap *tilemap)
 {
-	BasicCollisionResponse(other, tilemap);
+	if (other->meshName != "POWERUP")
+		BasicCollisionResponse(other, tilemap);
+	else
+	{
+		other->active = false;
+		Tile* tile = (Tile*)other;
+		switch (tile->GetType())
+		{
+		case Tile::POWERUP_ATTACK_TYPE:
+		{
+			int randomElement;
+			randomElement = rand() % 5;
+			cout << randomElement << endl;
+			BULLET_ELEMENT element = (BULLET_ELEMENT)(randomElement);
+			PowerUp_Attack* powerup = new PowerUp_Attack(0, 0, GEO_COIN, "POWERUP", 3, 20,element);
+			inventory->powerUpList.push_back(powerup);
+			break;
+		}
+		case Tile::POWERUP_SHIELD_TYPE:
+		{
+			PowerUp_Shield* powerup = new PowerUp_Shield(0, 0, GEO_COIN, "POWERUP", 3, 3.0f);
+			inventory->powerUpList.push_back(powerup);
+			break;
+		}
+		} 
+	}
 }
 void Hero::ImmuneTimeUpdate(double dt)
 {
 	if (immuneCurrentTime >=0)
 		immuneCurrentTime -= dt;
+}
+void Hero::RecoverSP(double dt)
+{
+	SpRecoverTime -= dt;
+	if (SpRecoverTime <= 0)
+	{
+		SpecialPower+=5;
+		SpRecoverTime = 1.0f;
+	}
+}
+int Hero::GetSP_Value()
+{
+	return SpecialPower;
 }
 
 

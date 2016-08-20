@@ -42,12 +42,18 @@ public:
 	Bullet*FetchGO();
 	void BulletUpdate(double dt);
 	void ImmuneTimeUpdate(double dt);
+	//SP recovery
+	void RecoverSP(double dt);
+	int GetSP_Value ();
 	//variables
 	Bag* inventory;
 	bool activeSkillEffect;
 	GEOMETRY_TYPE skillEffect;
 private:
 //hero info
+	//sp value time
+	int SpecialPower;
+	float SpRecoverTime;
 	//immune time
 	float immuneTime;
 	float immuneCurrentTime;
@@ -56,11 +62,9 @@ private:
 	float attackTimer;
 	float attackTime;
 	int heroDamage;
-	int heroHealth;
 	int currentPowerUp;
 	//buffed values
 	int heroShield;
-	int DamageBoost;
 	int moveX, moveY; 
 
 };

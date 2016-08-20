@@ -146,7 +146,6 @@ private:
 	vector<Avatar*> m_avatarList;
 	vector<Tile*> m_goList;
 	vector<C_Traps*>m_gotrapslist;
-
 	//Map RNG
 	Generator* MapRandomizer;
 

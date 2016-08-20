@@ -11,6 +11,8 @@
 #include "Strategy_Kill.h"
 #include "Strategy_Escape.h"
 
+#include "PowerUp_Attack.h"
+#include "PowerUp_Shield.h"
 Assignment::Assignment()
 	: goToNextLevel(false), ssss ("")
 {
@@ -247,7 +249,6 @@ void Assignment::Init()
 	state_enter_seed_screen::seedentered(false);
 	ssss.str("");
 }
-
 void Assignment::ReadLevel()
 {
 	MapRandomizer->Read(&tilemap);
@@ -352,8 +353,13 @@ void Assignment::ReadLevel()
 				m_gotrapslist.push_back(newTrap); 
 				break;
 			}
-
-
+			//remove this after checking
+			case 200:
+			{
+				Tile*newPower = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "POWERUP", GEO_COIN, Tile::POWERUP_ATTACK_TYPE);
+				newPower->active = true;
+				m_goList.push_back(newPower);
+			}
 			}
 		}
 	}
@@ -806,7 +812,6 @@ void Assignment::LoadLevel()
 			continue; 
 		Render2DMesh(meshList[go->type], false, go->scale.x, go->scale.y, go->GetPosition().x - tilemap.offSet_x, go->GetPosition().y - tilemap.offSet_y);
 	} 
-
 	//render Skill effect
 	if (currHero->activeSkillEffect)
 	{

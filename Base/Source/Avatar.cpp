@@ -11,7 +11,7 @@ Avatar::Avatar()
 	, moveRight(true)
 	, health(0)
 {
-
+	direction.Set(0, 0);
 }
 
 Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
@@ -25,7 +25,7 @@ Avatar::Avatar(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile)
 	, moveRight(true)
 	, health(0)
 {
-	//inventory = new Bag();
+	direction.Set(0, 0);
 }
 
 Avatar::~Avatar()
@@ -176,7 +176,6 @@ void Avatar::ElementStateUpdate(double dt)
 {
 	if (element != BULLET_ELEMENT::NO_ELEMENT)
 	{
-		element_Status -= dt;
 			switch (element)
 			{
 			case FIRE:
@@ -187,11 +186,12 @@ void Avatar::ElementStateUpdate(double dt)
 						 element = BULLET_ELEMENT::NO_ELEMENT;
 					 else
 					 {
-						 element_Status = 1.0f;
+						 element_Status = 0.5f;
 						 --tick;
 						 --health;
 					 }
 				 }
+				 break;
 			}
 			case ICE:
 			{
@@ -205,7 +205,37 @@ void Avatar::ElementStateUpdate(double dt)
 					MoveSpeed = MoveSpeedPre_Status;
 					element = BULLET_ELEMENT::NO_ELEMENT;
 				}
+				break;
+			}
+			case EARTH:
+			{
+				  if (element_Status > 0)
+				  {
+					  MoveSpeedPre_Status = MoveSpeed;
+					  MoveSpeed = 0;
+				  }
+				  else
+				  {
+					  MoveSpeed = MoveSpeedPre_Status;
+					  element = BULLET_ELEMENT::NO_ELEMENT;
+				  }
+				  break;
+			}
+			case WIND:
+			{
+				 if (element_Status >= 0.5f)
+				 {
+					 direction = direction* -1;
+				 }
+				 else if (element_Status <= 0)
+				 {
+					 direction = direction* -1;
+					 element = BULLET_ELEMENT::NO_ELEMENT;
+				 }
+				 cout << direction << endl;
+				 break;
 			}
 		}
+		element_Status -= dt;
 	}
 }

@@ -3,15 +3,7 @@
 #include <Vector2.h>
 #include "GeometryType.h"
 #include "Collideables.h"
-enum BULLET_ELEMENT
-{
-	NO_ELEMENT,
-	FIRE,
-	ICE,
-	EARTH,
-	WIND,
-	NUM_ELEMENTS
-};
+#include "BULLET_ELEMENT.h"
 class Bullet :public Collideables
 {
 public:

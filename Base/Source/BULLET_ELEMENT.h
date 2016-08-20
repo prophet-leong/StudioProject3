@@ -1,0 +1,15 @@
+#ifndef _BULLET_ELEMENT_H
+#define _BULLET_ELEMENT_H
+
+enum BULLET_ELEMENT
+{
+	NO_ELEMENT,
+	FIRE,
+	ICE,
+	EARTH,
+	WIND,
+	NUM_ELEMENTS
+};
+
+#endif // !_BULLET_ELEMENT_H
+

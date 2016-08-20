@@ -9,6 +9,7 @@ PowerUp_Shield::PowerUp_Shield(int x, int y, GEOMETRY_TYPE typeOfTile, string po
 	this->maxDuration = maxDuration;
 	this->duration = maxDuration;
 	SetIncrementStat(INCREMENT_STAT::SHIELD);
+	SetSPCost(50);
 }
 void PowerUp_Shield::Update(double dt)
 {
