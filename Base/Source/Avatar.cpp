@@ -159,7 +159,7 @@ void Avatar::BulletUpdate(double dt)
 {
 	for (int i = 0; i < Projectile.size(); ++i)
 	{
-		Projectile[i]->Update(dt);
+		Projectile[i]->Update(this,dt);
 	}
 }
 BULLET_ELEMENT Avatar::GetElement()

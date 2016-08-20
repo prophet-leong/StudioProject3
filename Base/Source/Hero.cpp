@@ -2,6 +2,7 @@
 #include "Tile.h"
 #include "PowerUp_Attack.h"
 #include "PowerUp_Shield.h"
+#include "PowerUp_Passive.h"
 #include "MyMath.h"
 //'x' and 'y' is position , meshName = name of the mesh , typeoftile = geometry type , numberoftextures = amount of textures for 'typeOfTile' 1 texture = 1
 Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberOfTextures)
@@ -28,6 +29,8 @@ Hero::Hero(int x, int y, string meshName, GEOMETRY_TYPE typeOfTile[],int numberO
 	SpecialPower = 100;
 	SpRecoverTime = 1.0f;
 	amountOfBulletPerShot = 3;
+	PowerUp_Passive* passive = new PowerUp_Passive(this, Position.x, Position.y, GEO_COIN);
+	inventory->powerUpList.push_back(passive);
 }
 
 Hero::~Hero()
@@ -167,7 +170,7 @@ void Hero::BulletUpdate(double dt)
 {
 	for (int i = 0; i < Projectile.size(); ++i)
 	{
-		Projectile[i]->Update(dt);
+		Projectile[i]->Update(this,dt);
 	}
 }
 

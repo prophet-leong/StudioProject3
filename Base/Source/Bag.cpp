@@ -1,6 +1,7 @@
 #include "Bag.h"
 #include "PowerUp_Attack.h"
 #include "PowerUp_Shield.h"
+#include "PowerUp_Passive.h"
 Bag::Bag()
 {
 }

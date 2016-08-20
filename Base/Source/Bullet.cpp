@@ -51,7 +51,7 @@ void Bullet::CollisionResponse(GameObject* other, TileMap*tilemap)
 		other->active = false;
 }
 
-void Bullet::Update(double dt)
+void Bullet::Update(GameObject*go,double dt)
 {
 	if (active)
 	{

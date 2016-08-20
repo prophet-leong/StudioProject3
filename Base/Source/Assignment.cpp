@@ -857,7 +857,7 @@ void Assignment::ClearLevel()
 	}
 	for (int i = 0; i < currHero->Projectile.size(); ++i)
 	{
-		if (currHero->Projectile[i]->active)
+		if (currHero->Projectile[i]->active && currHero->Projectile[i]->meshName != "BULLET_SURROUND")
 			currHero->Projectile[i]->active = false;
 	}
 	for (vector<Gate*>::iterator iter = Gates.begin(); iter != Gates.end(); iter++)
