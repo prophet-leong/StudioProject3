@@ -238,6 +238,15 @@ void Assignment::Init()
 	meshList[GEO_ROCK] = MeshBuilder::Generate2DMesh("shield_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
 	meshList[GEO_ROCK]->textureID = LoadTGA("Image//Rock.tga");
 
+	meshList[GEO_HEART] = MeshBuilder::Generate2DMesh("shield_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_HEART]->textureID = LoadTGA("Image//powerup//heart.tga");
+
+	meshList[GEO_MOVEFASTER] = MeshBuilder::Generate2DMesh("shield_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_MOVEFASTER]->textureID = LoadTGA("Image//powerup//MoveFaster.tga");
+
+	meshList[GEO_FASTERSHOOTING] = MeshBuilder::Generate2DMesh("shield_powerup", Color(1.f, 1.f, 1.f), 0.0f, 0.0f, tilemap.GetTileSize(), tilemap.GetTileSize());
+	meshList[GEO_FASTERSHOOTING]->textureID = LoadTGA("Image//powerup//FasterShooting.tga");
+
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 1000 units
 	//perspective.SetToOrtho(-80, 80, -60, 60, -1000, 1000);
 
@@ -359,6 +368,28 @@ void Assignment::ReadLevel()
 				Tile*newPower = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "POWERUP", GEO_COIN, Tile::POWERUP_ATTACK_TYPE);
 				newPower->active = true;
 				m_goList.push_back(newPower);
+				break;
+			}
+			case 201:
+			{
+						Tile*newPower = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "POWERUP", GEO_HEART, Tile::POWERUP_HEALTH);
+						newPower->active = true;
+						m_goList.push_back(newPower);
+						break;
+			}
+			case 202:
+			{
+						Tile*newPower = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "POWERUP", GEO_MOVEFASTER, Tile::POWERUP_MOVESPEED);
+						newPower->active = true;
+						m_goList.push_back(newPower);
+						break;
+			}
+			case 203:
+			{
+						Tile*newPower = new Tile(k*tilemap.GetTileSize(), i*tilemap.GetTileSize(), "POWERUP", GEO_FASTERSHOOTING, Tile::POWERUP_SHOOTINGSPEED);
+						newPower->active = true;
+						m_goList.push_back(newPower);
+						break;
 			}
 			}
 		}
